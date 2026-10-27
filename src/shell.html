@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- Basé sur Math3AM (© 2026, son auteur), réutilisé avec son autorisation. Fichier généré par build.py : modifier les sources dans src/. -->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="رياضيات باك">
+<meta name="theme-color" content="#0F5C4E">
+<title>الرياضيات — البكالوريا · Mathématiques — BAC</title>
+<style>
+/*@CSS@*/
+</style>
+</head>
+<body>
+<header class="top">
+  <button class="bar" id="home" aria-label="الفهرس">☰</button>
+  <h1 id="ttl">الرياضيات — البكالوريا</h1>
+  <button class="lng" id="lng" aria-label="Passer en français">FR</button>
+</header>
+<div class="years" id="years"></div>
+<main class="wrap" id="app"></main>
+<footer id="cred"></footer>
+<nav class="nav" id="nav"></nav>
+<div class="sheet" id="sheet"><div class="in" id="sheetin"></div></div>
+<script>
+/*@JS@*/
+</script>
+<script>
+/* تسجيل عامل الخدمة (يتطلّب https أو localhost) — service worker (https ou localhost) */
+(function(){
+  if(!('serviceWorker' in navigator)) return;
+  var okHost=location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1';
+  if(!okHost) return;
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('sw.js').then(function(r){
+      r.addEventListener('updatefound',function(){ var w=r.installing; if(!w) return;
+        w.addEventListener('statechange',function(){ if(w.state==='installed'&&navigator.serviceWorker.controller&&typeof toastBadges==='function')
+          toastBadges([{ico:'↻',h:t('updH'),t:t('upd')}]); }); });
+    }).catch(function(){});
+  });
+})();
+</script>
+</body>
+</html>

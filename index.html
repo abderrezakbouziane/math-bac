@@ -1,0 +1,2323 @@
+<!DOCTYPE html>
+<!-- Basé sur Math3AM (© 2026, son auteur), réutilisé avec son autorisation. Fichier généré par build.py : modifier les sources dans src/. -->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="رياضيات باك">
+<meta name="theme-color" content="#0F5C4E">
+<title>الرياضيات — البكالوريا · Mathématiques — BAC</title>
+<style>
+/* ============================================================
+   الخط: خطوط النظام العربية لضمان العمل دون اتصال
+   ============================================================ */
+:root{
+  --bg:#F6F4EF; --card:#FFFFFF; --ink:#1A2230; --ink2:#3B4759; --ink3:#6B7889;
+  --line:#E2DDD2; --line2:#F0ECE4;
+  --brand:#0F5C4E; --brand-l:#E4F0EC; --brand-d:#0A3F35;
+  --gold:#B8860B; --gold-l:#FBF3DF;
+  --red:#A62B39; --red-l:#FBEAEC;
+  --blue:#25507E; --blue-l:#E7EFF8; --blue-d:#25507E;
+  --violet:#5B4A9E; --violet-l:#EEEBF8; --violet-d:#5B4A9E;
+  --acc:var(--brand); --acc-l:var(--brand-l); --acc-d:var(--brand-d);
+  --r:14px;
+  --ar:"Noto Naskh Arabic","Amiri","Traditional Arabic","Geeza Pro","Segoe UI",system-ui,sans-serif;
+  --lat:"SF Mono","Menlo","Consolas","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;max-width:100%;overflow-x:hidden}
+body{font-family:var(--ar);background:var(--bg);color:var(--ink);
+  font-size:17px;line-height:1.95;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4{margin:0;line-height:1.5;font-weight:700}
+p{margin:0 0 .85em}
+button{font-family:inherit;font-size:inherit;cursor:pointer;border:none;background:none;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
+ul,ol{margin:0 0 .9em;padding-inline-start:1.35em}
+li{margin-bottom:.4em}
+
+/* ============================================================
+   العزل ثنائي الاتجاه: كل رمز أو صيغة لاتينية داخل عزل مستقلّ
+   ============================================================ */
+.m,.lat{font-family:var(--lat);direction:ltr;unicode-bidi:isolate;
+  font-size:.93em;letter-spacing:.01em;white-space:nowrap}
+.m{white-space:normal}
+a{color:var(--blue)}
+.mb{font-family:var(--lat);direction:ltr;unicode-bidi:isolate;display:block;
+  text-align:center;margin:.7em auto;background:var(--line2);padding:.55em .8em;
+  border-radius:9px;white-space:normal;font-size:1em}
+.mrow{direction:ltr;unicode-bidi:isolate;font-family:var(--lat);font-size:.93em}
+.mrow .m,.mrow .lat,.mrow .fr{font-size:1em}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;
+  margin:0 .18em;line-height:1.15}
+.fr span:first-child{border-bottom:1.4px solid currentColor;padding:0 .28em}
+.fr span:last-child{padding:0 .28em}
+
+/* ---------- الهيكل ---------- */
+.top{position:sticky;top:0;z-index:60;background:var(--brand);color:#fff;
+  padding:calc(9px + env(safe-area-inset-top)) 12px 9px;
+  display:flex;align-items:center;gap:9px;box-shadow:0 2px 12px rgba(0,0,0,.14)}
+.top .bar{width:40px;height:36px;border-radius:9px;background:rgba(255,255,255,.14);
+  display:grid;place-items:center;font-size:19px;flex:none}
+.top h1{font-size:15.5px;flex:1;line-height:1.3}
+.top h1 small{display:block;font-size:10.5px;opacity:.72;font-weight:400}
+.top .lng{background:rgba(255,255,255,.16);border-radius:8px;padding:5px 10px;font-size:12.5px;font-weight:700}
+
+.years{position:sticky;top:calc(54px + env(safe-area-inset-top));z-index:58;
+  background:var(--bg);display:flex;gap:6px;padding:9px 12px 7px;
+  border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.years::-webkit-scrollbar{display:none}
+.ybtn{white-space:nowrap;border:1px solid var(--line);background:var(--card);
+  border-radius:20px;padding:6px 15px;font-size:13.5px;font-weight:700;color:var(--ink2)}
+.ybtn.on{background:var(--gold);border-color:var(--gold);color:#fff}
+
+.wrap{max-width:900px;margin:0 auto;padding:0 12px 8px}
+#cred{max-width:900px;margin:0 auto;padding:20px 14px 104px;text-align:center;
+  font-size:12.5px;line-height:1.75;color:var(--ink3);border-top:1px solid var(--line2)}
+#cred b{color:var(--ink2);font-weight:700}
+#cred .cpy{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line2);font-size:12px}
+#cred .cpt{font-size:13.5px;font-weight:700;color:var(--ink2);margin-bottom:4px}
+
+/* ---------- الفهرس ---------- */
+.hero{background:linear-gradient(160deg,var(--brand-d),var(--brand));color:#fff;
+  border-radius:0 0 20px 20px;margin:0 -12px 16px;padding:20px 18px 24px}
+.hero h2{font-size:20px;margin-bottom:6px;overflow-wrap:break-word}
+.hero p{font-size:14px;opacity:.9;margin:0;line-height:1.8}
+.hero .hnote{margin-top:12px;font-size:11.5px;background:rgba(255,255,255,.13);
+  border-radius:10px;padding:9px 11px;line-height:1.75;white-space:normal}
+.hero .hnote b{color:#FBF3DF}
+
+.domain{margin:20px 0 10px;display:flex;align-items:center;gap:9px}
+.domain span{background:var(--acc);color:#fff;border-radius:20px;padding:3px 13px;font-size:12.5px;font-weight:700}
+.domain hr{flex:1;border:none;border-top:1px solid var(--line);margin:0}
+
+.lcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:14px 15px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;width:100%;text-align:start}
+.lcard:active{background:var(--acc-l)}
+.lnum{width:36px;height:36px;border-radius:10px;background:var(--acc-l);color:var(--acc-d);
+  display:grid;place-items:center;font-weight:700;font-size:16px;flex:none;font-family:var(--lat)}
+.lcard b{display:block;font-size:16.5px;margin-bottom:2px}
+.lcard em{font-style:normal;font-size:12px;color:var(--ink3)}
+
+/* ---------- الدرس ---------- */
+.crumb{display:flex;align-items:center;gap:8px;padding:12px 0 6px;font-size:12.5px;color:var(--ink3);flex-wrap:wrap}
+.crumb b{color:var(--acc-d)}
+.ltitle{font-size:23px;margin:2px 0 4px;line-height:1.45}
+.pageref{display:inline-block;background:var(--gold-l);color:#6B4E00;border:1px solid #EAD9A8;
+  border-radius:8px;padding:3px 10px;font-size:12px;margin-bottom:12px}
+.ref{display:inline-block;background:var(--gold-l);color:#6B4E00;border:1px solid #EAD9A8;
+  border-radius:7px;padding:0 7px;font-size:11.5px;margin-inline-start:4px;white-space:nowrap;
+  font-family:var(--ar);line-height:1.9}
+.hook{background:var(--gold-l);border:1px solid #EAD9A8;border-radius:var(--r);
+  padding:12px 14px;margin-bottom:14px;font-size:15.5px;line-height:1.9}
+
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:8px 0 10px;
+  position:sticky;top:calc(100px + env(safe-area-inset-top));background:var(--bg);z-index:50;
+  scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{white-space:nowrap;border:1px solid var(--line);background:var(--card);
+  border-radius:20px;padding:7px 14px;font-size:13.5px;font-weight:700;color:var(--ink2)}
+.tab.on{background:var(--acc);border-color:var(--acc);color:#fff}
+
+/* ---------- صناديق المحتوى ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:15px 16px;margin-bottom:13px;overflow-wrap:break-word}
+.card,.rule,.ex,.warn,.chip,.qbox,.sol,.hook,.note,.help{max-width:100%}
+.rule,.ex,.warn,.chip,.qbox,.sol,.hook{overflow-wrap:break-word}
+/* une formule trop longue défile dans son cadre au lieu d'élargir la page */
+.mb{overflow-x:auto}
+.card,.chip,.rule,.ex,.warn,.qbox,.sol,.hook,.lcard,.note{overflow-x:auto}
+.card>h3{font-size:16px;color:var(--acc-d);margin-bottom:9px}
+.rule{background:var(--acc-l);border:1px solid var(--line);border-inline-start:4px solid var(--acc);
+  border-radius:11px;padding:11px 12px;margin:10px 0;font-size:15.5px}
+.rule b{color:var(--acc-d)}
+.ex{background:var(--line2);border-radius:11px;padding:10px 12px;margin:9px 0;font-size:15px;color:var(--ink2)}
+.ex b{color:var(--ink)}
+.warn{background:var(--red-l);border:1px solid #F0CDD2;border-radius:11px;padding:10px 12px;margin:10px 0;font-size:15px}
+.warn b{color:var(--red)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+
+/* النواة الصلبة */
+.card.core{background:var(--gold-l);border-color:#EAD9A8}
+.card.core>h3{color:#6B4E00}
+.chip{display:block;background:#fff;border:1px solid #EAD9A8;border-radius:11px;padding:10px 12px;margin:9px 0;font-size:15.5px}
+.chip .lab{font-size:12.5px;color:#8A6100;font-weight:700;margin-bottom:2px}
+
+/* الطريقة */
+ol.steps{counter-reset:m;list-style:none;padding:0;margin:6px 0}
+ol.steps li{counter-increment:m;position:relative;padding-inline-start:34px;margin-bottom:10px}
+ol.steps li::before{content:counter(m);position:absolute;inset-inline-start:0;top:2px;
+  width:24px;height:24px;border-radius:7px;background:var(--acc);color:#fff;
+  display:grid;place-items:center;font-size:13px;font-weight:700;font-family:var(--lat)}
+
+/* تلوين حسب التبويب */
+.pane-analogie .card{border-color:#D8D1F0;background:#fff;border-style:dashed}
+.pane-analogie .card>h3{color:var(--violet)}
+.pane-vie .card{background:var(--blue-l);border-color:#CCDDF0}
+.pane-vie .card>h3{color:var(--blue)}
+
+/* ---------- مولّد التمارين ---------- */
+.gen{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:13px}
+.gen .top2{background:var(--acc);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;
+  align-items:center;gap:10px;flex-wrap:wrap}
+.gen .top2 h3{font-size:15px}
+.score{font-size:12.5px;background:rgba(255,255,255,.18);border-radius:20px;padding:2px 11px;font-family:var(--ar)}
+.gen .body{padding:14px}
+.qbox{font-size:16.5px;background:var(--line2);border-radius:11px;padding:13px;margin-bottom:12px;line-height:2}
+.qbox .tag{font-size:12px;color:var(--ink3);display:block;margin-bottom:6px}
+.answer{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+input[type=text]{flex:1;min-width:150px;font-family:var(--lat);font-size:17px;padding:10px 13px;
+  border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);direction:ltr;text-align:center}
+input[type=text]:focus{border-color:var(--acc);outline:none}
+.btnrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+.btn{background:var(--acc);color:#fff;border-radius:10px;padding:9px 15px;font-size:14px;font-weight:700}
+.btn.sec2{background:var(--card);color:var(--acc-d);border:1px solid var(--acc)}
+.btn.warnb{background:var(--gold);color:#fff}
+.choices{display:flex;flex-direction:column;gap:7px}
+.choice{display:block;width:100%;text-align:start;border:1px solid var(--line);background:#fff;
+  border-radius:10px;padding:10px 12px;font-size:15px}
+.choice.sel{background:var(--acc-l);border-color:var(--acc);font-weight:700}
+.fb{margin-top:12px;border-radius:11px;padding:11px 12px;font-size:15px;display:none}
+.fb.show{display:block}
+.fb.good{background:#E6F5EE;border:1px solid var(--brand)}
+.fb.bad{background:var(--red-l);border:1px solid #F0CDD2}
+.fb h4{font-size:15.5px;margin-bottom:6px}
+.fb.good h4{color:var(--brand-d)} .fb.bad h4{color:var(--red)}
+.sol{margin-top:8px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14.5px}
+.sol .st{margin-bottom:8px;padding-inline-start:11px;border-inline-start:3px solid var(--acc)}
+.help,.note{font-size:13px;color:var(--ink3);background:var(--line2);border-radius:9px;
+  padding:9px 11px;margin-top:10px;line-height:1.8}
+
+/* ---------- الورقة المنبثقة والتنقّل السفلي ---------- */
+.sheet{position:fixed;inset:0;background:rgba(20,26,36,.55);z-index:200;display:none;
+  align-items:flex-end;justify-content:center}
+.sheet.on{display:flex}
+.sheet .in{background:var(--bg);width:100%;max-width:900px;max-height:88vh;overflow-y:auto;
+  border-radius:20px 20px 0 0;padding:18px 16px calc(28px + env(safe-area-inset-bottom))}
+.nav{position:fixed;bottom:0;inset-inline:0;background:var(--card);border-top:1px solid var(--line);
+  display:flex;z-index:70;padding-bottom:env(safe-area-inset-bottom)}
+.nav button{flex:1;padding:9px 2px 8px;font-size:10.5px;color:var(--ink3);display:grid;gap:2px;justify-items:center}
+.nav button i{font-style:normal;font-size:19px;line-height:1}
+.nav button.on{color:var(--brand)}
+
+
+/* ---------- الاختبارات ---------- */
+.fig{margin:12px auto 6px;max-width:380px;text-align:center}
+.fig svg{width:100%;height:auto;display:block;background:#FCFBF8;border:1px solid var(--line2);border-radius:10px}
+.fignote{font-size:12px;color:var(--ink3);margin-top:4px}
+.exhead{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.exhead h3{font-size:16.5px;color:var(--acc-d)}
+.ptsb{background:var(--acc-l);color:var(--acc-d);border:1px solid var(--line);border-radius:20px;padding:1px 12px;font-size:13px;font-weight:700;white-space:nowrap}
+.ptsb.big{font-size:17px;padding:3px 16px;background:var(--gold-l);color:#6B4E00;border-color:#EAD9A8}
+.qtext{font-size:16px;line-height:2.1}
+.btn.small{padding:5px 10px;font-size:12.5px}
+.hintbox{display:none;background:var(--gold-l);border:1px solid #EAD9A8;border-radius:11px;padding:10px 12px;margin-top:10px;font-size:15px}
+.hintbox b{color:#6B4E00}
+.solbox{display:none;background:var(--brand-l);border:1px solid #C6E0D8;border-radius:11px;padding:10px 12px;margin-top:10px}
+.hintbox.on,.solbox.on{display:block}
+.soltip{font-size:12.5px;color:var(--brand-d);font-weight:700;margin:2px 0 4px}
+.solrow{display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed #C6E0D8;cursor:pointer}
+.solrow:last-of-type{border-bottom:none}
+.solrow input{width:20px;height:20px;accent-color:var(--brand);flex:none;margin-top:7px}
+.solrow .st2{flex:1;font-size:15px;line-height:2}
+.solrow .sp{flex:none;background:#fff;border:1px solid #C6E0D8;color:var(--brand-d);border-radius:8px;padding:0 7px;font-size:12px;font-weight:700;margin-top:6px;white-space:nowrap}
+.exsum{margin-top:8px;font-size:14px;color:var(--brand-d);text-align:start}
+.partttl{margin:20px 0 9px;font-size:16px;font-weight:700;color:var(--ink);border-inline-start:5px solid var(--acc);padding-inline-start:10px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 6px}
+.timer{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:15px;font-weight:700;color:var(--ink2)}
+.timer.end{background:var(--red-l);border-color:#F0CDD2;color:var(--red)}
+.scorecard{background:var(--gold-l);border-color:#EAD9A8}
+.scorecard .exhead h3{color:#6B4E00}
+.trinote{font-size:13px;color:var(--ink3);margin:-4px 0 10px}
+.lcard em.prog{display:block;color:var(--brand-d);font-weight:700;margin-top:2px}
+details.adv summary{cursor:pointer;font-size:15px;color:var(--ink2)}
+details.adv[open] summary{margin-bottom:8px}
+@media print{
+  .top,.years,.nav,#cred,.noprint,.hintbox,.sheet{display:none!important}
+  body{background:#fff;font-size:13pt}
+  .wrap{max-width:none;padding:0}
+  .card{break-inside:avoid;border-color:#bbb}
+  .solbox:not(.on){display:none!important}
+}
+/* ======================= الواجهات الجديدة ======================= */
+/* بطاقة اليوم والمربّعات */
+.today{border-color:var(--gold);background:linear-gradient(180deg,var(--gold-l),var(--card) 70%)}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 6px;text-align:center;display:grid;gap:2px}
+.tile b{font-size:22px;color:var(--brand-d);line-height:1.2}
+.tile span{font-size:12px;color:var(--ink3)}
+.tgrid.big .tile b{font-size:26px}
+/* شريط الجلسة */
+.runbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;background:var(--gold-l);border:1px solid #EAD9A8;
+  border-radius:10px;padding:8px 12px;margin-bottom:10px;font-size:13.5px}
+.rbar{flex:1 1 120px;height:8px;background:#EFE6CC;border-radius:6px;overflow:hidden;min-width:90px}
+.rbar i{display:block;height:100%;background:var(--gold);border-radius:6px;transition:width .3s}
+.carnet{margin-top:10px;font-size:13px;color:var(--violet-d);background:var(--violet-l);border-radius:9px;padding:7px 11px}
+.nextnote{margin-top:10px;font-size:13px;font-weight:700;color:var(--brand-d)}
+.qlist{margin:8px 0 0;padding-inline-start:20px;font-size:13px;color:var(--ink2)}
+details summary{cursor:pointer;font-weight:700;color:var(--ink2);font-size:13.5px;margin-top:8px}
+/* خريطة الأبواب */
+.map{display:grid;gap:12px;margin-top:8px}
+.mdom{display:inline-block;background:var(--acc);color:#fff;border-radius:20px;padding:2px 12px;font-size:12px;font-weight:700;margin-bottom:6px}
+.stations{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:7px}
+.station{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;gap:0 8px;align-items:center;text-align:start;
+  background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:8px 10px;color:var(--ink2)}
+.station.seen{border-style:solid}
+.station .snum{grid-row:1/3;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--line2);color:var(--ink3);font-weight:700}
+.station.seen .snum{background:var(--acc);color:#fff}
+.station.s3{background:var(--gold-l);border-color:var(--gold)}
+.station .sname{font-size:12.5px;font-weight:700;line-height:1.35}
+.stars{color:var(--gold);font-size:13px;letter-spacing:1px;direction:ltr;unicode-bidi:isolate;text-align:start}
+.stars i{font-style:normal;color:var(--line)}
+/* الشارات */
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.badge{border:1px solid var(--line);border-radius:12px;padding:9px;display:grid;gap:3px;text-align:center;opacity:.5;filter:grayscale(1);background:var(--card)}
+.badge.on{opacity:1;filter:none;border-color:var(--gold);background:var(--gold-l)}
+.badge .bi{font-size:22px;color:var(--gold);line-height:1.1}
+.badge b{font-size:12.5px;color:var(--ink)}
+.badge small{font-size:11px;color:var(--ink3);line-height:1.5}
+/* إشعار الشارة */
+#toast{position:fixed;inset-inline:12px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:300;display:grid;gap:6px;
+  pointer-events:none;opacity:0;transform:translateY(12px);transition:opacity .25s,transform .25s;max-width:420px;margin-inline:auto}
+#toast.on{opacity:1;transform:none}
+#toast .tb{display:flex;gap:10px;align-items:center;background:var(--brand-d);color:#fff;border-radius:12px;padding:10px 14px;
+  box-shadow:0 6px 22px rgba(0,0,0,.25);font-size:13.5px;line-height:1.5}
+#toast .ti{font-size:24px;color:#F2C94C}
+/* الحفظ */
+textarea.code{width:100%;font-family:var(--lat);font-size:12px;direction:ltr;border:1px solid var(--line);border-radius:10px;
+  padding:8px;margin:8px 0;background:var(--card);color:var(--ink);resize:vertical;word-break:break-all}
+.filebtn{position:relative;overflow:hidden;cursor:pointer;display:inline-flex;align-items:center}
+.filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
+/* قائمة «المزيد» */
+.morelist{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.morelist .lcard{width:100%;text-align:start;margin:0}
+.morelist .lnum{font-size:14px}
+/* القراءة الصوتية */
+.speak{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:2px 0 8px}
+.speak .note{margin:0;padding:4px 10px}
+/* علامات مزيج الفصل */
+.tab.mix{border-color:var(--gold);color:#8A6100;background:var(--gold-l)}
+.tab.mix.on{background:var(--gold);border-color:var(--gold);color:#fff}
+.tab.labtab{border-color:var(--blue)}
+/* جدول بيانات */
+table.dt{border-collapse:collapse;width:100%;margin:8px 0;font-size:13px;background:var(--card)}
+table.dt th,table.dt td{border:1px solid var(--line);padding:5px 6px;text-align:center;unicode-bidi:plaintext}
+table.dt th{background:var(--line2);font-weight:700;color:var(--ink2);font-size:12.5px}
+/* ---------- المختبر ---------- */
+.lab{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px;margin-bottom:12px}
+.labhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;margin-bottom:8px}
+.labhead b{font-size:15.5px;color:var(--acc-d)}
+.labtip{font-size:12px;color:var(--ink3)}
+.labmodes{margin:0 0 8px}
+.labmodes .btn{margin:0}
+.labctl{display:grid;gap:6px;margin-bottom:6px}
+.labctl:empty{display:none}
+.sl{display:grid;gap:2px;font-size:13px;color:var(--ink2)}
+.sl b{color:var(--acc-d)}
+.sl input[type=range]{width:100%;accent-color:var(--acc);height:30px;direction:ltr}
+.labsvg{display:block;width:100%;max-width:520px;margin:0 auto;aspect-ratio:360/300;background:#FCFBF8;border:1px solid var(--line2);
+  border-radius:12px;touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer}
+.labread{margin-top:8px;overflow-x:auto}
+.labread p{margin:6px 0}
+.obs{background:var(--brand-l);border-radius:9px;padding:8px 11px;font-size:13.5px}
+.labnote{margin-top:10px;font-size:12.5px;color:var(--ink3);background:var(--line2);border-radius:9px;padding:8px 11px;line-height:1.8}
+
+.note:empty,.help:empty{display:none}
+.crumb a{color:var(--acc-d);font-weight:700;text-decoration:none}
+.dgmap{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:7px}
+/* ---------- حجم الخطّ ---------- */
+#app,#sheetin{zoom:var(--z,1)}
+.lab{zoom:calc(1 / var(--z,1))}
+/* ---------- الإعدادات والمعجم ---------- */
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:6px 14px;font-size:13.5px;font-weight:700;color:var(--ink2)}
+.seg button.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.glctl{display:grid;grid-template-columns:1fr auto;gap:8px;margin:8px 0}
+.glctl input{font-family:inherit;font-size:15px;direction:rtl;text-align:start}
+.glctl select{font:inherit;font-size:13.5px;border:1px solid var(--line);border-radius:10px;padding:6px 8px;background:var(--card);color:var(--ink);max-width:46vw}
+.glhead,.glrow{display:grid;grid-template-columns:1.1fr 1.3fr 1fr;gap:8px;align-items:baseline;padding:6px 4px;border-bottom:1px solid var(--line2)}
+.glhead{font-size:12px;font-weight:700;color:var(--ink3);border-bottom:2px solid var(--line)}
+.glhead span:nth-child(n+2),.glrow .gf,.glrow .ge{direction:ltr;text-align:left}
+.glrow .ga{font-weight:700;font-size:15px}
+.glrow .gf{font-family:var(--ar);font-size:14.5px;color:var(--brand-d)}
+.glrow .ge{font-family:var(--ar);font-size:12.5px;color:var(--ink3)}
+.glcard .glrow{grid-template-columns:1fr 1.3fr}
+.glcard .ge{display:none}
+@media(max-width:420px){ .glctl{grid-template-columns:1fr} .glctl select{max-width:none} .glhead,.glrow{grid-template-columns:1fr 1.2fr} .glhead span:nth-child(3),.glrow .ge{display:none} }
+/* ---------- الوضع الداكن ---------- */
+html.dk{color-scheme:dark;
+  --bg:#12161C; --card:#1B2129; --ink:#E6EAF0; --ink2:#C3CCD7; --ink3:#97A3B2; --line:#2D3642; --line2:#232A33;
+  --brand:#1E7F69; --brand-l:#183A33; --brand-d:#8ED6C2;
+  --gold:#B8860B; --gold-l:#332B17;
+  --red:#C24A57; --red-l:#3A2125;
+  --blue:#3B73B0; --blue-l:#1C2A3A; --blue-d:#9DC0EA;
+  --violet:#7464BE; --violet-l:#262238; --violet-d:#C0B6F0}
+html.dk body{background:var(--bg)}
+html.dk .top{background:#123E35}
+html.dk .hero{background:linear-gradient(160deg,#0B2C25,#145A4A)}
+html.dk .pageref,html.dk .ref,html.dk .ptsb.big{color:#E9C46A;border-color:#5A4A22}
+html.dk .card.core,html.dk .scorecard{border-color:#5A4A22}
+html.dk .card.core>h3,html.dk .scorecard .exhead h3,html.dk .hintbox b,html.dk .chip .lab{color:#E9C46A}
+html.dk .chip,html.dk .choice,html.dk .sol,html.dk input[type=text],html.dk .pane-analogie .card{background:var(--card);border-color:var(--line);color:var(--ink)}
+html.dk .pane-analogie .card{border-color:#463F66}
+html.dk .pane-vie .card{border-color:#2C4560}
+html.dk .warn{border-color:#5C2E35}
+html.dk .fb.good{background:#163A30}
+html.dk .solrow .sp{background:var(--card);border-color:#2E5248}
+html.dk .runbar,html.dk .ghint{border-color:#5A4A22}
+html.dk .rbar{background:#3A3322}
+html.dk .tab.mix{color:#E9C46A}
+html.dk #toast .tb{background:#0B2C25}
+html.dk .badge.on{border-color:#8A6A1A}
+html.dk .stars i{color:#3A4350}
+html.dk .station.s3{border-color:#8A6A1A}
+/* الأشكال تبقى على «ورقة» فاتحة حتى تبقى الخطوط مقروءة */
+html.dk .fig svg,html.dk .labsvg{background:#F4F1EA;border-color:#3A4350}
+html.dk .fig figcaption,html.dk .fignote{color:var(--ink3)}
+html.dk .wpage{border-color:#3A4350}
+@media print{ html.dk{--bg:#fff;--card:#fff;--ink:#111;--ink2:#333;--ink3:#555;--line:#bbb;--line2:#eee} }
+html.dk .gm.okh{color:#E9C46A}
+.glnote{margin:4px 0 0;padding-inline-start:18px}
+.glnote li{margin:2px 0}
+html.dk .pk{box-shadow:none}
+/* ---------- لوحة المفاتيح الرياضية ---------- */
+.padwrap{margin:8px 0 2px}
+.padbar{display:flex;justify-content:flex-end;margin-bottom:6px}
+.pad{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;max-width:460px;margin:0 auto;direction:ltr}
+.pad.off{display:none}
+.pk{height:44px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-family:var(--lat);font-size:18px;font-weight:600;
+  touch-action:manipulation;-webkit-user-select:none;user-select:none;box-shadow:0 1px 0 var(--line)}
+.pk.o{background:var(--acc-l);color:var(--acc-d);border-color:transparent}
+.pk.f{background:var(--line2);color:var(--ink2);font-size:16px}
+.pk.e{border:none;background:none;box-shadow:none}
+.pk:active{transform:translateY(1px);box-shadow:none;filter:brightness(.95)}
+.pk sup{font-size:.6em}
+/* ---------- المسودّة ---------- */
+.scrbar{display:flex;margin-top:10px}
+.scrtools{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 6px}
+.scrtools .note{margin:0;padding:3px 9px;font-size:12px}
+canvas.scr{display:block;width:100%;background:#FFFEF9;border:1px dashed var(--line);border-radius:12px;touch-action:none;cursor:crosshair;
+  background-image:linear-gradient(#EEF1F4 1px,transparent 1px);background-size:100% 26px}
+html.dk canvas.scr{background-color:#F4F1EA;border-color:#3A4350}
+.padpv{font-size:13.5px;color:var(--ink3);margin:-2px 0 6px;min-height:1.2em}
+.padpv .m{color:var(--ink);font-size:15px}
+input[type=text]:placeholder-shown{direction:rtl}
+/* شريط «ثبّت التطبيق» فوق شريط التنقّل */
+#instb{position:fixed;inset-inline:12px;bottom:calc(72px + env(safe-area-inset-bottom));z-index:65;display:none;align-items:center;gap:10px;
+  max-width:560px;margin-inline:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;
+  box-shadow:0 8px 26px rgba(0,0,0,.16)}
+#instb.on{display:flex}
+#instb .ii{font-size:26px;line-height:1}
+#instb .it{flex:1;min-width:0;font-size:13px;line-height:1.65;color:var(--ink2)}
+#instb .it b{color:var(--ink)}
+#instb .btn{flex:none;margin:0}
+#instb .ix{flex:none;background:none;border:0;font-size:22px;line-height:1;color:var(--ink3);cursor:pointer;padding:4px 6px}
+@media print{ #instb{display:none!important} }
+
+@media(min-width:760px){ body{font-size:17.5px} .wrap{padding:0 20px 92px} .ltitle{font-size:27px} }
+/* ======================= تطبيق البكالوريا: إضافات — App BAC : ajouts ======================= */
+:root{ --fr:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif; }
+html[lang=fr] body{font-family:var(--fr);line-height:1.7;font-size:16.5px}
+html[lang=fr] .qbox{line-height:1.85}
+html[lang=fr] .qtext{line-height:1.9}
+html[lang=fr] .ref{font-family:var(--fr)}
+html[dir=ltr] input[type=text]:placeholder-shown{direction:ltr}
+.btn[disabled]{opacity:.45;cursor:default}
+.m sub,.mb sub,.m sup{font-size:.72em;line-height:0}
+.lcard.soon,.station[disabled]{opacity:.62;cursor:default}
+.lcard.soon:active{background:var(--card)}
+.tsoon{display:inline-block;background:var(--line2);color:var(--ink3);border-radius:20px;padding:0 9px;font-size:11.5px;font-weight:700}
+table.gl td{font-size:14px;padding:6px 8px}
+table.gl td[dir=ltr]{font-family:var(--fr);color:var(--brand-d)}
+.qtext .fr{font-size:.95em}
+.labread .obs{margin:6px 0}
+@media(min-width:760px){ html[lang=fr] body{font-size:17px} }
+input[type=text]::placeholder{font-family:var(--ar);letter-spacing:0}
+html[lang=fr] input[type=text]::placeholder{font-family:var(--fr)}
+.top h1{min-width:0}
+.top h1,.top h1 small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+</style>
+</head>
+<body>
+<header class="top">
+  <button class="bar" id="home" aria-label="الفهرس">☰</button>
+  <h1 id="ttl">الرياضيات — البكالوريا</h1>
+  <button class="lng" id="lng" aria-label="Passer en français">FR</button>
+</header>
+<div class="years" id="years"></div>
+<main class="wrap" id="app"></main>
+<footer id="cred"></footer>
+<nav class="nav" id="nav"></nav>
+<div class="sheet" id="sheet"><div class="in" id="sheetin"></div></div>
+<script>
+/* ======== core.js ======== */
+"use strict";
+/* Basé sur Math3AM (© 2026, son auteur), réutilisé avec son autorisation.
+   مبنيّ على تطبيق Math3AM بإذن من مؤلّفه. */
+
+/* ============================================================================
+   اللغة — Langue
+   كلّ نصّ يظهر للتلميذ إمّا مفتاح في I18N (واجهة) وإمّا كائن {ar,fr} (محتوى).
+   Tout texte affiché est soit une clé de I18N (interface), soit un objet {ar,fr} (contenu).
+   ============================================================================ */
+let LANG='ar';
+const B=(ar,fr)=>({ar,fr});                         /* نصّ ثنائي اللغة / texte bilingue */
+const tr=o=>o==null?'':(typeof o==='string'||typeof o==='number')?String(o):(o[LANG]!=null?o[LANG]:o.ar);
+function t(k){ const d=I18N[LANG]||I18N.ar; return d[k]!=null?d[k]:(I18N.ar[k]!=null?I18N.ar[k]:k); }
+
+/* ================================================================
+   محرّك مولّد التمارين — أدوات عددية (من Math3AM)
+   ================================================================ */
+const ri=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const nz=(a,b)=>{let v=0;while(v===0)v=ri(a,b);return v;};
+const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;};
+const ar=n=>String(n).replace('.',',').replace(/^-/,'−');   /* علامة الطرح الرياضية، والفاصلة العشرية */
+const red=(p,q)=>{const g=gcd(p,q);p/=g;q/=g;if(q<0){p=-p;q=-q;}return [p,q];};
+const f=(a,b)=>`<span class="fr"><span>${a}</span><span>${b}</span></span>`;
+const frs=(p,q)=>{const [a,b]=red(p,q);return b===1?ar(a):(a<0?'−'+f(-a,b):f(a,b));};
+const par=n=>n<0?`(${ar(n)})`:ar(n);
+const cx=a=>a===1?'':a===-1?'−':ar(a);          /* معامل: 1n ← n */
+const sgn=n=>n<0?'−':'+';
+const lcm=(a,b)=>Math.abs(a*b)/gcd(a,b);
+/* صيغة رياضية؛ الصيغ القصيرة لا تنقسم على سطرين / formule ; les formules courtes ne sont pas coupées en fin de ligne */
+const M=s=>{ s=String(s); if(s.replace(/<[^>]*>/g,'').length<=22) s=s.replace(/(<[^>]*>)| /g,(m,tag)=>tag||'\u00a0'); return `<span class="m">${s}</span>`; };
+/* عدد عشري مقرّب للعرض / nombre arrondi pour l'affichage */
+const rnd=(v,d)=>{ const k=Math.pow(10,d==null?2:d); const r=Math.round(v*k)/k; return Object.is(r,-0)?0:r; };
+/* عدد ناطق قريب من v (للعرض بكسر) / fraction proche de v */
+function rat(v){ for(let q=1;q<=1000;q++){ const p=Math.round(v*q); if(Math.abs(p/q-v)<1e-9) return [p,q]; } return null; }
+const nice=v=>{ const r=rat(v); return r?frs(r[0],r[1]):ar(rnd(v,4)); };
+
+/* محلّل رياضي صغير (نزول تكراري): أولويات صحيحة، دون تنفيذ أيّ شيفرة.
+   -x^2 = −(x²) ، 10^-3 = 0,001 ، 2x = 2×x ، (x+1)(x−2) ضرب ضمني */
+function mathEval(src,xv){
+  let i=0; const t=src;
+  const peek=()=>t[i];
+  const isStart=c=>c!==undefined&&(/[0-9.(x]/.test(c)||c==='π');
+  function num(){ const m=/^\d*\.?\d+(?:e[+-]?\d+)?|^\d+\./.exec(t.slice(i)); if(!m) throw 0; i+=m[0].length; return parseFloat(m[0]); }
+  function atom(){
+    const c=peek();
+    if(c==='('){ i++; const v=expr(); if(peek()!==')') throw 0; i++; return v; }
+    if(c==='x'){ if(xv===undefined) throw 0; i++; return xv; }
+    if(c==='π'){ i++; return Math.PI; }
+    return num();
+  }
+  function power(){ const b=atom(); if(peek()==='^'){ i++; return Math.pow(b,unary()); } return b; }
+  function unary(){ const c=peek(); if(c==='-'){ i++; return -unary(); } if(c==='+'){ i++; return unary(); } return power(); }
+  function term(){
+    let v=unary();
+    for(;;){
+      const c=peek();
+      if(c==='*'){ i++; v*=unary(); }
+      else if(c==='/'){ i++; const d=unary(); if(d===0) throw 0; v/=d; }
+      else if(isStart(c)){ v*=power(); }
+      else return v;
+    }
+  }
+  function expr(){
+    let v=term();
+    for(;;){ const c=peek(); if(c==='+'){ i++; v+=term(); } else if(c==='-'){ i++; v-=term(); } else return v; }
+  }
+  try{ const v=expr(); if(i!==t.length) return NaN; return isFinite(v)?v:NaN; }catch(e){ return NaN; }
+}
+
+/* تحليل جواب عددي: يقبل 3/4 و 0,75 و 2,5×10^3 */
+function pnum(s){
+  if(s==null)return NaN;
+  s=String(s).trim();
+  if(!s)return NaN;
+  s=s.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d))
+     .replace(/−|–|—/g,'-').replace(/,/g,'.')
+     .replace(/[×x·X*]/g,'*').replace(/÷/g,'/')
+     .replace(/\s+/g,'').replace(/Π/g,'π');
+  if(!/^[0-9.+\-*/()^π]+$/.test(s))return NaN;
+  return mathEval(s);
+}
+/* تحليل عبارة بدلالة n (حدّ عام لمتتالية) وتقييمها من أجل عدد طبيعي
+   Analyse une expression en n (terme général) et l'évalue pour un entier n */
+function pexprN(s,n){
+  if(s==null)return NaN;
+  s=String(s).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d))
+     .replace(/−|–|—/g,'-').replace(/,/g,'.').replace(/÷/g,'/')
+     .replace(/×|·/g,'*').replace(/²/g,'^2').replace(/³/g,'^3')
+     .replace(/\s+/g,'').replace(/^u_?\(?n\)?=/i,'').replace(/[nN]/g,'x');
+  if(!s||!/^[0-9x.+\-*/()^]+$/.test(s))return NaN;
+  return mathEval(s,n);
+}
+const NS=[0,1,2,3,4,6,9];                          /* قيم n للمقارنة / valeurs de n testées */
+const closeV=(a,b)=>Math.abs(a-b)<=1e-6*Math.max(1,Math.abs(b));
+function sameSeq(user,fn){ return NS.every(n=>{ const u=pexprN(user,n); return !isNaN(u)&&closeV(u,fn(n)); }); }
+function sameFnN(f1,f2){ return NS.every(n=>closeV(f1(n),f2(n))); }
+
+/* ============================================================================
+   إصلاح الاتجاه ثنائي المسار (للعربية فقط) — من Math3AM
+   الصيغة الرياضية التي تتوزّع على عدّة عناصر تُجمع في عازل واحد من اليسار لليمين.
+   En français (gauche → droite) aucune correction n'est nécessaire : fix() renvoie le texte tel quel.
+   ============================================================================ */
+const GLUE=/^(?:[\s0-9=×÷+\-−·<>≤≥≠≈%(),;/*^'"]|&[a-z]+;)*$/;
+const LAT_RE=/(^|[^A-Za-z0-9؀-ۿ&#])([A-Z][A-Z0-9′']*|[a-z])(?![A-Za-z0-9;])/g;
+function latWrap(h){
+  return h.split(/(<svg[\s\S]*?<\/svg>)/).map((seg,i)=>{
+    if(i%2) return seg;
+    const stack=[]; let out='';
+    for(const t of seg.split(/(<[^>]+>)/)){
+      if(!t) continue;
+      if(t[0]==='<'){
+        if(/^<span\b/.test(t)) stack.push(/class="(m|mb|fr|lat|mrow|ref)"/.test(t));
+        else if(t==='</span>') stack.pop();
+        out+=t; continue;
+      }
+      const nb=t.replace(/(\d) (?=\d{3}(?!\d))/g,'$1 ');
+      out+= stack.some(Boolean) ? nb : nb.replace(LAT_RE,'$1<span class="lat">$2</span>');
+    }
+    return out;
+  }).join('');
+}
+function bidiFix(h){
+  if(!h) return h;
+  h=latWrap(h);
+  if(h.indexOf('class="')<0) return h;
+  const T=[]; let i=0;
+  while(i<h.length){
+    if(h[i]==='<'){
+      const m=/^<span class="(m|fr|lat)">/.exec(h.slice(i,i+24));
+      if(m){
+        let depth=0,end=-1,x; const re=/<span\b[^>]*>|<\/span>/g; re.lastIndex=i;
+        while((x=re.exec(h))){
+          if(x[0]==='</span>'){ if(--depth===0){ end=x.index+7; break; } } else depth++;
+        }
+        if(end<0){ T.push({k:'txt',s:h.slice(i)}); break; }
+        T.push({k:'math',s:h.slice(i,end)}); i=end; continue;
+      }
+      const g=h.indexOf('>',i);
+      if(g<0){ T.push({k:'txt',s:h.slice(i)}); break; }
+      T.push({k:'tag',s:h.slice(i,g+1)}); i=g+1; continue;
+    }
+    let g=h.indexOf('<',i); if(g<0) g=h.length;
+    T.push({k:'txt',s:h.slice(i,g)}); i=g;
+  }
+  let out='',j=0;
+  while(j<T.length){
+    if(T[j].k!=='math'){ out+=T[j].s; j++; continue; }
+    let end=j,k=j+1;
+    while(k<T.length){
+      if(T[k].k==='math'){ end=k; k++; continue; }
+      if(T[k].k==='txt' && T[k].s.length<=25 && GLUE.test(T[k].s)
+         && k+1<T.length && T[k+1].k==='math'){ k++; continue; }
+      break;
+    }
+    const run=T.slice(j,end+1);
+    const s=run.map(t=>t.s).join('');
+    out += run.filter(t=>t.k==='math').length>=2 ? '<span class="mrow">'+s+'</span>' : s;
+    j=end+1;
+  }
+  return out;
+}
+const fix=h=>LANG==='ar'?bidiFix(h):h;
+
+/* ======== i18n.js ======== */
+/* ============================================================================
+   نصوص الواجهة — Textes de l'interface
+   ============================================================================ */
+const I18N={
+ar:{
+  appName:'الرياضيات — البكالوريا', appSub:'السنة الثالثة ثانوي · شعبة العلوم التجريبية',
+  langBtn:'FR', langAria:'Passer en français', menuAria:'الفهرس',
+  heroH:'المتتاليات، الدوال، الاحتمالات… افهم، تدرّب، ثمّ انجح',
+  heroP:'تحضير بكالوريا الرياضيات — شعبة العلوم التجريبية · وفق منهاج وزارة التربية الوطنية',
+  heroNote:'<b>نسخة تجريبية:</b> باب <b>المتتاليات العددية</b> جاهز بكلّ تبويباته: الدرس، تشبيهات، في الحياة، النواة الصلبة، التفكير الصحيح، جرّب بنفسك، تمرين بكالوريا، ومولّد تمارين لا ينتهي. بقيّة الأبواب قيد الإنجاز.<br>التطبيق <b>ثنائي اللغة</b>: الزرّ <b>FR</b> أعلى الشاشة يعرض كلّ شيء بالفرنسية، ويفيدك ذلك في الجامعة حيث تُدرَّس العلوم بالفرنسية.',
+  chap:'الباب', soon:'قريبًا', tabsN:'ثمانية تبويبات', allDom:'كلّ الميادين',
+  progNote:'قائمة الأبواب حسب منهاج السنة الثالثة ثانوي، شعبة العلوم التجريبية. الأبواب المعلَّمة «قريبًا» ستُضاف تباعًا.',
+  prevChap:'→ الباب', nextChap:'الباب', nextArrow:' ←',
+  listen:'▶ استمع إلى هذا الجزء', stopListen:'■ أوقف القراءة',
+  tab_cours:'الدرس', tab_analogie:'تشبيهات', tab_vie:'في الحياة', tab_noyau:'النواة الصلبة',
+  tab_methode:'التفكير الصحيح', tab_lab:'جرّب بنفسك', tab_bac:'تمرين بكالوريا', tab_gen:'تمارين',
+  genTitle:'مولّد التمارين — ', genTag:'تمرين مولّد آليا', streak:'سلسلة الإجابات الصحيحة: ',
+  check:'تحقّق من جوابي', newEx:'تمرين جديد', showSol:'أظهر الحلّ',
+  genHelp:'اكتب الكسور هكذا <span class="lat">-3/4</span>، والأعداد العشرية بالفاصلة <span class="lat">2,5</span> أو بالنقطة. للقوى استعمل <span class="lat">^</span>، مثلا <span class="lat">3*2^n</span>.',
+  ph:'اكتب جوابك هنا', phN:'اكتب الحدّ العام بدلالة n، مثلا: 5-3n',
+  okMsgs:['أحسنت! إجابة صحيحة.','ممتاز، هذا هو الجواب الصحيح.','بالضبط! تفكير سليم.','صحيح تماما — واصل بهذه الوتيرة.'],
+  fullSteps:'الخطوات كاملة للمراجعة:', notYet:'ليس بعد — وهذا عاديّ تماما.',
+  retry:'راجع جوابك بهدوء ثمّ حاول مرّة أخرى.', oneMore:'لديك محاولة أخرى قبل أن يظهر الحلّ.',
+  okFail:'لا بأس، الخطأ جزء من التعلّم.', hereSol:'إليك الحلّ خطوة بخطوة — اقرأه ثمّ اطلب تمرينا جديدا لتتأكّد أنّك فهمت.',
+  carnet:'سُجّل هذا النوع من التمارين في <b>كرّاسة أخطائي</b>: سيعود إليك غدا بأعداد جديدة، ثمّ بعد 3 أيام، ثمّ بعد أسبوع.',
+  carnetShort:'سُجّل هذا النوع في <b>كرّاسة أخطائي</b> ليعود إليك لاحقا.',
+  solTitle:'الحلّ المفصّل', solThen:'اقرأ الخطوات، ثمّ اطلب <b>تمرينا جديدا</b> من نفس النوع لتثبيت الطريقة.',
+  exDone:'انتهى هذا التمرين: اضغط «تمرين جديد» للمتابعة.', dx:'تشخيص الخطأ:',
+  chooseFirst:'اختر أحد الاحتمالات أوّلا.', wrongChoice:'الاختيار غير صحيح.', empty:'لم تكتب جوابا بعد.',
+  exprBad:'العبارة التي كتبتها لا تعطي نفس الحدود من أجل <span class="lat">n = 0, 1, 2, 3…</span> تحقّق من الحدّ الأوّل والأساس.',
+  exprParse:'لم أفهم العبارة. اكتبها بدلالة <span class="lat">n</span>، مثلا: <span class="lat">5-3n</span> أو <span class="lat">2*3^n</span>.',
+  numParse:'لم أفهم صيغة الجواب. اكتب عددا، أو كسرا مثل <span class="lat">-3/4</span>.',
+  signWrong:'<b>القيمة صحيحة لكنّ الإشارة خاطئة.</b> راجع إشارة الأساس أو الحدّ الأوّل.',
+  wrong:'الجواب غير صحيح.', willRead:'سيُقرأ جوابك هكذا: ',
+  padDevice:'⌨ لوحة الجهاز', padHide:'إخفاء لوحة الرموز', padShow:'⌨ لوحة الرموز الرياضية',
+  scr:'✎ مسودّة', scrHide:'✕ إخفاء المسودّة', pen:'قلم', eraser:'ممحاة', clearAll:'مسح الكلّ',
+  scrNote:'اكتب حساباتك بإصبعك أو بالفأرة؛ لا تُحفظ المسودّة بعد مغادرة التمرين.',
+  nav_home:'الفهرس', nav_quick:'تمارين', nav_progress:'تقدّمي', nav_settings:'الإعدادات',
+  quickTitle:'تمارين', quickSub:'مولّد لا ينتهي', quickH:'تدرّب على أيّ باب', quickRef:'اختر بابا: كلّ تمرين جديد بأعداد جديدة، مع تصحيح فوري وتشخيص للخطأ.',
+  progTitle:'تقدّمي', progSub:'الأيام، النجوم، الشارات وكرّاسة الأخطاء', progH:'رحلتك نحو البكالوريا',
+  daysRow:'أيام متتالية', dayOne:'يوم تدرّب', okAnswers:'إجابات صحيحة', badgesOf:'شارات من ', toReview:'للمراجعة اليوم', badgesW:'شارات',
+  noSave:'<b>تنبيه:</b> هذا المتصفّح لا يسمح بحفظ التقدّم في الجهاز. استعمل «تنزيل ملف الحفظ» أسفل هذه الصفحة قبل الإغلاق، ثمّ «استيراد» في المرّة القادمة.',
+  carnetH:'كرّاسة أخطائي — مراجعة اليوم', dueN:'عدد التمارين التي تنتظرك اليوم: ', dueTail:' — نفس الأنواع التي أخطأت فيها، بأعداد جديدة.',
+  startRev:'ابدأ المراجعة', nothingDue:'لا شيء للمراجعة اليوم.', nextRev:' المراجعة القادمة: ', waiting:'. عدد التمارين المنتظرة: ', autoNote:' كلّ تمرين تخطئ فيه سيُسجَّل هنا تلقائيا.',
+  carnetHow:'كيف تعمل؟ كلّ نوع تمرين تخطئ فيه يعود إليك غدا، فإن نجحت عاد بعد 3 أيام، ثمّ بعد أسبوع؛ وبعد ثلاث مرّات ناجحة يُعتبر مُتقَنا ويخرج من الكرّاسة. وإذا أخطأت يعود العدّ إلى البداية.',
+  carnetIn:'محتوى الكرّاسة', stage:'المرحلة', when:'الموعد: ',
+  mapH:'خريطة الأبواب', mapNote:'نجمة عند 5 إجابات صحيحة، نجمتان عند 15، وثلاث نجوم عند 30 إجابة صحيحة مع دقّة لا تقلّ عن 80% في آخر عشرة تمارين.',
+  myBadges:'شاراتي', backupH:'حفظ تقدّمي ونقله', backupP:'لنقل تقدّمك إلى جهاز آخر أو لحفظه احتياطيا: انسخ الرمز أو نزّل ملف الحفظ، ثمّ استورده في الجهاز الآخر.',
+  showCode:'إظهار رمز الحفظ', dlFile:'تنزيل ملف الحفظ', pasteCode:'الصق هنا رمز الحفظ ثمّ اضغط «استيراد»', impCode:'استيراد الرمز', impFile:'استيراد ملف',
+  codeShown:'هذا رمز تقدّمك: انسخه واحتفظ به.', impOk:'تمّ الاستيراد بنجاح ✔', impBad:'تعذّر الاستيراد: الرمز غير صالح.',
+  today:'اليوم', tomorrow:'غدا', in2:'بعد يومين', inN:'بعد ', daysW:' أيام',
+  revH:'مراجعة اليوم', revTitle:'كرّاسة أخطائي: لنُعِد المحاولة', revRef:'كلّ تمرين هنا من نوع أخطأت فيه سابقا، لكن بأعداد جديدة',
+  exOf:'التمرين ', of:' من ', nextOne:'التمرين الموالي', endRun:'إنهاء الجلسة',
+  pressNext:'اضغط «التمرين الموالي» للمتابعة.', pressEnd:'اضغط «إنهاء الجلسة» لرؤية النتيجة.',
+  runEnd:'انتهت الجلسة', yourRes:'نتيجتك', backProg:'العودة إلى تقدّمي',
+  resAll:'رائع! كلّ الأجوبة صحيحة.', resHalf:'عمل جيّد. ما أخطأت فيه سيعود إليك في موعده.', resLow:'لا بأس: هذه التمارين ستعود إليك غدا بأعداد جديدة حتى تتقنها.',
+  newBadge:'شارة جديدة!',
+  setTitle:'الإعدادات', setLang:'اللغة', setTheme:'المظهر', thAuto:'تلقائي (حسب الجهاز)', thLight:'فاتح', thDark:'داكن',
+  setPad:'لوحة المفاتيح الرياضية', padAuto:'تلقائي (تظهر على الهاتف)', padOn:'تظهر دائما', padOff:'لا تظهر',
+  padNote:'أزرار للرموز (n، ^، −، /…) تحت خانة الجواب. يمكن دائما الرجوع إلى لوحة الجهاز بزرّ «لوحة الجهاز».',
+  setZ:'حجم الخطّ', z09:'أصغر', z1:'عادي', z11:'كبير', z12:'أكبر', z135:'كبير جدّا', zNote:'يكبّر الدروس والتمارين.',
+  setSpeech:'القراءة الصوتية', speed:'سرعة القراءة: ', tryVoice:'تجربة الصوت',
+  voiceTest:'مرحبا! هذا مثال على القراءة الصوتية. المتتالية الهندسية أساسها اثنان.',
+  noSpeech:'هذا المتصفّح لا يدعم القراءة الصوتية.', voiceUsed:'الصوت المستعمل: ',
+  voiceApprox:'. الرموز الرياضية قد تُقرأ بطريقة تقريبية.',
+  noVoice:'لم نجد صوتا عربيا في هذا الجهاز. يمكن إضافته من إعدادات الجهاز (اللغة ← تحويل النصّ إلى كلام)، ثمّ إعادة فتح التطبيق.',
+  setSaved:'التقدّم المحفوظ', savedOk:'يُحفظ تقدّمك في هذا المتصفّح على هذا الجهاز فقط. لنقله إلى جهاز آخر استعمل «حفظ تقدّمي ونقله» في صفحة «تقدّمي».',
+  savedNo:'هذا المتصفّح لا يسمح بالحفظ: استعمل «تنزيل ملف الحفظ» في صفحة «تقدّمي» قبل الإغلاق.',
+  resetAll:'مسح كلّ التقدّم', resetSure:'هل أنت متأكّد؟ سيُمسح كلّ شيء: النجوم، الشارات، كرّاسة الأخطاء ونتائج تمارين البكالوريا. اضغط مرّة ثانية للتأكيد.', resetYes:'نعم، امسح كلّ شيء',
+  close:'إغلاق',
+  instH:'تثبيت التطبيق', instDone:'✓ التطبيق مثبّت على هذا الجهاز ويعمل دون إنترنت.',
+  instReady:'أضف أيقونة التطبيق إلى الشاشة الرئيسية ليُفتح كتطبيق ويعمل دون إنترنت.', instNow:'تثبيت التطبيق الآن',
+  instIOS:'في <span class="lat">Safari</span>: اضغط زرّ المشاركة <b>⬆</b> ثمّ اختر <b>«إضافة إلى الشاشة الرئيسية»</b>.',
+  instMenu:'يظهر زرّ «تثبيت» تلقائيا بعد استعمال التطبيق قليلا. وإن لم يظهر: افتح قائمة المتصفّح <b>⋮</b> واختر <b>«تثبيت التطبيق»</b> أو <b>«إضافة إلى الشاشة الرئيسية»</b>.',
+  instFile:'هذه النسخة مفتوحة كملفّ في الجهاز: التثبيت ممكن فقط من موقع التطبيق (رابط يبدأ بـ <span class="lat">https</span>).',
+  instBarH:'ثبّت التطبيق على جهازك', instBarP:'أيقونة على الشاشة الرئيسية، ويعمل دون إنترنت.', instBtn:'تثبيت', later:'لاحقا',
+  instToastH:'تمّ التثبيت', instToast:'تجد التطبيق الآن على الشاشة الرئيسية.',
+  updH:'تحديث', upd:'نسخة جديدة من التطبيق جاهزة: أغلقه ثمّ أعد فتحه.',
+  hint:'تلميح', corr:'الحلّ', hideHint:'إخفاء التلميح', hideCorr:'إخفاء الحلّ', pts:'ن',
+  qMark:'علامتك في هذا السؤال: ', total:'علامتك الإجمالية', tickTip:'ضع علامة على كلّ خطوة أنجزتها صحيحة: تُحسب علامتك تلقائيا.',
+  bacHow:'حلّ التمرين على ورقة كما في يوم الامتحان، ثمّ افتح التلميح إن احتجت إليه، وأخيرا افتح الحلّ وصحّح نفسك خطوة بخطوة.',
+  bacReset:'إعادة التصحيح', bacMsgTop:'ممتاز! أنت جاهز لهذا النوع من التمارين يوم البكالوريا.', bacMsgMid:'عمل جيّد. أعد الأسئلة التي ضيّعت فيها النقاط بعد يومين.',
+  bacMsgLow:'لا بأس: راجع «النواة الصلبة» و«التفكير الصحيح» ثمّ أعد التمرين.', bacMsgNone:'افتح الحلول وصحّح خطواتك لتظهر علامتك.',
+  labObs:'لاحظ', credit:'تصميم التطبيق وتطويره: ',
+  cpt:'تطبيق تعليمي مجاني لمساعدة تلاميذ السنة الثالثة ثانوي على التحضير لامتحان البكالوريا في الرياضيات',
+  cpy:'مبادرة مستقلّة، غير تابعة لوزارة التربية الوطنية. الاستعمال مجّاني لغرض التعلّم والتدريس، دون أيّ استعمال تجاري. مبنيّ على تطبيق <span class="lat">Math3AM</span> بإذن من مؤلّفه.',
+},
+fr:{
+  appName:'Mathématiques — BAC', appSub:'3e AS · Sciences expérimentales',
+  langBtn:'ع', langAria:'التبديل إلى العربية', menuAria:'Sommaire',
+  heroH:'Suites, fonctions, probabilités… comprendre, s\'entraîner, réussir',
+  heroP:'Préparation au BAC de mathématiques — filière Sciences expérimentales · programme du ministère de l\'Éducation nationale',
+  heroNote:'<b>Version prototype :</b> le chapitre <b>Suites numériques</b> est complet : cours, analogies, dans la vie, l\'essentiel, bien raisonner, explorer, exercice type BAC et générateur d\'exercices illimité. Les autres chapitres sont en préparation.<br>L\'application est <b>bilingue</b> : le bouton <b>ع</b> en haut de l\'écran repasse tout en arabe.',
+  chap:'Chapitre', soon:'Bientôt', tabsN:'huit onglets', allDom:'Tous les domaines',
+  progNote:'Chapitres du programme de 3e AS, filière Sciences expérimentales. Les chapitres marqués « Bientôt » seront ajoutés au fur et à mesure.',
+  prevChap:'← Chapitre', nextChap:'Chapitre', nextArrow:' →',
+  listen:'▶ Écouter cette partie', stopListen:'■ Arrêter la lecture',
+  tab_cours:'Cours', tab_analogie:'Analogies', tab_vie:'Dans la vie', tab_noyau:'L\'essentiel',
+  tab_methode:'Bien raisonner', tab_lab:'Explorer', tab_bac:'Exercice type BAC', tab_gen:'Exercices',
+  genTitle:'Générateur d\'exercices — ', genTag:'Exercice généré automatiquement', streak:'Série de bonnes réponses : ',
+  check:'Vérifier', newEx:'Nouvel exercice', showSol:'Voir la solution',
+  genHelp:'Écris les fractions ainsi : <span class="lat">-3/4</span>, les décimaux avec une virgule <span class="lat">2,5</span> ou un point. Pour les puissances, utilise <span class="lat">^</span> : par exemple <span class="lat">3*2^n</span>.',
+  ph:'Écris ta réponse ici', phN:'Écris le terme général en fonction de n, ex. : 5-3n',
+  okMsgs:['Bravo ! Bonne réponse.','Excellent, c\'est la bonne réponse.','Exactement ! Raisonnement juste.','Tout à fait — continue comme ça.'],
+  fullSteps:'La solution complète, pour réviser :', notYet:'Pas encore — et c\'est tout à fait normal.',
+  retry:'Relis calmement ta réponse et réessaie.', oneMore:'Tu as encore un essai avant que la solution s\'affiche.',
+  okFail:'Ce n\'est pas grave, l\'erreur fait partie de l\'apprentissage.', hereSol:'Voici la solution pas à pas — lis-la, puis demande un nouvel exercice pour vérifier que tu as compris.',
+  carnet:'Ce type d\'exercice est noté dans ton <b>carnet d\'erreurs</b> : il reviendra demain avec de nouveaux nombres, puis dans 3 jours, puis dans une semaine.',
+  carnetShort:'Ce type est noté dans ton <b>carnet d\'erreurs</b> pour y revenir plus tard.',
+  solTitle:'Solution détaillée', solThen:'Lis les étapes, puis demande un <b>nouvel exercice</b> du même type pour fixer la méthode.',
+  exDone:'Cet exercice est terminé : appuie sur « Nouvel exercice » pour continuer.', dx:'Diagnostic :',
+  chooseFirst:'Choisis d\'abord une réponse.', wrongChoice:'Ce choix n\'est pas correct.', empty:'Tu n\'as pas encore écrit de réponse.',
+  exprBad:'Ton expression ne donne pas les mêmes termes pour <span class="lat">n = 0, 1, 2, 3…</span> Vérifie le premier terme et la raison.',
+  exprParse:'Je n\'ai pas compris l\'expression. Écris-la en fonction de <span class="lat">n</span>, par exemple : <span class="lat">5-3n</span> ou <span class="lat">2*3^n</span>.',
+  numParse:'Je n\'ai pas compris ta réponse. Écris un nombre, ou une fraction comme <span class="lat">-3/4</span>.',
+  signWrong:'<b>La valeur est juste mais le signe est faux.</b> Vérifie le signe de la raison ou du premier terme.',
+  wrong:'Ce n\'est pas la bonne réponse.', willRead:'Ta réponse sera lue ainsi : ',
+  padDevice:'⌨ Clavier de l\'appareil', padHide:'Masquer les symboles', padShow:'⌨ Clavier mathématique',
+  scr:'✎ Brouillon', scrHide:'✕ Masquer le brouillon', pen:'Crayon', eraser:'Gomme', clearAll:'Tout effacer',
+  scrNote:'Écris tes calculs au doigt ou à la souris ; le brouillon n\'est pas conservé après l\'exercice.',
+  nav_home:'Sommaire', nav_quick:'Exercices', nav_progress:'Progrès', nav_settings:'Réglages',
+  quickTitle:'Exercices', quickSub:'Générateur illimité', quickH:'Entraîne-toi sur un chapitre', quickRef:'Choisis un chapitre : chaque nouvel exercice a de nouveaux nombres, avec correction immédiate et diagnostic de l\'erreur.',
+  progTitle:'Mes progrès', progSub:'Jours, étoiles, badges et carnet d\'erreurs', progH:'Ton parcours vers le BAC',
+  daysRow:'jours d\'affilée', dayOne:'jour d\'entraînement', okAnswers:'bonnes réponses', badgesOf:'badges sur ', toReview:'à réviser aujourd\'hui', badgesW:'badges',
+  noSave:'<b>Attention :</b> ce navigateur ne permet pas d\'enregistrer ta progression. Utilise « Télécharger la sauvegarde » en bas de cette page avant de fermer, puis « Importer » la prochaine fois.',
+  carnetH:'Carnet d\'erreurs — révision du jour', dueN:'Exercices qui t\'attendent aujourd\'hui : ', dueTail:' — les mêmes types que ceux où tu t\'es trompé(e), avec de nouveaux nombres.',
+  startRev:'Commencer la révision', nothingDue:'Rien à réviser aujourd\'hui.', nextRev:' Prochaine révision : ', waiting:'. Exercices en attente : ', autoNote:' Chaque exercice manqué sera noté ici automatiquement.',
+  carnetHow:'Comment ça marche ? Chaque type d\'exercice manqué revient le lendemain ; si tu le réussis, il revient dans 3 jours, puis dans une semaine. Après trois réussites, il est maîtrisé et sort du carnet. En cas d\'erreur, le compteur repart de zéro.',
+  carnetIn:'Contenu du carnet', stage:'étape', when:'prévu : ',
+  mapH:'Carte des chapitres', mapNote:'Une étoile à 5 bonnes réponses, deux à 15, trois à 30 bonnes réponses avec au moins 80 % de réussite sur les dix derniers exercices.',
+  myBadges:'Mes badges', backupH:'Sauvegarder et transférer ma progression', backupP:'Pour transférer ta progression sur un autre appareil ou la sauvegarder : copie le code ou télécharge le fichier, puis importe-le sur l\'autre appareil.',
+  showCode:'Afficher le code de sauvegarde', dlFile:'Télécharger la sauvegarde', pasteCode:'Colle ici le code de sauvegarde puis appuie sur « Importer »', impCode:'Importer le code', impFile:'Importer un fichier',
+  codeShown:'Voici le code de ta progression : copie-le et garde-le.', impOk:'Importation réussie ✔', impBad:'Importation impossible : code non valide.',
+  today:'aujourd\'hui', tomorrow:'demain', in2:'dans 2 jours', inN:'dans ', daysW:' jours',
+  revH:'Révision du jour', revTitle:'Carnet d\'erreurs : on réessaie', revRef:'Chaque exercice ici est d\'un type où tu t\'es déjà trompé(e), avec de nouveaux nombres',
+  exOf:'Exercice ', of:' sur ', nextOne:'Exercice suivant', endRun:'Terminer la séance',
+  pressNext:'Appuie sur « Exercice suivant » pour continuer.', pressEnd:'Appuie sur « Terminer la séance » pour voir ton résultat.',
+  runEnd:'Séance terminée', yourRes:'Ton résultat', backProg:'Retour à mes progrès',
+  resAll:'Bravo ! Toutes les réponses sont justes.', resHalf:'Bon travail. Ce que tu as manqué reviendra au bon moment.', resLow:'Pas grave : ces exercices reviendront demain avec de nouveaux nombres jusqu\'à ce que tu les maîtrises.',
+  newBadge:'Nouveau badge !',
+  setTitle:'Réglages', setLang:'Langue', setTheme:'Apparence', thAuto:'Automatique (selon l\'appareil)', thLight:'Clair', thDark:'Sombre',
+  setPad:'Clavier mathématique', padAuto:'Automatique (sur téléphone)', padOn:'Toujours affiché', padOff:'Jamais affiché',
+  padNote:'Des touches pour les symboles (n, ^, −, /…) sous la case réponse. Le bouton « Clavier de l\'appareil » permet toujours de revenir au clavier habituel.',
+  setZ:'Taille du texte', z09:'Plus petit', z1:'Normal', z11:'Grand', z12:'Plus grand', z135:'Très grand', zNote:'Agrandit les cours et les exercices.',
+  setSpeech:'Lecture à voix haute', speed:'Vitesse de lecture : ', tryVoice:'Tester la voix',
+  voiceTest:'Bonjour ! Voici un exemple de lecture à voix haute. La suite géométrique a pour raison deux.',
+  noSpeech:'Ce navigateur ne permet pas la lecture à voix haute.', voiceUsed:'Voix utilisée : ',
+  voiceApprox:'. Les symboles mathématiques peuvent être lus de façon approximative.',
+  noVoice:'Aucune voix française trouvée sur cet appareil. Tu peux en ajouter une dans les réglages de l\'appareil (Langue → Synthèse vocale), puis rouvrir l\'application.',
+  setSaved:'Progression enregistrée', savedOk:'Ta progression est enregistrée dans ce navigateur, sur cet appareil uniquement. Pour la transférer, utilise « Sauvegarder et transférer » dans la page « Mes progrès ».',
+  savedNo:'Ce navigateur ne permet pas l\'enregistrement : utilise « Télécharger la sauvegarde » dans « Mes progrès » avant de fermer.',
+  resetAll:'Effacer toute la progression', resetSure:'Es-tu sûr(e) ? Tout sera effacé : étoiles, badges, carnet d\'erreurs et résultats des exercices type BAC. Appuie une seconde fois pour confirmer.', resetYes:'Oui, tout effacer',
+  close:'Fermer',
+  instH:'Installer l\'application', instDone:'✓ L\'application est installée sur cet appareil et fonctionne sans Internet.',
+  instReady:'Ajoute l\'icône de l\'application à l\'écran d\'accueil : elle s\'ouvrira comme une application et fonctionnera sans Internet.', instNow:'Installer maintenant',
+  instIOS:'Dans <span class="lat">Safari</span> : appuie sur le bouton Partager <b>⬆</b> puis choisis <b>« Sur l\'écran d\'accueil »</b>.',
+  instMenu:'Un bouton « Installer » apparaît après un peu d\'utilisation. Sinon : ouvre le menu du navigateur <b>⋮</b> et choisis <b>« Installer l\'application »</b> ou <b>« Ajouter à l\'écran d\'accueil »</b>.',
+  instFile:'Cette version est ouverte comme un fichier : l\'installation n\'est possible que depuis le site de l\'application (adresse commençant par <span class="lat">https</span>).',
+  instBarH:'Installe l\'application sur ton appareil', instBarP:'Une icône sur l\'écran d\'accueil, et ça marche sans Internet.', instBtn:'Installer', later:'Plus tard',
+  instToastH:'Installation terminée', instToast:'L\'application est maintenant sur ton écran d\'accueil.',
+  updH:'Mise à jour', upd:'Une nouvelle version est prête : ferme puis rouvre l\'application.',
+  hint:'Indice', corr:'Corrigé', hideHint:'Masquer l\'indice', hideCorr:'Masquer le corrigé', pts:'pt',
+  qMark:'Ta note pour cette question : ', total:'Ta note totale', tickTip:'Coche chaque étape que tu as réussie : ta note se calcule toute seule.',
+  bacHow:'Résous l\'exercice sur une feuille comme le jour de l\'examen, ouvre l\'indice si besoin, puis ouvre le corrigé et corrige-toi étape par étape.',
+  bacReset:'Recommencer la correction', bacMsgTop:'Excellent ! Tu es prêt(e) pour ce type d\'exercice le jour du BAC.', bacMsgMid:'Bon travail. Refais dans deux jours les questions où tu as perdu des points.',
+  bacMsgLow:'Pas grave : relis « L\'essentiel » et « Bien raisonner », puis refais l\'exercice.', bacMsgNone:'Ouvre les corrigés et coche tes étapes réussies pour voir ta note.',
+  labObs:'Observe', credit:'Conception et développement : ',
+  cpt:'Application éducative gratuite pour aider les élèves de 3e année secondaire à préparer le BAC de mathématiques',
+  cpy:'Initiative indépendante, non affiliée au ministère de l\'Éducation nationale. Utilisation gratuite pour apprendre et enseigner, sans usage commercial. Basée sur l\'application <span class="lat">Math3AM</span>, avec l\'accord de son auteur.',
+}
+};
+
+/* ======== program.js ======== */
+/* ============================================================================
+   البرنامج: الميادين والأبواب — Programme : domaines et chapitres
+   Pour ajouter un chapitre : créer src/ch-xxx.js qui remplit CH(id) (voir ch-suites.js),
+   l'ajouter à build.py, puis retirer « soon » ci-dessous.
+   ============================================================================ */
+const DOMAINS={
+  ana:{name:B('التحليل','Analyse'), v:'blue'},
+  alg:{name:B('الجبر والهندسة','Algèbre et géométrie'), v:'brand'},
+  pro:{name:B('الاحتمالات','Probabilités'), v:'violet'}
+};
+const L=[
+  {id:1, dom:'ana', soon:true, t:B('النهايات والاستمرارية','Limites et continuité')},
+  {id:2, dom:'ana', soon:true, t:B('الاشتقاقية ودراسة الدوال','Dérivabilité et étude de fonctions')},
+  {id:3, dom:'ana', soon:true, t:B('الدالة الأسية','Fonction exponentielle')},
+  {id:4, dom:'ana', soon:true, t:B('الدالة اللوغاريتمية النيبيرية','Fonction logarithme népérien')},
+  {id:5, dom:'ana', soon:true, t:B('المتتاليات العددية','Suites numériques')},
+  {id:6, dom:'ana', soon:true, t:B('الدوال الأصلية والحساب التكاملي','Primitives et calcul intégral')},
+  {id:7, dom:'alg', soon:true, t:B('الأعداد المركّبة','Nombres complexes')},
+  {id:8, dom:'alg', soon:true, t:B('الهندسة في الفضاء','Géométrie dans l\'espace')},
+  {id:9, dom:'pro', soon:true, t:B('الاحتمالات','Probabilités')},
+];
+const CH=id=>L.find(l=>l.id===id);
+const GEN={};     /* GEN[id]  : générateurs d'exercices du chapitre */
+const BAC={};     /* BAC[id]  : exercice type BAC du chapitre */
+const LABS={};    /* LABS[id] : activité « Explorer » du chapitre */
+
+/* ======== ch-suites.js ======== */
+/* ============================================================================
+   الباب 5 — المتتاليات العددية / Chapitre 5 — Suites numériques
+   Contenu rédigé : cours, analogies, dans la vie, l'essentiel, bien raisonner.
+   Les exercices générés, l'exercice type BAC et le laboratoire sont dans ch-suites-ex.js.
+   ============================================================================ */
+(function(){
+const U=i=>`u<sub>${i}</sub>`, V=i=>`v<sub>${i}</sub>`;
+const un=U('n'), un1=U('n+1'), u0=U(0), vn=V('n'), vn1=V('n+1'), v0=V(0);
+const LIM='lim<sub>n→+∞</sub> ';
+const h=f('1','2');
+const S='(u<sub>n</sub>)';
+
+Object.assign(CH(5),{
+soon:false,
+hook:B(
+`المتتالية فيلمٌ مصنوع من الأعداد: صورة بعد صورة، وكلّ صورة تتبع قاعدة. حين تفهم القاعدة تستطيع أن تتنبّأ بالصورة رقم ${M('1000')} دون أن تشاهد الفيلم كلّه، بل وأن تعرف كيف ينتهي. وهذا الباب حاضر في <b>كلّ</b> مواضيع البكالوريا تقريبا.`,
+`Une suite, c'est un film fait de nombres : image après image, chacune obéit à une règle. Quand on comprend la règle, on peut prédire l'image n° ${M('1000')} sans regarder tout le film — et même savoir comment il se termine. Ce chapitre tombe presque <b>chaque année</b> au BAC.`),
+
+/* ------------------------------------------------------------------ الدرس / Cours */
+cours:B(`
+<div class="card"><h3>١) عموميات: تعريف متتالية وطريقتا توليدها</h3>
+<div class="rule"><b>تعريف:</b> المتتالية العددية ${M(S)} دالة ترفق بكلّ عدد طبيعي ${M('n')} (ابتداءً من رتبة ${M('n<sub>0</sub>')}) عددا حقيقيا ${M(un)} يُسمّى <b>الحدّ ذا الرتبة</b> ${M('n')}، أو <b>الحدّ العام</b>.</div>
+<p>توجد طريقتان أساسيتان لتعريف متتالية:</p>
+<ul><li><b>بصيغة صريحة</b> ${M(`${un} = f(n)`)}: نحسب أيّ حدّ مباشرة. مثال: ${M(`${un} = 2n² − 1`)}، ومنه ${M(`${U(3)} = 2 × 9 − 1 = 17`)}.</li>
+<li><b>بعلاقة تراجعية</b> ${M(`${un1} = f(${un})`)} مع حدّ أوّل معلوم: كلّ حدّ يُحسب من الذي قبله. مثال: ${M(`${u0} = 2`)} و ${M(`${un1} = 3${un} − 1`)}، ومنه ${M(`${U(1)} = 5`)} ثمّ ${M(`${U(2)} = 14`)}. ولحساب ${M(U(10))} يجب المرور بكلّ الحدود السابقة.</li></ul>
+<div class="warn"><b>انتبه:</b> ${M(un1)} هو الحدّ الموالي، وليس ${M(`${un} + 1`)}. مثلا إذا كان ${M(`${un} = n²`)} فإنّ ${M(`${un1} = (n + 1)² = n² + 2n + 1`)}، بينما ${M(`${un} + 1 = n² + 1`)}.</div></div>
+
+<div class="card"><h3>٢) اتجاه تغيّر متتالية — المتتاليات المحدودة</h3>
+<div class="rule">نقول إنّ ${M(S)} <b>متزايدة تماما</b> إذا كان من أجل كلّ ${M('n')}: ${M(`${un1} > ${un}`)}، و<b>متناقصة تماما</b> إذا كان ${M(`${un1} < ${un}`)}، و<b>ثابتة</b> إذا كان ${M(`${un1} = ${un}`)}. والمتتالية المتزايدة أو المتناقصة تُسمّى <b>رتيبة</b>.</div>
+<p>ثلاث طرق لدراسة اتجاه التغيّر:</p>
+<ol class="steps"><li>ندرس <b>إشارة الفرق</b> ${M(`${un1} − ${un}`)}، وهي الطريقة الأكثر استعمالا.</li>
+<li>إذا كانت كلّ الحدود <b>موجبة تماما</b>، نقارن ${M(f(un1,un))} بالعدد ${M('1')}.</li>
+<li>إذا كان ${M(`${un} = f(n)`)}، فإنّ اتجاه تغيّر الدالة ${M('f')} على ${M('[0 ; +∞[')} يعطي اتجاه تغيّر المتتالية.</li></ol>
+<div class="ex"><b>مثال:</b> ${M(`${un} = n² − 4n`)}. ${M(`${un1} − ${un} = (n + 1)² − 4(n + 1) − n² + 4n = 2n − 3`)}. هذا الفرق موجب تماما من أجل ${M('n ≥ 2')}: المتتالية متزايدة تماما ابتداءً من الرتبة ${M('2')}.</div>
+<div class="rule">${M(S)} <b>محدودة من الأعلى</b> بالعدد ${M('M')} إذا كان ${M(`${un} ≤ M`)} من أجل كلّ ${M('n')}، و<b>محدودة من الأسفل</b> بالعدد ${M('m')} إذا كان ${M(`${un} ≥ m`)} من أجل كلّ ${M('n')}، و<b>محدودة</b> إذا كانت محدودة من الأعلى ومن الأسفل.</div>
+<div class="ex"><b>مثال:</b> ${M(`${un} = 3 − ${f('1','n + 1')}`)}. بما أنّ ${M(`0 < ${f('1','n + 1')} ≤ 1`)} فإنّ ${M(`2 ≤ ${un} < 3`)}: المتتالية محدودة.</div></div>
+
+<div class="card"><h3>٣) الاستدلال بالتراجع</h3>
+<div class="rule">لإثبات أنّ خاصية ${M('P(n)')} صحيحة من أجل كلّ عدد طبيعي ${M('n ≥ n<sub>0</sub>')}:
+<ol class="steps"><li><b>التحقّق:</b> نتحقّق أنّ ${M('P(n<sub>0</sub>)')} صحيحة.</li>
+<li><b>الوراثة:</b> نفرض أنّ ${M('P(n)')} صحيحة من أجل عدد طبيعي كيفي ${M('n ≥ n<sub>0</sub>')}، ونبرهن أنّ ${M('P(n + 1)')} صحيحة.</li>
+<li><b>الخلاصة:</b> ${M('P(n)')} صحيحة من أجل كلّ ${M('n ≥ n<sub>0</sub>')}.</li></ol></div>
+<div class="ex"><b>مثال:</b> ${M(`${u0} = 1`)} و ${M(`${un1} = ${h}${un} + 2`)}. نبرهن أنّ ${M(`0 ≤ ${un} ≤ 4`)} من أجل كلّ عدد طبيعي ${M('n')}.<br>
+• <b>التحقّق:</b> ${M(`${u0} = 1`)} و ${M('0 ≤ 1 ≤ 4')}.<br>
+• <b>الوراثة:</b> نفرض ${M(`0 ≤ ${un} ≤ 4`)}. نضرب في ${M(h)} وهو موجب: ${M(`0 ≤ ${h}${un} ≤ 2`)}، ثمّ نضيف ${M('2')}: ${M(`2 ≤ ${un1} ≤ 4`)}، إذن ${M(`0 ≤ ${un1} ≤ 4`)}.<br>
+• <b>الخلاصة:</b> من أجل كلّ عدد طبيعي ${M('n')}: ${M(`0 ≤ ${un} ≤ 4`)}.</div>
+<div class="warn"><b>الوراثة وحدها لا تكفي:</b> الخاصية «${M('10<sup>n</sup> + 1')} مضاعف للعدد ${M('9')}» وراثية: إذا كان ${M('10<sup>n</sup> + 1 = 9k')} فإنّ ${M('10<sup>n+1</sup> + 1 = 9(10k − 1)')}. لكنّها خاطئة دائما، فمثلا ${M('10<sup>0</sup> + 1 = 2')}. التحقّق خطوة إلزامية.</div></div>
+
+<div class="card"><h3>٤) المتتاليات الحسابية</h3>
+<div class="rule"><b>تعريف:</b> ${M(S)} متتالية حسابية إذا وُجد عدد حقيقي ${M('r')} بحيث من أجل كلّ ${M('n')}: ${M(`${un1} = ${un} + r`)}. العدد ${M('r')} هو <b>أساس</b> المتتالية.</div>
+<div class="rule"><b>الحدّ العام:</b> ${M(`${un} = ${u0} + nr`)}، وبصفة عامّة ${M(`${un} = ${U('p')} + (n − p)r`)}.</div>
+<div class="ex"><b>مثال:</b> ${M(`${u0} = 7`)} و ${M('r = −3')}: ${M(`${un} = 7 − 3n`)}، ومنه ${M(`${U(20)} = 7 − 60 = −53`)}.</div>
+<p><b>اتجاه التغيّر:</b> ${M(`${un1} − ${un} = r`)}، فالمتتالية متزايدة تماما إذا كان ${M('r > 0')}، ومتناقصة تماما إذا كان ${M('r < 0')}، وثابتة إذا كان ${M('r = 0')}.</p>
+<div class="rule"><b>مجموع حدود متتابعة:</b> ${M(`S = ${U('p')} + ${U('p+1')} + … + ${un} = (n − p + 1) × ${f(`${U('p')} + ${un}`,'2')}`)}<br>
+أي: <b>عدد الحدود × (الحدّ الأوّل + الحدّ الأخير) ÷ 2</b>. وحالة خاصة: ${M(`1 + 2 + … + n = ${f('n(n + 1)','2')}`)}.</div>
+<div class="ex">${M(`1 + 2 + … + 100 = ${f('100 × 101','2')} = 5050`)}.</div>
+<div class="rule"><b>الوسط الحسابي:</b> الأعداد ${M('a')} ، ${M('b')} ، ${M('c')} حدود متتابعة لمتتالية حسابية إذا وفقط إذا كان ${M('2b = a + c')}.</div></div>
+
+<div class="card"><h3>٥) المتتاليات الهندسية</h3>
+<div class="rule"><b>تعريف:</b> ${M(S)} متتالية هندسية إذا وُجد عدد حقيقي ${M('q')} بحيث من أجل كلّ ${M('n')}: ${M(`${un1} = q × ${un}`)}. العدد ${M('q')} هو <b>أساس</b> المتتالية.</div>
+<div class="rule"><b>الحدّ العام:</b> ${M(`${un} = ${u0} × q<sup>n</sup>`)}، وبصفة عامّة ${M(`${un} = ${U('p')} × q<sup>n−p</sup>`)}.</div>
+<div class="ex"><b>مثال:</b> ${M(`${u0} = 5`)} و ${M('q = 2')}: ${M(`${un} = 5 × 2<sup>n</sup>`)}، ومنه ${M(`${U(6)} = 5 × 64 = 320`)}.</div>
+<p><b>اتجاه التغيّر</b> في حالة ${M(`${u0} > 0`)}: إذا كان ${M('q > 1')} فهي متزايدة تماما، وإذا كان ${M('0 < q < 1')} فهي متناقصة تماما، وإذا كان ${M('q = 1')} فهي ثابتة، وإذا كان ${M('q < 0')} فإشارات الحدود تتناوب والمتتالية ليست رتيبة. وإذا كان ${M(`${u0} < 0`)} ينعكس الاتجاهان.</p>
+<div class="rule"><b>مجموع حدود متتابعة</b> (${M('q ≠ 1')}): ${M(`S = ${U('p')} + … + ${un} = ${U('p')} × ${f('1 − q<sup>n−p+1</sup>','1 − q')}`)}<br>
+أي: <b>الحدّ الأوّل × (1 − الأساس<sup>عدد الحدود</sup>) ÷ (1 − الأساس)</b>. وحالة خاصة: ${M(`1 + q + … + q<sup>n</sup> = ${f('1 − q<sup>n+1</sup>','1 − q')}`)}.</div>
+<div class="ex">${M(`1 + 2 + 4 + … + 2<sup>9</sup> = ${f('1 − 2<sup>10</sup>','1 − 2')} = 1023`)}.</div>
+<div class="rule"><b>الوسط الهندسي:</b> الأعداد غير المعدومة ${M('a')} ، ${M('b')} ، ${M('c')} حدود متتابعة لمتتالية هندسية إذا وفقط إذا كان ${M('b² = ac')}.</div></div>
+
+<div class="card"><h3>٦) نهاية متتالية — التقارب</h3>
+<div class="rule">نقول إنّ ${M(S)} <b>متقاربة</b> نحو العدد الحقيقي ${M('ℓ')} إذا أصبحت حدودها قريبة من ${M('ℓ')} بالقدر الذي نريد ابتداءً من رتبة معيّنة، ونكتب ${M(`${LIM}${un} = ℓ`)}. وإلّا فهي <b>متباعدة</b>: نهايتها ${M('+∞')} أو ${M('−∞')}، أو ليست لها نهاية.</div>
+<div class="rule"><b>نهاية ${M('q<sup>n</sup>')}:</b><br>
+• إذا كان ${M('q > 1')}: ${M(`${LIM}q<sup>n</sup> = +∞`)}<br>
+• إذا كان ${M('q = 1')}: ${M('q<sup>n</sup> = 1')}<br>
+• إذا كان ${M('−1 < q < 1')}: ${M(`${LIM}q<sup>n</sup> = 0`)}<br>
+• إذا كان ${M('q ≤ −1')}: المتتالية ${M('(q<sup>n</sup>)')} ليست لها نهاية.</div>
+<div class="rule"><b>مبرهنة التقارب الرتيب:</b> كلّ متتالية <b>متزايدة ومحدودة من الأعلى</b> متقاربة، وكلّ متتالية <b>متناقصة ومحدودة من الأسفل</b> متقاربة. أمّا المتتالية المتزايدة غير المحدودة من الأعلى فتؤول إلى ${M('+∞')}.</div>
+<div class="rule"><b>المقارنة:</b> إذا كان ${M(`${vn} ≤ ${un} ≤ w<sub>n</sub>`)} ابتداءً من رتبة معيّنة، وكانت ${M('(v<sub>n</sub>)')} و ${M('(w<sub>n</sub>)')} متقاربتين نحو نفس العدد ${M('ℓ')}، فإنّ ${M(`${LIM}${un} = ℓ`)}. وإذا كان ${M(`${un} ≥ ${vn}`)} و ${M(`${LIM}${vn} = +∞`)} فإنّ ${M(`${LIM}${un} = +∞`)}.</div>
+<div class="rule"><b>متتاليتان متجاورتان:</b> إذا كانت ${M(S)} متزايدة و ${M('(v<sub>n</sub>)')} متناقصة و ${M(`${LIM}(${vn} − ${un}) = 0`)}، فإنّهما متقاربتان نحو نفس النهاية ${M('ℓ')}، ومن أجل كلّ ${M('n')}: ${M(`${un} ≤ ℓ ≤ ${vn}`)}.</div>
+<div class="rule"><b>متتالية تراجعية:</b> إذا كان ${M(`${un1} = f(${un})`)} حيث ${M('f')} دالة مستمرّة، وكانت ${M(S)} متقاربة نحو ${M('ℓ')}، فإنّ ${M('ℓ')} حلّ للمعادلة ${M('f(x) = x')}.</div></div>
+
+<div class="card"><h3>٧) طريقة المتتالية المساعدة</h3>
+<p>هذه الطريقة حاضرة في أغلب مواضيع البكالوريا. نعتبر ${M(`${un1} = a${un} + b`)} حيث ${M('a ≠ 0')} و ${M('a ≠ 1')}.</p>
+<ol class="steps"><li>نبحث عن العدد ${M('α')} الذي يحقّق ${M('α = aα + b')}، أي ${M(`α = ${f('b','1 − a')}`)}.</li>
+<li>نضع ${M(`${vn} = ${un} − α`)}، فنجد ${M(`${vn1} = a${un} + b − (aα + b) = a(${un} − α) = a${vn}`)}: المتتالية ${M('(v<sub>n</sub>)')} هندسية أساسها ${M('a')}.</li>
+<li>ومنه ${M(`${vn} = ${v0} × a<sup>n</sup>`)}، ثمّ ${M(`${un} = α + (${u0} − α) × a<sup>n</sup>`)}.</li></ol>
+<div class="ex"><b>مثال (متتالية الفقرة ٣ نفسها):</b> ${M(`${u0} = 1`)} و ${M(`${un1} = ${h}${un} + 2`)}.<br>
+${M(`α = ${f('2','1 − 0,5')} = 4`)}، ونضع ${M(`${vn} = ${un} − 4`)}: ${M(`${v0} = −3`)} و ${M(`${vn} = −3 × (${h})<sup>n</sup>`)}، إذن ${M(`${un} = 4 − 3 × (${h})<sup>n</sup>`)}.<br>
+وبما أنّ ${M(`−1 < ${h} < 1`)} فإنّ ${M(`${LIM}${un} = 4`)}.</div></div>`,
+
+`
+<div class="card"><h3>1) Généralités : définition et modes de génération</h3>
+<div class="rule"><b>Définition :</b> une suite numérique ${M(S)} associe à chaque entier naturel ${M('n')} (à partir d'un rang ${M('n<sub>0</sub>')}) un réel ${M(un)}, appelé <b>terme de rang</b> ${M('n')} ou <b>terme général</b>.</div>
+<p>Il y a deux façons principales de définir une suite :</p>
+<ul><li><b>De façon explicite</b> ${M(`${un} = f(n)`)} : on calcule n'importe quel terme directement. Exemple : ${M(`${un} = 2n² − 1`)}, donc ${M(`${U(3)} = 2 × 9 − 1 = 17`)}.</li>
+<li><b>Par récurrence</b> ${M(`${un1} = f(${un})`)}, avec un premier terme donné : chaque terme se calcule à partir du précédent. Exemple : ${M(`${u0} = 2`)} et ${M(`${un1} = 3${un} − 1`)}, donc ${M(`${U(1)} = 5`)} puis ${M(`${U(2)} = 14`)}. Pour calculer ${M(U(10))}, il faut passer par tous les termes précédents.</li></ul>
+<div class="warn"><b>Attention :</b> ${M(un1)} est le terme suivant, pas ${M(`${un} + 1`)}. Par exemple, si ${M(`${un} = n²`)}, alors ${M(`${un1} = (n + 1)² = n² + 2n + 1`)}, alors que ${M(`${un} + 1 = n² + 1`)}.</div></div>
+
+<div class="card"><h3>2) Sens de variation — suites bornées</h3>
+<div class="rule">${M(S)} est <b>strictement croissante</b> si, pour tout ${M('n')}, ${M(`${un1} > ${un}`)} ; <b>strictement décroissante</b> si ${M(`${un1} < ${un}`)} ; <b>constante</b> si ${M(`${un1} = ${un}`)}. Une suite croissante ou décroissante est dite <b>monotone</b>.</div>
+<p>Trois méthodes pour étudier le sens de variation :</p>
+<ol class="steps"><li>Étudier le <b>signe de la différence</b> ${M(`${un1} − ${un}`)} : c'est la méthode la plus utilisée.</li>
+<li>Si tous les termes sont <b>strictement positifs</b>, comparer ${M(f(un1,un))} à ${M('1')}.</li>
+<li>Si ${M(`${un} = f(n)`)}, le sens de variation de la fonction ${M('f')} sur ${M('[0 ; +∞[')} donne celui de la suite.</li></ol>
+<div class="ex"><b>Exemple :</b> ${M(`${un} = n² − 4n`)}. ${M(`${un1} − ${un} = (n + 1)² − 4(n + 1) − n² + 4n = 2n − 3`)}. Cette différence est strictement positive pour ${M('n ≥ 2')} : la suite est strictement croissante à partir du rang ${M('2')}.</div>
+<div class="rule">${M(S)} est <b>majorée</b> par ${M('M')} si ${M(`${un} ≤ M`)} pour tout ${M('n')}, <b>minorée</b> par ${M('m')} si ${M(`${un} ≥ m`)} pour tout ${M('n')}, et <b>bornée</b> si elle est à la fois majorée et minorée.</div>
+<div class="ex"><b>Exemple :</b> ${M(`${un} = 3 − ${f('1','n + 1')}`)}. Comme ${M(`0 < ${f('1','n + 1')} ≤ 1`)}, on a ${M(`2 ≤ ${un} < 3`)} : la suite est bornée.</div></div>
+
+<div class="card"><h3>3) Raisonnement par récurrence</h3>
+<div class="rule">Pour démontrer qu'une propriété ${M('P(n)')} est vraie pour tout entier ${M('n ≥ n<sub>0</sub>')} :
+<ol class="steps"><li><b>Initialisation :</b> on vérifie que ${M('P(n<sub>0</sub>)')} est vraie.</li>
+<li><b>Hérédité :</b> on suppose ${M('P(n)')} vraie pour un entier ${M('n ≥ n<sub>0</sub>')} quelconque, et on démontre ${M('P(n + 1)')}.</li>
+<li><b>Conclusion :</b> ${M('P(n)')} est vraie pour tout ${M('n ≥ n<sub>0</sub>')}.</li></ol></div>
+<div class="ex"><b>Exemple :</b> ${M(`${u0} = 1`)} et ${M(`${un1} = ${h}${un} + 2`)}. Montrons que ${M(`0 ≤ ${un} ≤ 4`)} pour tout entier naturel ${M('n')}.<br>
+• <b>Initialisation :</b> ${M(`${u0} = 1`)} et ${M('0 ≤ 1 ≤ 4')}.<br>
+• <b>Hérédité :</b> supposons ${M(`0 ≤ ${un} ≤ 4`)}. On multiplie par ${M(h)}, qui est positif : ${M(`0 ≤ ${h}${un} ≤ 2`)}, puis on ajoute ${M('2')} : ${M(`2 ≤ ${un1} ≤ 4`)}, donc ${M(`0 ≤ ${un1} ≤ 4`)}.<br>
+• <b>Conclusion :</b> pour tout entier naturel ${M('n')}, ${M(`0 ≤ ${un} ≤ 4`)}.</div>
+<div class="warn"><b>L'hérédité seule ne suffit pas :</b> la propriété « ${M('10<sup>n</sup> + 1')} est un multiple de ${M('9')} » est héréditaire : si ${M('10<sup>n</sup> + 1 = 9k')}, alors ${M('10<sup>n+1</sup> + 1 = 9(10k − 1)')}. Pourtant elle est toujours fausse, par exemple ${M('10<sup>0</sup> + 1 = 2')}. L'initialisation est obligatoire.</div></div>
+
+<div class="card"><h3>4) Suites arithmétiques</h3>
+<div class="rule"><b>Définition :</b> ${M(S)} est arithmétique s'il existe un réel ${M('r')} tel que, pour tout ${M('n')}, ${M(`${un1} = ${un} + r`)}. Le réel ${M('r')} est la <b>raison</b> de la suite.</div>
+<div class="rule"><b>Terme général :</b> ${M(`${un} = ${u0} + nr`)}, et plus généralement ${M(`${un} = ${U('p')} + (n − p)r`)}.</div>
+<div class="ex"><b>Exemple :</b> ${M(`${u0} = 7`)} et ${M('r = −3')} : ${M(`${un} = 7 − 3n`)}, donc ${M(`${U(20)} = 7 − 60 = −53`)}.</div>
+<p><b>Sens de variation :</b> ${M(`${un1} − ${un} = r`)}, donc la suite est strictement croissante si ${M('r > 0')}, strictement décroissante si ${M('r < 0')}, constante si ${M('r = 0')}.</p>
+<div class="rule"><b>Somme de termes consécutifs :</b> ${M(`S = ${U('p')} + ${U('p+1')} + … + ${un} = (n − p + 1) × ${f(`${U('p')} + ${un}`,'2')}`)}<br>
+c'est-à-dire : <b>nombre de termes × (premier terme + dernier terme) ÷ 2</b>. Cas particulier : ${M(`1 + 2 + … + n = ${f('n(n + 1)','2')}`)}.</div>
+<div class="ex">${M(`1 + 2 + … + 100 = ${f('100 × 101','2')} = 5050`)}.</div>
+<div class="rule"><b>Moyenne arithmétique :</b> ${M('a')}, ${M('b')}, ${M('c')} sont trois termes consécutifs d'une suite arithmétique si et seulement si ${M('2b = a + c')}.</div></div>
+
+<div class="card"><h3>5) Suites géométriques</h3>
+<div class="rule"><b>Définition :</b> ${M(S)} est géométrique s'il existe un réel ${M('q')} tel que, pour tout ${M('n')}, ${M(`${un1} = q × ${un}`)}. Le réel ${M('q')} est la <b>raison</b> de la suite.</div>
+<div class="rule"><b>Terme général :</b> ${M(`${un} = ${u0} × q<sup>n</sup>`)}, et plus généralement ${M(`${un} = ${U('p')} × q<sup>n−p</sup>`)}.</div>
+<div class="ex"><b>Exemple :</b> ${M(`${u0} = 5`)} et ${M('q = 2')} : ${M(`${un} = 5 × 2<sup>n</sup>`)}, donc ${M(`${U(6)} = 5 × 64 = 320`)}.</div>
+<p><b>Sens de variation</b> lorsque ${M(`${u0} > 0`)} : si ${M('q > 1')} elle est strictement croissante ; si ${M('0 < q < 1')} elle est strictement décroissante ; si ${M('q = 1')} elle est constante ; si ${M('q < 0')} les signes des termes alternent et la suite n'est pas monotone. Si ${M(`${u0} < 0`)}, les deux sens s'inversent.</p>
+<div class="rule"><b>Somme de termes consécutifs</b> (${M('q ≠ 1')}) : ${M(`S = ${U('p')} + … + ${un} = ${U('p')} × ${f('1 − q<sup>n−p+1</sup>','1 − q')}`)}<br>
+c'est-à-dire : <b>premier terme × (1 − raison<sup>nombre de termes</sup>) ÷ (1 − raison)</b>. Cas particulier : ${M(`1 + q + … + q<sup>n</sup> = ${f('1 − q<sup>n+1</sup>','1 − q')}`)}.</div>
+<div class="ex">${M(`1 + 2 + 4 + … + 2<sup>9</sup> = ${f('1 − 2<sup>10</sup>','1 − 2')} = 1023`)}.</div>
+<div class="rule"><b>Moyenne géométrique :</b> trois réels non nuls ${M('a')}, ${M('b')}, ${M('c')} sont trois termes consécutifs d'une suite géométrique si et seulement si ${M('b² = ac')}.</div></div>
+
+<div class="card"><h3>6) Limite d'une suite — convergence</h3>
+<div class="rule">${M(S)} <b>converge</b> vers le réel ${M('ℓ')} si ses termes deviennent aussi proches de ${M('ℓ')} qu'on le veut à partir d'un certain rang ; on écrit ${M(`${LIM}${un} = ℓ`)}. Sinon elle <b>diverge</b> : sa limite est ${M('+∞')} ou ${M('−∞')}, ou elle n'a pas de limite.</div>
+<div class="rule"><b>Limite de ${M('q<sup>n</sup>')} :</b><br>
+• si ${M('q > 1')} : ${M(`${LIM}q<sup>n</sup> = +∞`)}<br>
+• si ${M('q = 1')} : ${M('q<sup>n</sup> = 1')}<br>
+• si ${M('−1 < q < 1')} : ${M(`${LIM}q<sup>n</sup> = 0`)}<br>
+• si ${M('q ≤ −1')} : la suite ${M('(q<sup>n</sup>)')} n'a pas de limite.</div>
+<div class="rule"><b>Théorème de convergence monotone :</b> toute suite <b>croissante et majorée</b> converge ; toute suite <b>décroissante et minorée</b> converge. Une suite croissante non majorée tend vers ${M('+∞')}.</div>
+<div class="rule"><b>Comparaison :</b> si ${M(`${vn} ≤ ${un} ≤ w<sub>n</sub>`)} à partir d'un certain rang, et si ${M('(v<sub>n</sub>)')} et ${M('(w<sub>n</sub>)')} convergent vers le même réel ${M('ℓ')}, alors ${M(`${LIM}${un} = ℓ`)} (théorème des gendarmes). Si ${M(`${un} ≥ ${vn}`)} et ${M(`${LIM}${vn} = +∞`)}, alors ${M(`${LIM}${un} = +∞`)}.</div>
+<div class="rule"><b>Suites adjacentes :</b> si ${M(S)} est croissante, ${M('(v<sub>n</sub>)')} décroissante et ${M(`${LIM}(${vn} − ${un}) = 0`)}, alors elles convergent vers la même limite ${M('ℓ')}, et pour tout ${M('n')} : ${M(`${un} ≤ ℓ ≤ ${vn}`)}.</div>
+<div class="rule"><b>Suite récurrente :</b> si ${M(`${un1} = f(${un})`)} avec ${M('f')} continue, et si ${M(S)} converge vers ${M('ℓ')}, alors ${M('ℓ')} est solution de l'équation ${M('f(x) = x')}.</div></div>
+
+<div class="card"><h3>7) La méthode de la suite auxiliaire</h3>
+<p>Cette méthode apparaît dans la plupart des sujets de BAC. On considère ${M(`${un1} = a${un} + b`)} avec ${M('a ≠ 0')} et ${M('a ≠ 1')}.</p>
+<ol class="steps"><li>On cherche le réel ${M('α')} tel que ${M('α = aα + b')}, c'est-à-dire ${M(`α = ${f('b','1 − a')}`)}.</li>
+<li>On pose ${M(`${vn} = ${un} − α`)} et on trouve ${M(`${vn1} = a${un} + b − (aα + b) = a(${un} − α) = a${vn}`)} : la suite ${M('(v<sub>n</sub>)')} est géométrique de raison ${M('a')}.</li>
+<li>Donc ${M(`${vn} = ${v0} × a<sup>n</sup>`)}, puis ${M(`${un} = α + (${u0} − α) × a<sup>n</sup>`)}.</li></ol>
+<div class="ex"><b>Exemple (la suite du paragraphe 3) :</b> ${M(`${u0} = 1`)} et ${M(`${un1} = ${h}${un} + 2`)}.<br>
+${M(`α = ${f('2','1 − 0,5')} = 4`)} ; on pose ${M(`${vn} = ${un} − 4`)} : ${M(`${v0} = −3`)} et ${M(`${vn} = −3 × (${h})<sup>n</sup>`)}, donc ${M(`${un} = 4 − 3 × (${h})<sup>n</sup>`)}.<br>
+Comme ${M(`−1 < ${h} < 1`)}, on obtient ${M(`${LIM}${un} = 4`)}.</div></div>`),
+
+/* ------------------------------------------------------------- تشبيهات / Analogies */
+analogie:B(`
+<div class="card"><h3>الدَّرَج وآلة النسخ بالتكبير</h3>
+<p>المتتالية <b>الحسابية</b> درج منتظم: كلّ درجة تضيف نفس الارتفاع ${M('r')}. بعد ${M('n')} درجة صعدت ${M('n × r')}، ولهذا ${M(`${un} = ${u0} + nr`)}.</p>
+<p>المتتالية <b>الهندسية</b> آلة نسخ مضبوطة على تكبير ثابت ${M('× q')}: كلّ نسخة هي السابقة مكبّرة (${M('q > 1')}) أو مصغّرة (${M('0 < q < 1')}). بعد ${M('n')} نسخة تكون الصورة الأصلية قد ضُربت في ${M('q<sup>n</sup>')}.</p>
+<p>الفرق كلّه في كلمة واحدة: <b>نضيف</b> (حسابية) أم <b>نضرب</b> (هندسية)؟</p></div>
+<div class="card"><h3>الاستدلال بالتراجع = قطع الدومينو</h3>
+<p>لكي تسقط كلّ القطع يجب شرطان: أن تُسقط <b>القطعة الأولى</b> (التحقّق)، وأن تكون كلّ قطعة <b>قريبة بما يكفي</b> لتُسقط التي بعدها (الوراثة).</p>
+<ul><li>بدون القطعة الأولى لا يسقط شيء، مهما كانت القطع متقاربة: هذا مثال ${M('10<sup>n</sup> + 1')} في الدرس.</li>
+<li>وإذا انقطعت السلسلة في مكان ما، تتوقّف القطع عن السقوط: الوراثة يجب أن تصحّ من أجل <b>كلّ</b> ${M('n')}.</li></ul></div>
+<div class="card"><h3>المتتالية المتزايدة المحدودة: الصعود تحت سقف</h3>
+<p>تصعد دائما، لكن يوجد سقف لا تستطيع اختراقه. لا بدّ إذن أن تقترب من ارتفاع معيّن: المتتالية متقاربة.</p>
+<p>انتبه: هذا الارتفاع ليس بالضرورة السقف نفسه. قد يكون السقف في ${M('10')} وتقترب أنت من ${M('4')}. لهذا نقول: «متزايدة ومحدودة من الأعلى بـ ${M('6')}، إذن متقاربة»، دون أن نستنتج أنّ النهاية ${M('6')}.</p></div>
+<div class="card"><h3>التقارب: نصف المسافة المتبقّية</h3>
+<p>تقف على بعد مترين من جدار، وفي كلّ خطوة تقطع <b>نصف</b> المسافة المتبقّية. لن تلمس الجدار أبدا، لكنّ المسافة تصبح أصغر من أيّ عدد تختاره: ${M(`d<sub>n</sub> = 2 × (${h})<sup>n</sup>`)} تؤول إلى ${M('0')}. هذا بالضبط معنى ${M(`${LIM}${un} = ℓ`)}: الاقتراب بالقدر الذي نريد، لا الوصول.</p></div>
+<div class="card"><h3>متتاليتان متجاورتان: مسافران في رواق</h3>
+<p>مسافر يمشي نحو الشرق فقط، وآخر نحو الغرب فقط، في رواق واحد، ولا يتجاوز أحدهما الآخر، والمسافة بينهما تؤول إلى ${M('0')}. سيلتقيان حتما في نفس النقطة: هذه هي النهاية المشتركة ${M('ℓ')}، وهي محصورة دائما بينهما.</p></div>
+<div class="card"><h3>المتتالية المساعدة: تغيير مستوى المرجع</h3>
+<p>فنجان قهوة يبرد في غرفة حرارتها ${M('20°')}. درجة حرارة القهوة نفسها تتغيّر بطريقة معقّدة، لكنّ <b>الفرق</b> بينها وبين حرارة الغرفة يُضرب تقريبا في نفس العدد كلّ دقيقة: هذا الفرق متتالية هندسية!</p>
+<p>هذا ما نفعله مع ${M(`${vn} = ${un} − α`)}: نقيس الحدود انطلاقا من «نقطة التوازن» ${M('α')} بدل الصفر، فتظهر البنية الهندسية البسيطة المختبئة.</p></div>
+<div class="card"><h3>مجموع غاوس: الطيّ</h3>
+<p>لحساب ${M('1 + 2 + … + 100')} اكتب المجموع مرّتين، مرّة بالترتيب ومرّة بالترتيب المعاكس، ثمّ اجمع عموديا: كلّ عمود يعطي ${M('101')}، وعندك ${M('100')} عمود. المجموع المضاعف ${M('100 × 101')}، إذن المجموع ${M('5050')}. هذا هو سبب «الأوّل + الأخير، على 2».</p></div>`,
+`
+<div class="card"><h3>L'escalier et la photocopieuse à zoom</h3>
+<p>Une suite <b>arithmétique</b> est un escalier régulier : chaque marche ajoute la même hauteur ${M('r')}. Après ${M('n')} marches, tu es monté de ${M('n × r')} — d'où ${M(`${un} = ${u0} + nr`)}.</p>
+<p>Une suite <b>géométrique</b> est une photocopieuse réglée sur un zoom fixe ${M('× q')} : chaque copie est la précédente agrandie (${M('q > 1')}) ou réduite (${M('0 < q < 1')}). Après ${M('n')} copies, l'original a été multiplié par ${M('q<sup>n</sup>')}.</p>
+<p>Toute la différence tient en un mot : on <b>ajoute</b> (arithmétique) ou on <b>multiplie</b> (géométrique) ?</p></div>
+<div class="card"><h3>La récurrence = les dominos</h3>
+<p>Pour que tous les dominos tombent, il faut deux choses : faire tomber le <b>premier</b> (initialisation), et que chaque domino soit <b>assez proche</b> pour renverser le suivant (hérédité).</p>
+<ul><li>Sans le premier domino, rien ne tombe, même si les dominos sont bien serrés : c'est l'exemple ${M('10<sup>n</sup> + 1')} du cours.</li>
+<li>Si la chaîne est coupée quelque part, la chute s'arrête : l'hérédité doit être vraie pour <b>tout</b> ${M('n')}.</li></ul></div>
+<div class="card"><h3>Croissante et majorée : monter sous un plafond</h3>
+<p>Tu montes sans arrêt, mais il y a un plafond que tu ne peux pas traverser. Tu t'approches donc forcément d'une certaine hauteur : la suite converge.</p>
+<p>Attention : cette hauteur n'est pas forcément le plafond lui-même. Le plafond peut être à ${M('10')} et toi t'approcher de ${M('4')}. C'est pourquoi on dit « croissante et majorée par ${M('6')}, donc convergente », sans conclure que la limite vaut ${M('6')}.</p></div>
+<div class="card"><h3>Converger : la moitié du chemin restant</h3>
+<p>Tu es à deux mètres d'un mur et, à chaque pas, tu parcours la <b>moitié</b> de la distance qui reste. Tu ne toucheras jamais le mur, mais la distance devient plus petite que n'importe quel nombre choisi : ${M(`d<sub>n</sub> = 2 × (${h})<sup>n</sup>`)} tend vers ${M('0')}. C'est exactement le sens de ${M(`${LIM}${un} = ℓ`)} : s'approcher autant qu'on veut, pas forcément arriver.</p></div>
+<div class="card"><h3>Suites adjacentes : deux marcheurs dans un couloir</h3>
+<p>L'un ne marche que vers l'est, l'autre que vers l'ouest, dans le même couloir ; aucun ne dépasse l'autre, et l'écart entre eux tend vers ${M('0')}. Ils finissent forcément au même point : c'est la limite commune ${M('ℓ')}, toujours coincée entre les deux.</p></div>
+<div class="card"><h3>La suite auxiliaire : changer de niveau de référence</h3>
+<p>Une tasse de café refroidit dans une pièce à ${M('20°')}. La température du café varie de façon compliquée, mais l'<b>écart</b> avec la température de la pièce est multiplié à peu près par le même nombre chaque minute : cet écart est une suite géométrique !</p>
+<p>C'est ce qu'on fait avec ${M(`${vn} = ${un} − α`)} : on mesure les termes à partir du « point d'équilibre » ${M('α')} au lieu de zéro, et la structure géométrique cachée apparaît.</p></div>
+<div class="card"><h3>La somme de Gauss : le pliage</h3>
+<p>Pour calculer ${M('1 + 2 + … + 100')}, écris la somme deux fois, une fois dans l'ordre et une fois à l'envers, puis additionne en colonnes : chaque colonne donne ${M('101')}, et il y a ${M('100')} colonnes. Le double de la somme vaut ${M('100 × 101')}, donc la somme vaut ${M('5050')}. Voilà d'où vient « premier + dernier, divisé par 2 ».</p></div>`),
+
+/* --------------------------------------------------------- في الحياة / Dans la vie */
+vie:B(`
+<div class="card"><h3>أين تلتقي بالمتتاليات فعلا؟</h3>
+<ul>
+<li><b>الادّخار والفوائد المركّبة:</b> مبلغ ${M('100 000')} دج موضوع بنسبة ${M('5%')} سنويا يصبح بعد ${M('n')} سنة ${M(`C<sub>n</sub> = 100 000 × 1,05<sup>n</sup>`)}: متتالية هندسية أساسها ${M('1,05')}. بعد ${M('10')} سنوات: حوالي ${M('162 889')} دج. أمّا الفائدة البسيطة (نفس المبلغ يضاف كلّ سنة) فتعطي متتالية حسابية.</li>
+<li><b>الطبّ والصيدلة:</b> يتخلّص الجسم كلّ ساعة من ${M('20%')} من دواء في الدم، ويتلقّى المريض جرعة ${M('2')} ملغ كلّ ساعة: ${M(`${un1} = 0,8${un} + 2`)}. الطريقة المساعدة تعطي النهاية ${M(`α = ${f('2','0,2')} = 10`)} ملغ: الكمّية تستقرّ عند ${M('10')} ملغ مهما كانت الجرعة الأولى.</li>
+<li><b>البيولوجيا:</b> بكتيريا تنقسم كلّ ${M('20')} دقيقة: ${M(`N<sub>n</sub> = N<sub>0</sub> × 2<sup>n</sup>`)}. بعد ${M('3')} ساعات (${M('9')} انقسامات) يُضرب العدد في ${M('2<sup>9</sup> = 512')}.</li>
+<li><b>الفيزياء — النشاط الإشعاعي:</b> كلّ ${M('5730')} سنة تُقسم كمّية الكربون ${M('14')} على ${M('2')}: متتالية هندسية أساسها ${M(h)}، وهي أساس التأريخ بالكربون ${M('14')} الذي تدرسه في الفيزياء هذه السنة.</li>
+<li><b>نحو الدالة الأسية:</b> المتتالية الهندسية هي «النسخة المتقطّعة» للدالة الأسية: نفس الظواهر (تفريغ مكثّفة، تناقص إشعاعي، نموّ سكّاني) تُدرس بالمتتاليات عند القياس خطوة بخطوة، وبالدالة الأسية عند القياس المستمرّ.</li>
+<li><b>الإعلام الآلي:</b> الخوارزميات التي «تكرّر» حسابا (حساب ${M(un1)} من ${M(un)} داخل حلقة) هي متتاليات تراجعية، وهكذا تحسب الآلات الحاسبة جذورا ونهايات كثيرة.</li></ul></div>`,
+`
+<div class="card"><h3>Où rencontre-t-on vraiment les suites ?</h3>
+<ul>
+<li><b>Épargne et intérêts composés :</b> ${M('100 000')} DA placés à ${M('5 %')} par an deviennent, après ${M('n')} ans, ${M(`C<sub>n</sub> = 100 000 × 1,05<sup>n</sup>`)} : une suite géométrique de raison ${M('1,05')}. Après ${M('10')} ans : environ ${M('162 889')} DA. Les intérêts simples (la même somme ajoutée chaque année) donnent, eux, une suite arithmétique.</li>
+<li><b>Médecine et pharmacie :</b> chaque heure, le corps élimine ${M('20 %')} d'un médicament présent dans le sang, et le patient reçoit ${M('2')} mg par heure : ${M(`${un1} = 0,8${un} + 2`)}. La méthode de la suite auxiliaire donne la limite ${M(`α = ${f('2','0,2')} = 10`)} mg : la quantité se stabilise à ${M('10')} mg, quelle que soit la première dose.</li>
+<li><b>Biologie :</b> des bactéries se divisent toutes les ${M('20')} minutes : ${M(`N<sub>n</sub> = N<sub>0</sub> × 2<sup>n</sup>`)}. Après ${M('3')} heures (${M('9')} divisions), leur nombre est multiplié par ${M('2<sup>9</sup> = 512')}.</li>
+<li><b>Physique — radioactivité :</b> tous les ${M('5730')} ans, la quantité de carbone ${M('14')} est divisée par ${M('2')} : une suite géométrique de raison ${M(h)}. C'est la base de la datation au carbone ${M('14')}, que tu étudies cette année en physique.</li>
+<li><b>Vers la fonction exponentielle :</b> la suite géométrique est la « version pas à pas » de la fonction exponentielle : les mêmes phénomènes (décharge d'un condensateur, décroissance radioactive, croissance d'une population) s'étudient avec les suites quand on mesure étape par étape, et avec l'exponentielle quand on mesure en continu.</li>
+<li><b>Informatique :</b> les algorithmes qui « répètent » un calcul (calculer ${M(un1)} à partir de ${M(un)} dans une boucle) sont des suites récurrentes ; c'est ainsi que les calculatrices obtiennent de nombreuses racines et limites.</li></ul></div>`),
+
+/* -------------------------------------------------------- النواة الصلبة / L'essentiel */
+noyau:B(`
+<div class="card core"><h3>النواة الصلبة — ما يجب أن تحفظه</h3>
+<div class="chip"><div class="lab">متتالية حسابية</div>${M(`${un1} = ${un} + r`)} · ${M(`${un} = ${U('p')} + (n − p)r`)} · ${M(`S = N × ${f('الأوّل + الأخير','2')}`)}</div>
+<div class="chip"><div class="lab">متتالية هندسية</div>${M(`${un1} = q${un}`)} · ${M(`${un} = ${U('p')} × q<sup>n−p</sup>`)} · ${M(`S = الأوّل × ${f('1 − q<sup>N</sup>','1 − q')}`)}</div>
+<div class="chip"><div class="lab">عدد الحدود</div>من ${M(U('p'))} إلى ${M(un)}: ${M('N = n − p + 1')} (من ${M(u0)} إلى ${M(un)}: ${M('n + 1')} حدّا)</div>
+<div class="chip"><div class="lab">اتجاه التغيّر</div>إشارة ${M(`${un1} − ${un}`)}</div>
+<div class="chip"><div class="lab">الاستدلال بالتراجع</div>التحقّق + الوراثة ← الخلاصة</div>
+<div class="chip"><div class="lab">نهاية ${M('q<sup>n</sup>')}</div>${M('q > 1')} ← ${M('+∞')} · ${M('−1 < q < 1')} ← ${M('0')} · ${M('q ≤ −1')} ← لا نهاية</div>
+<div class="chip"><div class="lab">التقارب الرتيب</div>متزايدة ومحدودة من الأعلى ← متقاربة · متناقصة ومحدودة من الأسفل ← متقاربة</div>
+<div class="chip"><div class="lab">متجاورتان</div>${M('(u<sub>n</sub>)')} ↗ ، ${M('(v<sub>n</sub>)')} ↘ ، ${M(`${vn} − ${un} → 0`)} ← نفس النهاية</div>
+<div class="chip"><div class="lab">المتتالية المساعدة</div>${M(`${un1} = a${un} + b`)}: ${M(`α = ${f('b','1 − a')}`)} و ${M(`${vn} = ${un} − α`)} هندسية أساسها ${M('a')}</div>
+<div class="chip"><div class="lab">النقطة الثابتة</div>${M(`${un1} = f(${un})`)} و ${M('f')} مستمرّة و ${M(`${un} → ℓ`)} ← ${M('f(ℓ) = ℓ')}</div></div>`,
+`
+<div class="card core"><h3>L'essentiel — ce qu'il faut retenir</h3>
+<div class="chip"><div class="lab">Suite arithmétique</div>${M(`${un1} = ${un} + r`)} · ${M(`${un} = ${U('p')} + (n − p)r`)} · ${M(`S = N × ${f('premier + dernier','2')}`)}</div>
+<div class="chip"><div class="lab">Suite géométrique</div>${M(`${un1} = q${un}`)} · ${M(`${un} = ${U('p')} × q<sup>n−p</sup>`)} · ${M(`S = premier × ${f('1 − q<sup>N</sup>','1 − q')}`)}</div>
+<div class="chip"><div class="lab">Nombre de termes</div>de ${M(U('p'))} à ${M(un)} : ${M('N = n − p + 1')} (de ${M(u0)} à ${M(un)} : ${M('n + 1')} termes)</div>
+<div class="chip"><div class="lab">Sens de variation</div>signe de ${M(`${un1} − ${un}`)}</div>
+<div class="chip"><div class="lab">Récurrence</div>initialisation + hérédité → conclusion</div>
+<div class="chip"><div class="lab">Limite de ${M('q<sup>n</sup>')}</div>${M('q > 1')} → ${M('+∞')} · ${M('−1 < q < 1')} → ${M('0')} · ${M('q ≤ −1')} → pas de limite</div>
+<div class="chip"><div class="lab">Convergence monotone</div>croissante et majorée → converge · décroissante et minorée → converge</div>
+<div class="chip"><div class="lab">Adjacentes</div>${M('(u<sub>n</sub>)')} ↗, ${M('(v<sub>n</sub>)')} ↘, ${M(`${vn} − ${un} → 0`)} → même limite</div>
+<div class="chip"><div class="lab">Suite auxiliaire</div>${M(`${un1} = a${un} + b`)} : ${M(`α = ${f('b','1 − a')}`)} et ${M(`${vn} = ${un} − α`)} géométrique de raison ${M('a')}</div>
+<div class="chip"><div class="lab">Point fixe</div>${M(`${un1} = f(${un})`)}, ${M('f')} continue et ${M(`${un} → ℓ`)} → ${M('f(ℓ) = ℓ')}</div></div>`),
+
+/* Lexique : affiché tel quel dans les deux langues */
+gloss:[['متتالية عددية','suite numérique'],['الحدّ العام','terme général'],['الحدّ الأوّل','premier terme'],['الرتبة','le rang'],
+  ['علاقة تراجعية','relation de récurrence'],['متتالية حسابية','suite arithmétique'],['متتالية هندسية','suite géométrique'],['الأساس','la raison'],
+  ['متزايدة تماما','strictement croissante'],['متناقصة تماما','strictement décroissante'],['رتيبة','monotone'],['محدودة من الأعلى','majorée'],
+  ['محدودة من الأسفل','minorée'],['محدودة','bornée'],['متقاربة','convergente'],['متباعدة','divergente'],['النهاية','la limite'],
+  ['الاستدلال بالتراجع','raisonnement par récurrence'],['التحقّق','initialisation'],['الوراثة','hérédité'],
+  ['متتاليتان متجاورتان','suites adjacentes'],['متتالية مساعدة','suite auxiliaire'],['مجموع حدود متتابعة','somme de termes consécutifs']],
+
+/* ----------------------------------------------------- التفكير الصحيح / Bien raisonner */
+methode:B(`
+<div class="card"><h3>كيف تعالج تمرين متتاليات في البكالوريا؟</h3>
+<p>أغلب التمارين تدور حول متتالية تراجعية ${M(`${un1} = f(${un})`)}، والأسئلة تأتي دائما تقريبا بهذا الترتيب:</p>
+<ol class="steps">
+<li><b>احسب أوّل الحدود</b> (${M(U(1))}، ${M(U(2))}) واحتفظ بالكسور. هذه الحدود تعطيك فكرة عن السلوك (تزايد؟ تقارب؟) وتسمح لك بالتحقّق لاحقا.</li>
+<li><b>برهن حصرا بالتراجع</b> (مثل ${M(`${un} < 6`)} أو ${M(`0 ≤ ${un} ≤ 4`)}). في الوراثة: انطلق من فرضية التراجع وطبّق عليها العمليات نفسها التي في العلاقة التراجعية، بالترتيب.</li>
+<li><b>ادرس اتجاه التغيّر:</b> احسب ${M(`${un1} − ${un}`)} وحلّله، ثمّ استعمل الحصر السابق لمعرفة إشارته.</li>
+<li><b>استنتج التقارب:</b> «متزايدة ومحدودة من الأعلى، إذن متقاربة» — جملة واحدة تكفي.</li>
+<li><b>المتتالية المساعدة:</b> لإثبات أنّ ${M('(v<sub>n</sub>)')} هندسية، اكتب ${M(vn1)}، عوّض ${M(un1)} بعبارتها، ثمّ أخرج الأساس عاملا مشتركا حتى تصل إلى ${M(`${vn1} = q × ${vn}`)}.</li>
+<li><b>اكتب ${M(vn)} ثمّ ${M(un)} بدلالة ${M('n')}</b>، واحسب النهاية بنهاية ${M('q<sup>n</sup>')}. وإن طُلب مجموع، فاحسب عدد الحدود أوّلا.</li></ol></div>
+<div class="card"><h3>المطبّات</h3>
+<div class="warn"><b>المطبّ 1 — عدد الحدود:</b> من ${M(u0)} إلى ${M(un)} يوجد ${M('n + 1')} حدّا، وليس ${M('n')}. هذا الخطأ وحده يُضيّع نقاط سؤال المجموع.</div>
+<div class="warn"><b>المطبّ 2:</b> ${M(un1)} ليس ${M(`${un} + 1`)}، و ${M(`${U('2n')}`)} ليس ${M(`2${un}`)}.</div>
+<div class="warn"><b>المطبّ 3 — إثبات أنّ متتالية هندسية:</b> حساب ${M(f(U(1),u0))} و ${M(f(U(2),U(1)))} لا يكفي (ذلك يُثبت فقط أنّها <b>ليست</b> هندسية إن اختلفا). يجب إثبات ${M(`${vn1} = q × ${vn}`)} من أجل كلّ ${M('n')} مع ${M('q')} ثابت لا يتعلّق بـ ${M('n')}.</div>
+<div class="warn"><b>المطبّ 4:</b> «متزايدة ومحدودة من الأعلى بـ ${M('6')}» تعني أنّها متقاربة، <b>لا</b> أنّ نهايتها ${M('6')}. النهاية تُحسب بعد ذلك.</div>
+<div class="warn"><b>المطبّ 5:</b> نسيان التحقّق في الاستدلال بالتراجع، أو عدم استعمال فرضية التراجع في الوراثة: عندها لا يكون البرهان استدلالا بالتراجع.</div>
+<div class="warn"><b>المطبّ 6:</b> ${M('(−2)<sup>n</sup>')} ليست لها نهاية، و ${M('q<sup>n</sup> → 0')} فقط إذا كان ${M('−1 < q < 1')}. لا تكتب ${M('q<sup>n</sup> → +∞')} قبل التحقّق من أنّ ${M('q > 1')}.</div>
+<div class="warn"><b>المطبّ 7:</b> عند ضرب متباينة في عدد سالب ينعكس اتجاهها، وهذا يتكرّر في الوراثة حين يكون ${M('a < 0')}.</div></div>`,
+`
+<div class="card"><h3>Comment traiter un exercice de suites au BAC ?</h3>
+<p>La plupart des exercices portent sur une suite récurrente ${M(`${un1} = f(${un})`)}, et les questions arrivent presque toujours dans cet ordre :</p>
+<ol class="steps">
+<li><b>Calcule les premiers termes</b> (${M(U(1))}, ${M(U(2))}) en gardant les fractions. Ils donnent une idée du comportement (croissance ? convergence ?) et permettent de vérifier la suite.</li>
+<li><b>Démontre un encadrement par récurrence</b> (comme ${M(`${un} < 6`)} ou ${M(`0 ≤ ${un} ≤ 4`)}). Dans l'hérédité : pars de l'hypothèse de récurrence et applique-lui, dans l'ordre, les mêmes opérations que la relation de récurrence.</li>
+<li><b>Étudie le sens de variation :</b> calcule ${M(`${un1} − ${un}`)}, factorise, puis utilise l'encadrement pour connaître son signe.</li>
+<li><b>Déduis la convergence :</b> « croissante et majorée, donc convergente » — une phrase suffit.</li>
+<li><b>Suite auxiliaire :</b> pour montrer que ${M('(v<sub>n</sub>)')} est géométrique, écris ${M(vn1)}, remplace ${M(un1)} par son expression, puis factorise par la raison jusqu'à obtenir ${M(`${vn1} = q × ${vn}`)}.</li>
+<li><b>Exprime ${M(vn)} puis ${M(un)} en fonction de ${M('n')}</b>, et calcule la limite grâce à celle de ${M('q<sup>n</sup>')}. Pour une somme, compte d'abord le nombre de termes.</li></ol></div>
+<div class="card"><h3>Les pièges</h3>
+<div class="warn"><b>Piège 1 — le nombre de termes :</b> de ${M(u0)} à ${M(un)} il y a ${M('n + 1')} termes, pas ${M('n')}. Cette seule erreur fait perdre les points de la question sur la somme.</div>
+<div class="warn"><b>Piège 2 :</b> ${M(un1)} n'est pas ${M(`${un} + 1`)}, et ${M(U('2n'))} n'est pas ${M(`2${un}`)}.</div>
+<div class="warn"><b>Piège 3 — montrer qu'une suite est géométrique :</b> calculer ${M(f(U(1),u0))} et ${M(f(U(2),U(1)))} ne suffit pas (cela prouve seulement qu'elle n'est <b>pas</b> géométrique s'ils diffèrent). Il faut prouver ${M(`${vn1} = q × ${vn}`)} pour tout ${M('n')}, avec ${M('q')} constant, indépendant de ${M('n')}.</div>
+<div class="warn"><b>Piège 4 :</b> « croissante et majorée par ${M('6')} » signifie qu'elle converge, <b>pas</b> que sa limite vaut ${M('6')}. La limite se calcule ensuite.</div>
+<div class="warn"><b>Piège 5 :</b> oublier l'initialisation, ou ne pas utiliser l'hypothèse de récurrence dans l'hérédité : ce n'est alors plus un raisonnement par récurrence.</div>
+<div class="warn"><b>Piège 6 :</b> ${M('(−2)<sup>n</sup>')} n'a pas de limite, et ${M('q<sup>n</sup> → 0')} seulement si ${M('−1 < q < 1')}. N'écris pas ${M('q<sup>n</sup> → +∞')} sans avoir vérifié que ${M('q > 1')}.</div>
+<div class="warn"><b>Piège 7 :</b> multiplier une inégalité par un nombre négatif change son sens — cela arrive dans l'hérédité quand ${M('a < 0')}.</div></div>`)
+});
+})();
+
+/* ======== ch-suites-ex.js ======== */
+/* ============================================================================
+   الباب 5 — المتتاليات: مولّد التمارين، تمرين البكالوريا، المختبر
+   Chapitre 5 — Suites : générateurs d'exercices, exercice type BAC, laboratoire
+   Chaque générateur renvoie {type, q, ans, sol, miss|why|missF} ; q et sol sont des objets {ar,fr}.
+   ============================================================================ */
+(function(){
+const U=i=>`u<sub>${i}</sub>`, V=i=>`v<sub>${i}</sub>`;
+const un=U('n'), un1=U('n+1'), u0=U(0), vn=V('n'), vn1=V('n+1'), v0=V(0);
+const LIM='lim<sub>n→+∞</sub> ';
+const S='(u<sub>n</sub>)';
+const st=(k,html)=>`<div class="st">${k}) ${html}</div>`;
+const N_=n=>M(String(n));
+const qS=(p,d)=>d===1?ar(p):(p<0?'−'+f(-p,d):f(p,d));                       /* q = p/d */
+const qP=(p,d,e)=>(d!==1||p<0?`(${qS(p,d)})`:qS(p,d))+`<sup>${e}</sup>`;      /* q^e */
+const pn=v=>v<0?`(${nice(v)})`:nice(v);
+const kx=k=>k===1?'':k===-1?'−':ar(k)+' × ';                                 /* k × … */
+const addC=d=>d?` ${sgn(d)} ${ar(Math.abs(d))}`:'';
+/* d + c·n  →  « 7 − 3n » */
+const lin=(d,c)=>{ const cn=(Math.abs(c)===1?'':ar(Math.abs(c)))+'n'; return d===0?(c<0?'−':'')+cn:`${ar(d)} ${sgn(c)} ${cn}`; };
+const lin1=(d,c)=>{ const cn=(Math.abs(c)===1?'':ar(Math.abs(c)))+'(n + 1)'; return d===0?(c<0?'−':'')+cn:`${ar(d)} ${sgn(c)} ${cn}`; };
+
+GEN[5]=[
+/* 0 — terme d'une suite arithmétique */
+()=>{ const p=pick([0,1]), a=nz(-12,12), r=nz(-7,7), n=ri(10,40), k=n-p, ans=a+k*r;
+  const fo=p===0?`${un} = ${u0} + nr`:`${un} = ${U(1)} + (n − 1)r`;
+  const calc=`${U(n)} = ${ar(a)} + ${k} × ${par(r)} = ${ar(a)} ${sgn(k*r)} ${Math.abs(k*r)} = ${ar(ans)}`;
+  return {type:'num',ans,
+   q:B(`${M(S)} متتالية حسابية حدّها الأوّل ${M(`${U(p)} = ${ar(a)}`)} وأساسها ${M(`r = ${ar(r)}`)}. احسب ${M(U(n))}.`,
+       `${M(S)} est une suite arithmétique de premier terme ${M(`${U(p)} = ${ar(a)}`)} et de raison ${M(`r = ${ar(r)}`)}. Calcule ${M(U(n))}.`),
+   miss:[[a+(k-1)*r,B(`من ${M(U(p))} إلى ${M(U(n))} نضيف الأساس ${M(`${n} − ${p} = ${k}`)} مرّة، لا ${N_(k-1)} مرّة.`,
+                     `De ${M(U(p))} à ${M(U(n))}, on ajoute la raison ${M(`${n} − ${p} = ${k}`)} fois, pas ${N_(k-1)} fois.`)],
+         [a+(k+1)*r,B(`نضيف الأساس ${M(`${n} − ${p} = ${k}`)} مرّة وليس ${N_(k+1)}: انتبه إلى رتبة الحدّ الأوّل.`,
+                     `On ajoute la raison ${M(`${n} − ${p} = ${k}`)} fois, pas ${N_(k+1)} : attention au rang du premier terme.`)]],
+   sol:B(st(1,`<b>الحدّ العام:</b> ${M(fo)}`)+st(2,`<b>بالتعويض:</b> ${M(calc)}`),
+         st(1,`<b>Terme général :</b> ${M(fo)}`)+st(2,`<b>On remplace :</b> ${M(calc)}`))};},
+
+/* 1 — raison d'une suite arithmétique à partir de deux termes */
+()=>{ const p=ri(0,4), d=ri(3,12), k=p+d, r=nz(-8,8), a=ri(-15,15), b=a+d*r;
+  const miss=[[(b-a)/(d+1),B(`بين ${M(U(p))} و ${M(U(k))} توجد ${M(`${k} − ${p} = ${d}`)} خطوة، وليس ${N_(d+1)}.`,
+                             `Entre ${M(U(p))} et ${M(U(k))}, il y a ${M(`${k} − ${p} = ${d}`)} pas, et non ${N_(d+1)}.`)],
+     [b-a,B(`${M(`${ar(b)} − ${par(a)} = ${ar(b-a)}`)} هو التغيّر الكلّي عبر ${N_(d)} خطوات: يجب قسمته على ${N_(d)}.`,
+            `${M(`${ar(b)} − ${par(a)} = ${ar(b-a)}`)} est la variation totale sur ${N_(d)} pas : il faut la diviser par ${N_(d)}.`)]];
+  if(p>0) miss.push([(b-a)/k,B(`قسمت على ${N_(k)} (رتبة الحدّ) بدل ${M(`${k} − ${p} = ${d}`)}.`,`Tu as divisé par ${N_(k)} (le rang) au lieu de ${M(`${k} − ${p} = ${d}`)}.`)]);
+  const s2=st(2,M(`${d}r = ${ar(b)} − ${par(a)} = ${ar(b-a)}`));
+  return {type:'num',ans:r,miss,
+   q:B(`${M(S)} متتالية حسابية حيث ${M(`${U(p)} = ${ar(a)}`)} و ${M(`${U(k)} = ${ar(b)}`)}. احسب أساسها ${M('r')}.`,
+       `${M(S)} est une suite arithmétique telle que ${M(`${U(p)} = ${ar(a)}`)} et ${M(`${U(k)} = ${ar(b)}`)}. Calcule sa raison ${M('r')}.`),
+   sol:B(st(1,`${M(`${U(k)} = ${U(p)} + (${k} − ${p})r`)}، أي ${M(`${ar(b)} = ${ar(a)} + ${d}r`)}`)+s2+st(3,`<b>النتيجة:</b> ${M(`r = ${f(ar(b-a),d)} = ${ar(r)}`)}`),
+         st(1,`${M(`${U(k)} = ${U(p)} + (${k} − ${p})r`)}, c'est-à-dire ${M(`${ar(b)} = ${ar(a)} + ${d}r`)}`)+s2+st(3,`<b>Résultat :</b> ${M(`r = ${f(ar(b-a),d)} = ${ar(r)}`)}`))};},
+
+/* 2 — terme d'une suite géométrique */
+()=>{ let a,qp,qd=1,n;
+  if(Math.random()<0.6){ a=pick([1,2,3,4,5,-1,-2,-3]); qp=pick([2,3,-2,-3]); n=ri(3,Math.abs(qp)===3?6:8); }
+  else { qp=1; qd=2; a=pick([64,128,192,320,-64,-192]); n=ri(2,6); }
+  const q=qp/qd, qn=Math.pow(q,n), ans=a*qn;
+  const s2=st(2,M(`${U(n)} = ${par(a)} × ${qP(qp,qd,n)} = ${par(a)} × ${pn(qn)}`));
+  return {type:'num',ans,
+   q:B(`${M(S)} متتالية هندسية حدّها الأوّل ${M(`${u0} = ${ar(a)}`)} وأساسها ${M(`q = ${qS(qp,qd)}`)}. احسب ${M(U(n))}.`,
+       `${M(S)} est une suite géométrique de premier terme ${M(`${u0} = ${ar(a)}`)} et de raison ${M(`q = ${qS(qp,qd)}`)}. Calcule ${M(U(n))}.`),
+   miss:[[a*Math.pow(q,n-1),B(`${M(`${U(n)} = ${u0} × q<sup>${n}</sup>`)}: الأسّ ${N_(n)} وليس ${N_(n-1)}.`,`${M(`${U(n)} = ${u0} × q<sup>${n}</sup>`)} : l'exposant est ${N_(n)}, pas ${N_(n-1)}.`)],
+         [a*Math.pow(q,n+1),B(`من ${M(u0)} إلى ${M(U(n))} نضرب في ${M('q')} بالضبط ${N_(n)} مرّة.`,`De ${M(u0)} à ${M(U(n))}, on multiplie par ${M('q')} exactement ${N_(n)} fois.`)],
+         [a*q*n,B(`ضربت في ${M('q × n')}: في المتتالية الهندسية نرفع ${M('q')} إلى القوّة ${M('n')}.`,`Tu as multiplié par ${M('q × n')} : dans une suite géométrique, on élève ${M('q')} à la puissance ${M('n')}.`)],
+         [a+n*q,B(`هذه علاقة المتتالية الحسابية ${M(`${u0} + nq`)}: هنا نضرب في الأساس، لا نضيفه.`,`C'est la formule d'une suite arithmétique, ${M(`${u0} + nq`)} : ici on multiplie par la raison, on ne l'ajoute pas.`)]],
+   sol:B(st(1,`<b>الحدّ العام:</b> ${M(`${un} = ${u0} × q<sup>n</sup>`)}`)+s2+st(3,`<b>النتيجة:</b> ${M(`${U(n)} = ${ar(ans)}`)}`),
+         st(1,`<b>Terme général :</b> ${M(`${un} = ${u0} × q<sup>n</sup>`)}`)+s2+st(3,`<b>Résultat :</b> ${M(`${U(n)} = ${ar(ans)}`)}`))};},
+
+/* 3 — somme de termes d'une suite arithmétique */
+()=>{ const p=pick([0,1]), a=ri(-10,15), r=nz(-5,6), n=p+ri(8,30), N=n-p+1, last=a+(n-p)*r, ans=N*(a+last)/2;
+  const s2=M(`${U(n)} = ${ar(a)} + ${n-p} × ${par(r)} = ${ar(last)}`), s3=st(3,M(`S = ${N} × ${f(`${ar(a)} + ${par(last)}`,'2')} = ${ar(ans)}`));
+  return {type:'num',ans,
+   q:B(`${M(S)} متتالية حسابية حدّها الأوّل ${M(`${U(p)} = ${ar(a)}`)} وأساسها ${M(`r = ${ar(r)}`)}. احسب المجموع ${M(`S = ${U(p)} + ${U(p+1)} + … + ${U(n)}`)}.`,
+       `${M(S)} est une suite arithmétique de premier terme ${M(`${U(p)} = ${ar(a)}`)} et de raison ${M(`r = ${ar(r)}`)}. Calcule la somme ${M(`S = ${U(p)} + ${U(p+1)} + … + ${U(n)}`)}.`),
+   miss:[[(N-1)*(a+last)/2,B(`عدد الحدود من ${M(U(p))} إلى ${M(U(n))} هو ${M(`${n} − ${p} + 1 = ${N}`)}، وليس ${N_(N-1)}.`,`De ${M(U(p))} à ${M(U(n))}, il y a ${M(`${n} − ${p} + 1 = ${N}`)} termes, pas ${N_(N-1)}.`)],
+         [(N+1)*(a+last)/2,B(`عدد الحدود هو ${M(`${n} − ${p} + 1 = ${N}`)}، وليس ${N_(N+1)}.`,`Le nombre de termes est ${M(`${n} − ${p} + 1 = ${N}`)}, pas ${N_(N+1)}.`)],
+         [N*(a+last),B('نسيت القسمة على 2: المجموع = عدد الحدود × (الأوّل + الأخير) ÷ 2.','Tu as oublié de diviser par 2 : somme = nombre de termes × (premier + dernier) ÷ 2.')]],
+   sol:B(st(1,`<b>عدد الحدود:</b> ${M(`N = ${n} − ${p} + 1 = ${N}`)}`)+st(2,`<b>الحدّ الأخير:</b> ${s2}`)+s3,
+         st(1,`<b>Nombre de termes :</b> ${M(`N = ${n} − ${p} + 1 = ${N}`)}`)+st(2,`<b>Dernier terme :</b> ${s2}`)+s3)};},
+
+/* 4 — somme de termes d'une suite géométrique */
+()=>{ const a=pick([1,2,3,5,-1,-2]), q=pick([2,3,-2]), n=ri(q===3?3:4,q===3?6:8), N=n+1, X=Math.pow(q,N), ans=a*(1-X)/(1-q);
+  const miss=[[a*(1-Math.pow(q,n))/(1-q),B(`من ${M(u0)} إلى ${M(U(n))} يوجد ${M(`${n} + 1 = ${N}`)} حدّا: الأسّ في الدستور ${N_(N)} وليس ${N_(n)}.`,`De ${M(u0)} à ${M(U(n))}, il y a ${M(`${n} + 1 = ${N}`)} termes : l'exposant dans la formule est ${N_(N)}, pas ${N_(n)}.`)],
+     [a*(1-Math.pow(q,N+1))/(1-q),B(`الأسّ هو عدد الحدود ${N_(N)}، وليس ${N_(N+1)}.`,`L'exposant est le nombre de termes, ${N_(N)}, pas ${N_(N+1)}.`)],
+     [a*Math.pow(q,n),B(`هذا هو الحدّ الأخير ${M(U(n))}، وليس المجموع.`,`C'est le dernier terme ${M(U(n))}, pas la somme.`)]];
+  if(a!==1) miss.push([(1-X)/(1-q),B(`نسيت الضرب في الحدّ الأوّل ${M(`${u0} = ${ar(a)}`)}.`,`Tu as oublié de multiplier par le premier terme ${M(`${u0} = ${ar(a)}`)}.`)]);
+  const s2=st(2,M(`S = ${u0} × ${f('1 − q<sup>N</sup>','1 − q')} = ${par(a)} × ${f(`1 − ${par(q)}<sup>${N}</sup>`,`1 − ${par(q)}`)}`));
+  const s3=st(3,M(`S = ${par(a)} × ${f(ar(1-X),ar(1-q))} = ${ar(ans)}`));
+  return {type:'num',ans,miss,
+   q:B(`${M(S)} متتالية هندسية حدّها الأوّل ${M(`${u0} = ${ar(a)}`)} وأساسها ${M(`q = ${ar(q)}`)}. احسب ${M(`S = ${u0} + ${U(1)} + … + ${U(n)}`)}.`,
+       `${M(S)} est une suite géométrique de premier terme ${M(`${u0} = ${ar(a)}`)} et de raison ${M(`q = ${ar(q)}`)}. Calcule ${M(`S = ${u0} + ${U(1)} + … + ${U(n)}`)}.`),
+   sol:B(st(1,`<b>عدد الحدود:</b> ${M(`N = ${n} + 1 = ${N}`)}`)+s2+s3,
+         st(1,`<b>Nombre de termes :</b> ${M(`N = ${n} + 1 = ${N}`)}`)+s2+s3)};},
+
+/* 5 — nature d'une suite donnée explicitement (QCM) */
+()=>{ const OP=[{k:'A',ar:'حسابية',fr:'arithmétique'},{k:'G',ar:'هندسية',fr:'géométrique'},{k:'N',ar:'لا حسابية ولا هندسية',fr:'ni arithmétique ni géométrique'}];
+  const kind=pick(['A','G','N']); let expr,sol,why;
+  if(kind==='A'){ const c=nz(-6,6), d=ri(-9,9); expr=lin(d,c);
+    const s1=st(1,M(`${un1} − ${un} = ${lin1(d,c)} − (${lin(d,c)}) = ${ar(c)}`));
+    sol=B(s1+st(2,`الفرق ثابت لا يتعلّق بـ ${M('n')}: المتتالية <b>حسابية</b> أساسها ${M(`r = ${ar(c)}`)} وحدّها الأوّل ${M(`${u0} = ${ar(d)}`)}.`),
+          s1+st(2,`La différence est constante, elle ne dépend pas de ${M('n')} : la suite est <b>arithmétique</b> de raison ${M(`r = ${ar(c)}`)} et de premier terme ${M(`${u0} = ${ar(d)}`)}.`));
+    why={G:B(`حاصل القسمة ${M(f(un1,un))} ليس ثابتا هنا. احسب الفرق ${M(`${un1} − ${un}`)}: ستجده ثابتا.`,`Le quotient ${M(f(un1,un))} n'est pas constant ici. Calcule la différence ${M(`${un1} − ${un}`)} : elle est constante.`),
+         N:B(`احسب الفرق ${M(`${un1} − ${un}`)}: ستجده ثابتا يساوي ${M(ar(c))}.`,`Calcule la différence ${M(`${un1} − ${un}`)} : elle est constante, égale à ${M(ar(c))}.`)};
+  } else if(kind==='G'){ const c=pick([1,2,3,5,-2,-3]), q=pick([2,3,4,5]); const cc=c===1?'':ar(c)+' × '; expr=`${cc}${q}<sup>n</sup>`;
+    const s1=M(`${f(un1,un)} = ${f(`${cc}${q}<sup>n+1</sup>`,`${cc}${q}<sup>n</sup>`)} = ${q}`);
+    sol=B(st(1,`كلّ الحدود غير معدومة، و ${s1}`)+st(2,`حاصل القسمة ثابت: المتتالية <b>هندسية</b> أساسها ${M(`q = ${q}`)} وحدّها الأوّل ${M(`${u0} = ${ar(c)}`)}.`),
+          st(1,`Tous les termes sont non nuls, et ${s1}`)+st(2,`Le quotient est constant : la suite est <b>géométrique</b> de raison ${M(`q = ${q}`)} et de premier terme ${M(`${u0} = ${ar(c)}`)}.`));
+    const t3=M(`${ar(c)} ; ${ar(c*q)} ; ${ar(c*q*q)}`);
+    why={A:B(`الحدود ${t3} لا تتغيّر بنفس المقدار: الفرق ${M(`${un1} − ${un}`)} يتعلّق بـ ${M('n')}. احسب ${M(f(un1,un))}.`,`Les termes ${t3} ne varient pas de la même quantité : la différence ${M(`${un1} − ${un}`)} dépend de ${M('n')}. Calcule ${M(f(un1,un))}.`),
+         N:B(`احسب ${M(f(un1,un))}: ستجده ثابتا يساوي ${N_(q)}.`,`Calcule ${M(f(un1,un))} : il est constant, égal à ${N_(q)}.`)};
+  } else { const sq=Math.random()<0.5, d=ri(1,sq?5:4); expr=sq?`n² + ${d}`:`2<sup>n</sup> + ${d}`;
+    const g=n=>sq?n*n+d:Math.pow(2,n)+d, a0=g(0), a1=g(1), a2=g(2);
+    const s1=st(1,`${M(`${u0} = ${a0}`)} ، ${M(`${U(1)} = ${a1}`)} ، ${M(`${U(2)} = ${a2}`)}`);
+    const dA=`${M(`${U(1)} − ${u0} = ${a1-a0}`)}`, dB=`${M(`${U(2)} − ${U(1)} = ${a2-a1}`)}`;
+    const rA=`${M(`${f(U(1),u0)} = ${frs(a1,a0)}`)}`, rB=`${M(`${f(U(2),U(1))} = ${frs(a2,a1)}`)}`;
+    sol=B(s1+st(2,`${dA} و ${dB}: الفرق ليس ثابتا، إذن ليست حسابية.`)+st(3,`${rA} و ${rB}: حاصل القسمة ليس ثابتا، إذن ليست هندسية.`),
+          s1+st(2,`${dA} et ${dB} : la différence n'est pas constante, donc elle n'est pas arithmétique.`)+st(3,`${rA} et ${rB} : le quotient n'est pas constant, donc elle n'est pas géométrique.`));
+    why={A:B(`${dA} بينما ${dB}: الفرق ليس ثابتا.`,`${dA} alors que ${dB} : la différence n'est pas constante.`),
+         G:B(`${rA} بينما ${rB}: حاصل القسمة ليس ثابتا.`,`${rA} alors que ${rB} : le quotient n'est pas constant.`)};
+  }
+  return {type:'choice',opts:OP,ans:kind,why,sol,
+   q:B(`ما طبيعة المتتالية المعرّفة على ${M('ℕ')} بـ ${M(`${un} = ${expr}`)}؟`,`Quelle est la nature de la suite définie sur ${M('ℕ')} par ${M(`${un} = ${expr}`)} ?`)};},
+
+/* 6 — sens de variation (QCM) */
+()=>{ const OP=[{k:'C',ar:'متزايدة تماما',fr:'strictement croissante'},{k:'D',ar:'متناقصة تماما',fr:'strictement décroissante'},{k:'X',ar:'ليست رتيبة',fr:'ni croissante ni décroissante'}];
+  const v=pick(['lin','geo','geo','quad']); let expr,ans,sol;
+  const pos=B('موجب','positive'), neg=B('سالب','négative');
+  if(v==='lin'){ const c=nz(-6,6), d=ri(-9,9); expr=lin(d,c); ans=c>0?'C':'D';
+    const s1=st(1,M(`${un1} − ${un} = ${ar(c)}`));
+    sol=B(s1+st(2,`الفرق ${c>0?'موجب':'سالب'} تماما، إذن المتتالية ${c>0?'متزايدة':'متناقصة'} تماما (حسابية أساسها ${M(ar(c))}).`),
+          s1+st(2,`La différence est strictement ${c>0?'positive':'négative'} : la suite est strictement ${c>0?'croissante':'décroissante'} (arithmétique de raison ${M(ar(c))}).`));
+  } else if(v==='geo'){ const k=pick([1,2,3,4,-1,-2,-3]), [qp,qd]=pick([[2,1],[3,1],[1,2],[1,3],[2,3],[-2,1],[-1,2]]), q=qp/qd;
+    expr=kx(k)+qP(qp,qd,'n');
+    if(q<0){ ans='X'; const t0=k, t1=k*q, t2=k*q*q;
+      const tt=`${M(`${u0} = ${nice(t0)}`)} ، ${M(`${U(1)} = ${nice(t1)}`)} ، ${M(`${U(2)} = ${nice(t2)}`)}`;
+      const cmp=`${M(`${U(1)} ${t1<t0?'<':'>'} ${u0}`)}`, cmp2=`${M(`${U(2)} ${t2<t1?'<':'>'} ${U(1)}`)}`;
+      sol=B(st(1,`الأساس ${M(`q = ${qS(qp,qd)}`)} سالب، فإشارات الحدود تتناوب: ${tt}.`)+st(2,`${cmp} لكنّ ${cmp2}: المتتالية ليست رتيبة.`),
+            st(1,`La raison ${M(`q = ${qS(qp,qd)}`)} est négative, donc les signes des termes alternent : ${tt}.`)+st(2,`${cmp} mais ${cmp2} : la suite n'est pas monotone.`));
+    } else { const s=Math.sign(k)*Math.sign(q-1); ans=s>0?'C':'D';
+      const s1=st(1,M(`${un1} − ${un} = ${kx(k)}${qP(qp,qd,'n')} × (${qS(qp,qd)} − 1) = ${kx(k)}${qP(qp,qd,'n')} × ${pn(q-1)}`));
+      sol=B(s1+st(2,`${M(qP(qp,qd,'n')+' > 0')}، و ${M(ar(k))} ${k>0?'موجب':'سالب'}، و ${M(`${qS(qp,qd)} − 1`)} ${q>1?'موجب':'سالب'}: الفرق ${s>0?'موجب':'سالب'} تماما، إذن المتتالية ${s>0?'متزايدة':'متناقصة'} تماما.`),
+            s1+st(2,`${M(qP(qp,qd,'n')+' > 0')}, ${M(ar(k))} est ${k>0?'positif':'négatif'} et ${M(`${qS(qp,qd)} − 1`)} est ${q>1?'positif':'négatif'} : la différence est strictement ${s>0?'positive':'négative'}, donc la suite est strictement ${s>0?'croissante':'décroissante'}.`));
+    }
+  } else { const kind=pick(['up','mix','down']), d=ri(-5,5);
+    if(kind==='mix'){ const c=ri(3,7); expr=`n² − ${c}n${addC(d)}`; ans='X';
+      const s1=st(1,M(`${un1} − ${un} = 2n + 1 − ${c} = 2n − ${c-1}`));
+      const e=`${M(`${U(1)} − ${u0} = ${1-c} < 0`)}`, e2=`${M(`${U(c+1)} − ${U(c)} = ${c+1} > 0`)}`;
+      sol=B(s1+st(2,`${e} لكنّ ${e2}: الفرق يغيّر إشارته، فالمتتالية ليست رتيبة (تتناقص ثمّ تتزايد).`),
+            s1+st(2,`${e} mais ${e2} : la différence change de signe, la suite n'est donc pas monotone (elle décroît puis croît).`));
+    } else { const c=ri(0,4), up=kind==='up', cn=c?` ${up?'+':'−'} ${c===1?'':c}n`:'';
+      expr=`${up?'':'−'}n²${cn}${addC(d)}`; ans=up?'C':'D';
+      const df=up?`2n + ${1+c}`:`−2n − ${1+c}`;
+      const s1=st(1,M(`${un1} − ${un} = ${df}`));
+      sol=B(s1+st(2,`من أجل كلّ ${M('n ≥ 0')}: ${M(`${df} ${up?'>':'<'} 0`)}، إذن المتتالية ${up?'متزايدة':'متناقصة'} تماما.`),
+            s1+st(2,`Pour tout ${M('n ≥ 0')} : ${M(`${df} ${up?'>':'<'} 0`)}, donc la suite est strictement ${up?'croissante':'décroissante'}.`));
+    }
+  }
+  const W={C:B(`الفرق ${M(`${un1} − ${un}`)} موجب تماما من أجل كلّ ${M('n')}: كلّ حدّ أكبر من الذي قبله.`,`La différence ${M(`${un1} − ${un}`)} est strictement positive pour tout ${M('n')} : chaque terme est plus grand que le précédent.`),
+           D:B(`الفرق ${M(`${un1} − ${un}`)} سالب تماما من أجل كلّ ${M('n')}: كلّ حدّ أصغر من الذي قبله.`,`La différence ${M(`${un1} − ${un}`)} est strictement négative pour tout ${M('n')} : chaque terme est plus petit que le précédent.`),
+           X:B(`احسب أوّل الحدود: المتتالية تنقص في موضع وتزيد في آخر، فهي ليست رتيبة.`,`Calcule les premiers termes : la suite diminue à un endroit et augmente à un autre, elle n'est donc pas monotone.`)};
+  const why={}; OP.forEach(o=>{ if(o.k!==ans) why[o.k]=W[ans]; });
+  return {type:'choice',opts:OP,ans,why,sol,
+   q:B(`ما اتجاه تغيّر المتتالية المعرّفة على ${M('ℕ')} بـ ${M(`${un} = ${expr}`)}؟`,`Quel est le sens de variation de la suite définie sur ${M('ℕ')} par ${M(`${un} = ${expr}`)} ?`)};},
+
+/* 7 — limite de c·qⁿ + d (QCM) */
+()=>{ const cat=pick(['s','s','s','b','b','g']);
+  const Q={s:[[1,2],[1,3],[2,3],[3,4],[-1,2],[-1,3]], b:[[2,1],[3,1],[3,2],[5,4]], g:[[-2,1],[-3,1],[-1,1]]};
+  const [qp,qd]=pick(Q[cat]), c=nz(-5,5), d=ri(-6,6), qs=qS(qp,qd);
+  const expr=kx(c)+qP(qp,qd,'n')+addC(d);
+  const ans=cat==='s'?'L':cat==='b'?(c>0?'P':'M'):'N';
+  const opts=[{k:'L',ar:M(ar(d)),fr:M(ar(d))}].concat(d!==0?[{k:'Z',ar:M('0'),fr:M('0')}]:[],
+    [{k:'P',ar:M('+∞'),fr:M('+∞')},{k:'M',ar:M('−∞'),fr:M('−∞')},{k:'N',ar:'ليست لها نهاية',fr:'pas de limite'}]);
+  let sol;
+  if(cat==='s'){
+    sol=B(st(1,`${M(`−1 < ${qs} < 1`)}، إذن ${M(`${LIM}${qP(qp,qd,'n')} = 0`)}، ومنه ${M(`${LIM}${kx(c)}${qP(qp,qd,'n')} = 0`)}.`)+st(2,`${M(`${LIM}${un} = 0${addC(d)} = ${ar(d)}`)}.`),
+          st(1,`${M(`−1 < ${qs} < 1`)}, donc ${M(`${LIM}${qP(qp,qd,'n')} = 0`)}, d'où ${M(`${LIM}${kx(c)}${qP(qp,qd,'n')} = 0`)}.`)+st(2,`${M(`${LIM}${un} = 0${addC(d)} = ${ar(d)}`)}.`));
+  } else if(cat==='b'){ const inf=c>0?'+∞':'−∞';
+    sol=B(st(1,`${M(`${qs} > 1`)}، إذن ${M(`${LIM}${qP(qp,qd,'n')} = +∞`)}.`)+st(2,`${M(`${ar(c)} ${c>0?'> 0':'< 0'}`)}، إذن ${M(`${LIM}${kx(c)}${qP(qp,qd,'n')} = ${inf}`)}، وإضافة ${M(ar(d))} لا تغيّر شيئا: ${M(`${LIM}${un} = ${inf}`)}.`),
+          st(1,`${M(`${qs} > 1`)}, donc ${M(`${LIM}${qP(qp,qd,'n')} = +∞`)}.`)+st(2,`${M(`${ar(c)} ${c>0?'> 0':'< 0'}`)}, donc ${M(`${LIM}${kx(c)}${qP(qp,qd,'n')} = ${inf}`)}, et ajouter ${M(ar(d))} ne change rien : ${M(`${LIM}${un} = ${inf}`)}.`));
+  } else {
+    sol=B(st(1,`${M(`${qs} ≤ −1`)}: إشارة ${M(qP(qp,qd,'n'))} تتغيّر من رتبة إلى أخرى ولا تقترب من أيّ عدد، فـ ${M(`(${qP(qp,qd,'n')})`)} ليست لها نهاية.`)+st(2,`إذن ${M(S)} ليست لها نهاية.`),
+          st(1,`${M(`${qs} ≤ −1`)} : le signe de ${M(qP(qp,qd,'n'))} change d'un rang à l'autre et ne s'approche d'aucun nombre, donc ${M(`(${qP(qp,qd,'n')})`)} n'a pas de limite.`)+st(2,`Donc ${M(S)} n'a pas de limite.`));
+  }
+  const why={};
+  const msg={
+    toZ:B(`${M(`${kx(c)}${qP(qp,qd,'n')}`)} يؤول إلى ${M('0')}، لكن يبقى الحدّ الثابت: ${M(`${un} → ${ar(d)}`)}.`,`${M(`${kx(c)}${qP(qp,qd,'n')}`)} tend vers ${M('0')}, mais il reste le terme constant : ${M(`${un} → ${ar(d)}`)}.`),
+    small:B(`${M(`−1 < ${qs} < 1`)}: قوى عدد محصور بين ${M('−1')} و ${M('1')} تصغر وتؤول إلى ${M('0')}.`,`${M(`−1 < ${qs} < 1`)} : les puissances d'un nombre compris entre ${M('−1')} et ${M('1')} rapetissent et tendent vers ${M('0')}.`),
+    big:B(`${M(`${qs} > 1`)}: ${M(qP(qp,qd,'n'))} يؤول إلى ${M('+∞')}، فالمتتالية لا تستقرّ عند عدد.`,`${M(`${qs} > 1`)} : ${M(qP(qp,qd,'n'))} tend vers ${M('+∞')}, la suite ne se stabilise pas.`),
+    sign:B(`انتبه إلى إشارة المعامل ${M(ar(c))}: ${M(`${ar(c)} × (+∞) = ${c>0?'+∞':'−∞'}`)}.`,`Attention au signe du coefficient ${M(ar(c))} : ${M(`${ar(c)} × (+∞) = ${c>0?'+∞':'−∞'}`)}.`),
+    hasLim:B(`للمتتالية نهاية هنا: ${M(`q = ${qs}`)} أكبر من ${M('−1')}.`,`La suite a bien une limite ici : ${M(`q = ${qs}`)} est supérieur à ${M('−1')}.`),
+    none:B(`${M(`${qs} ≤ −1`)}: الحدود تتناوب في الإشارة دون أن تقترب من عدد: لا توجد نهاية.`,`${M(`${qs} ≤ −1`)} : les termes alternent de signe sans s'approcher d'un nombre : pas de limite.`)};
+  opts.forEach(o=>{ if(o.k===ans) return;
+    why[o.k]= ans==='N'?msg.none
+      : ans==='L'?(o.k==='Z'?msg.toZ:o.k==='N'?msg.hasLim:msg.small)
+      : (o.k==='P'||o.k==='M')?msg.sign : o.k==='N'?msg.hasLim : msg.big; });
+  return {type:'choice',opts,ans,why,sol,
+   q:B(`ما نهاية المتتالية ${M(`${un} = ${expr}`)} عندما يؤول ${M('n')} إلى ${M('+∞')}؟`,`Quelle est la limite de la suite ${M(`${un} = ${expr}`)} quand ${M('n')} tend vers ${M('+∞')} ?`)};},
+
+/* 8 — calcul de termes d'une suite récurrente */
+()=>{ const a=ri(-4,4), k=pick([2,3,-2,-1]), b=nz(-5,5), m=pick([2,3]);
+  const T=[a], W=[a]; for(let i=0;i<m;i++){ T.push(k*T[i]+b); W.push(k*(W[i]+b)); }
+  const rec=`${cx(k)}${un}${addC(b)}`;
+  let steps=''; for(let i=0;i<m;i++) steps+=st(i+1,M(`${U(i+1)} = ${ar(k)} × ${par(T[i])}${addC(b)} = ${ar(T[i+1])}`));
+  return {type:'num',ans:T[m],
+   q:B(`${M(S)} متتالية معرّفة بـ ${M(`${u0} = ${ar(a)}`)} ومن أجل كلّ عدد طبيعي ${M('n')}: ${M(`${un1} = ${rec}`)}. احسب ${M(U(m))}.`,
+       `${M(S)} est définie par ${M(`${u0} = ${ar(a)}`)} et, pour tout entier naturel ${M('n')}, ${M(`${un1} = ${rec}`)}. Calcule ${M(U(m))}.`),
+   miss:[[T[m-1],B(`هذا هو ${M(U(m-1))}: تحتاج خطوة أخرى للوصول إلى ${M(U(m))}.`,`C'est ${M(U(m-1))} : il faut encore une étape pour arriver à ${M(U(m))}.`)],
+         [W[m],B(`الضرب قبل الجمع: ${M(rec)} تعني ${M(`(${ar(k)} × ${un})${addC(b)}`)}، وليس ${M(`${ar(k)} × (${un}${addC(b)})`)}.`,`La multiplication passe avant l'addition : ${M(rec)} signifie ${M(`(${ar(k)} × ${un})${addC(b)}`)}, et non ${M(`${ar(k)} × (${un}${addC(b)})`)}.`)],
+         [k*T[m]+b,B(`ذهبت خطوة أبعد: هذا هو ${M(U(m+1))}.`,`Tu es allé(e) une étape trop loin : c'est ${M(U(m+1))}.`)]],
+   sol:B(steps,steps)};},
+
+/* 9 — suite auxiliaire : α, raison de (vₙ), limite */
+()=>{ const [p,d]=pick([[1,2],[1,3],[2,3],[3,4],[-1,2],[2,1],[3,1]]), a=p/d, t=nz(-3,3);
+  const alpha=d===1?t:d*t, b=d===1?t*(1-p):t*(d-p);
+  const aS=qS(p,d), rec=`${un1} = ${d===1?cx(p):aS}${un}${addC(b)}`;
+  const vdef=`${vn} = ${un}${addC(-alpha)}`;
+  const variant=Math.abs(a)<1?pick(['alpha','ratio','lim']):pick(['alpha','ratio']);
+  const aMinus=`1 − ${a<0?'('+aS+')':aS}`;
+  const aC=d===1?cx(p):aS, aAl=a<0?` − ${qS(-p,d)}α`:` + ${aC}α`;          /* « + aα » avec le bon signe */
+  const s1=st(1,M(`${vn1} = ${un1} − α = ${aC}${un}${addC(b)} − α = ${aC}(${un} − α)${aAl}${addC(b)} − α`));
+  if(variant==='alpha'){
+    const s2=B(st(2,`نريد ${M(`${vn1} = ${aS} × ${vn}`)}، أي ${M(`${aS}α${addC(b)} − α = 0`)}، ومنه ${M(`α = ${f(ar(b),aMinus)} = ${ar(alpha)}`)}.`),
+               st(2,`On veut ${M(`${vn1} = ${aS} × ${vn}`)}, c'est-à-dire ${M(`${aS}α${addC(b)} − α = 0`)}, d'où ${M(`α = ${f(ar(b),aMinus)} = ${ar(alpha)}`)}.`));
+    return {type:'num',ans:alpha,
+     q:B(`${M(S)} معرّفة بـ ${M(rec)}. نضع ${M(`${vn} = ${un} − α`)}. عيّن العدد الحقيقي ${M('α')} الذي تكون من أجله ${M('(v<sub>n</sub>)')} متتالية هندسية.`,
+         `${M(S)} est définie par ${M(rec)}. On pose ${M(`${vn} = ${un} − α`)}. Détermine le réel ${M('α')} pour lequel ${M('(v<sub>n</sub>)')} est une suite géométrique.`),
+     miss:[[b,B(`نسيت القسمة على ${M(aMinus)}: ${M('α')} يحقّق ${M(`α = ${aS}α${addC(b)}`)}، أي ${M(`α = ${f('b','1 − a')}`)}.`,`Tu as oublié de diviser par ${M(aMinus)} : ${M('α')} vérifie ${M(`α = ${aS}α${addC(b)}`)}, donc ${M(`α = ${f('b','1 − a')}`)}.`)],
+           [b/(1+a),B(`${M(`α = ${f('b','1 − a')}`)} وليس ${M(f('b','1 + a'))}: انتبه إلى الإشارة عند نقل ${M(`${aS}α`)}.`,`${M(`α = ${f('b','1 − a')}`)}, et non ${M(f('b','1 + a'))} : attention au signe en passant ${M(`${aS}α`)} de l'autre côté.`)],
+           [b/a,B(`${M('α')} هو حلّ ${M(`α = ${aS}α${addC(b)}`)}: نجمع حدود ${M('α')} في طرف واحد قبل القسمة.`,`${M('α')} est solution de ${M(`α = ${aS}α${addC(b)}`)} : on regroupe les termes en ${M('α')} d'un côté avant de diviser.`)]],
+     sol:B(s1+s2.ar,s1+s2.fr)};
+  }
+  if(variant==='ratio'){
+    const chk=M(`${aS} × ${par(alpha)}${addC(b)} − ${par(alpha)} = 0`);
+    return {type:'num',ans:a,tol:1e-6,
+     q:B(`${M(S)} معرّفة بـ ${M(rec)}، ونضع ${M(vdef)}. نقبل أنّ ${M('(v<sub>n</sub>)')} متتالية هندسية. ما أساسها؟`,
+         `${M(S)} est définie par ${M(rec)}, et on pose ${M(vdef)}. On admet que ${M('(v<sub>n</sub>)')} est géométrique. Quelle est sa raison ?`),
+     miss:[[b,B(`${M(ar(b))} هو الحدّ الثابت في العلاقة، وليس الأساس. احسب ${M(vn1)} بدلالة ${M(vn)}.`,`${M(ar(b))} est le terme constant de la relation, pas la raison. Calcule ${M(vn1)} en fonction de ${M(vn)}.`)],
+           [1-a,B(`${M(`1 − a`)} يظهر في حساب ${M('α')}، أمّا الأساس فهو المعامل ${M('a')} نفسه.`,`${M('1 − a')} intervient dans le calcul de ${M('α')} ; la raison est le coefficient ${M('a')} lui-même.`)],
+           [alpha,B(`${M(`α = ${ar(alpha)}`)} هو العدد المطروح لتعريف ${M(vn)}، وليس الأساس.`,`${M(`α = ${ar(alpha)}`)} est le nombre retranché pour définir ${M(vn)}, pas la raison.`)]],
+     sol:B(s1+st(2,`مع ${M(`α = ${ar(alpha)}`)}: ${chk}، إذن ${M(`${vn1} = ${aS} × ${vn}`)}.`)+st(3,`أساس ${M('(v<sub>n</sub>)')} هو ${M(aS)}.`),
+           s1+st(2,`Avec ${M(`α = ${ar(alpha)}`)} : ${chk}, donc ${M(`${vn1} = ${aS} × ${vn}`)}.`)+st(3,`La raison de ${M('(v<sub>n</sub>)')} est ${M(aS)}.`))};
+  }
+  let x0=ri(-6,6); if(x0===alpha) x0+=1;
+  const s3=M(`${vn} = (${ar(x0)}${addC(-alpha)}) × ${qP(p,d,'n')} = ${ar(x0-alpha)} × ${qP(p,d,'n')}`);
+  return {type:'num',ans:alpha,
+   q:B(`${M(S)} معرّفة بـ ${M(`${u0} = ${ar(x0)}`)} و ${M(rec)}. احسب ${M(`${LIM}${un}`)}.`,
+       `${M(S)} est définie par ${M(`${u0} = ${ar(x0)}`)} et ${M(rec)}. Calcule ${M(`${LIM}${un}`)}.`),
+   miss:[[x0,B(`النهاية لا تتعلّق بالحدّ الأوّل هنا: استعمل المتتالية المساعدة ${M(`${vn} = ${un} − α`)}.`,`Ici, la limite ne dépend pas du premier terme : utilise la suite auxiliaire ${M(`${vn} = ${un} − α`)}.`)],
+         [0,B(`${M(vn)} هي التي تؤول إلى ${M('0')}، أمّا ${M(`${un} = ${vn} + α`)} فتؤول إلى ${M('α')}.`,`C'est ${M(vn)} qui tend vers ${M('0')} ; ${M(`${un} = ${vn} + α`)} tend vers ${M('α')}.`)],
+         [b,B(`النهاية ${M('ℓ')} تحقّق ${M(`ℓ = ${aS}ℓ${addC(b)}`)}، أي ${M(`ℓ = ${f('b','1 − a')}`)}، وليست ${M('b')}.`,`La limite ${M('ℓ')} vérifie ${M(`ℓ = ${aS}ℓ${addC(b)}`)}, donc ${M(`ℓ = ${f('b','1 − a')}`)}, et non ${M('b')}.`)]],
+   sol:B(st(1,`${M(`α = ${f(ar(b),aMinus)} = ${ar(alpha)}`)}، و ${M(`${vn} = ${un} − α`)} هندسية أساسها ${M(aS)}.`)+st(2,s3)+st(3,`${M(`−1 < ${aS} < 1`)} إذن ${M(`${vn} → 0`)}، ومنه ${M(`${un} = ${vn} + α → ${ar(alpha)}`)}.`),
+         st(1,`${M(`α = ${f(ar(b),aMinus)} = ${ar(alpha)}`)}, et ${M(`${vn} = ${un} − α`)} est géométrique de raison ${M(aS)}.`)+st(2,s3)+st(3,`${M(`−1 < ${aS} < 1`)} donc ${M(`${vn} → 0`)}, d'où ${M(`${un} = ${vn} + α → ${ar(alpha)}`)}.`))};},
+
+/* 10 — terme général en fonction de n (réponse = expression) */
+()=>{ const geo=Math.random()<0.5, p=pick([0,0,1]);
+  if(!geo){ const a=nz(-9,12), r=nz(-6,6), fn=n=>a+(n-p)*r, c0=a-p*r;
+    const s1=st(1,M(`${un} = ${U(p)} + (n − ${p})r = ${ar(a)} + (n − ${p}) × ${par(r)}`)), s2=st(2,M(`${un} = ${lin(c0,r)}`));
+    return {type:'exprn',fn,ansS:`${c0}+(${r})*n`,
+     q:B(`${M(S)} متتالية حسابية حدّها الأوّل ${M(`${U(p)} = ${ar(a)}`)} وأساسها ${M(`r = ${ar(r)}`)}. اكتب ${M(un)} بدلالة ${M('n')}.`,
+         `${M(S)} est une suite arithmétique de premier terme ${M(`${U(p)} = ${ar(a)}`)} et de raison ${M(`r = ${ar(r)}`)}. Exprime ${M(un)} en fonction de ${M('n')}.`),
+     missF:[[n=>a+(n-p-1)*r,B(`تحقّق: عوّض ${M(`n = ${p}`)} في عبارتك، يجب أن تجد ${M(`${U(p)} = ${ar(a)}`)}.`,`Vérifie : en remplaçant ${M(`n = ${p}`)} dans ton expression, tu dois retrouver ${M(`${U(p)} = ${ar(a)}`)}.`)],
+            [n=>a+(n-p+1)*r,B(`تحقّق: عوّض ${M(`n = ${p}`)} في عبارتك، يجب أن تجد ${M(`${U(p)} = ${ar(a)}`)}. الحدّ الأوّل رتبته ${N_(p)}.`,`Vérifie : en remplaçant ${M(`n = ${p}`)}, tu dois retrouver ${M(`${U(p)} = ${ar(a)}`)}. Le premier terme est de rang ${N_(p)}.`)],
+            [n=>a*Math.pow(r,n-p),B(`هذه علاقة متتالية هندسية: في المتتالية الحسابية نضيف الأساس، فيظهر ${M('n')} مضروبا في ${M('r')}.`,`C'est une formule de suite géométrique : dans une suite arithmétique on ajoute la raison, donc ${M('n')} est multiplié par ${M('r')}.`)]],
+     sol:B(s1+s2,s1+s2)};
+  }
+  const a=pick([1,2,3,5,-2,-3]), [qp,qd]=pick([[2,1],[3,1],[-2,1],[1,2],[1,3]]), q=qp/qd, fn=n=>a*Math.pow(q,n-p);
+  const e=p?'n − 1':'n', s1=st(1,M(`${un} = ${U(p)} × q<sup>${e}</sup>`)), s2=st(2,M(`${un} = ${kx(a)}${qP(qp,qd,e)}`));
+  return {type:'exprn',fn,ansS:`${a}*(${qp}/${qd})^(n-${p})`,
+   q:B(`${M(S)} متتالية هندسية حدّها الأوّل ${M(`${U(p)} = ${ar(a)}`)} وأساسها ${M(`q = ${qS(qp,qd)}`)}. اكتب ${M(un)} بدلالة ${M('n')}.`,
+       `${M(S)} est une suite géométrique de premier terme ${M(`${U(p)} = ${ar(a)}`)} et de raison ${M(`q = ${qS(qp,qd)}`)}. Exprime ${M(un)} en fonction de ${M('n')}.`),
+   missF:[[n=>a*Math.pow(q,n-p-1),B(`تحقّق: من أجل ${M(`n = ${p}`)} يجب أن تجد ${M(`${U(p)} = ${ar(a)}`)}. راجع الأسّ.`,`Vérifie : pour ${M(`n = ${p}`)}, tu dois retrouver ${M(`${U(p)} = ${ar(a)}`)}. Revois l'exposant.`)],
+          [n=>a*Math.pow(q,n-p+1),B(`تحقّق: من أجل ${M(`n = ${p}`)} يجب أن تجد ${M(`${U(p)} = ${ar(a)}`)}. الأسّ هو ${M(e)}.`,`Vérifie : pour ${M(`n = ${p}`)}, tu dois retrouver ${M(`${U(p)} = ${ar(a)}`)}. L'exposant est ${M(e)}.`)],
+          [n=>a+(n-p)*q,B(`هذه علاقة متتالية حسابية: في المتتالية الهندسية نضرب في الأساس، فيظهر ${M('n')} في الأسّ.`,`C'est une formule de suite arithmétique : dans une suite géométrique on multiplie par la raison, donc ${M('n')} apparaît en exposant.`)]],
+   sol:B(s1+s2,s1+s2)};}
+];
+
+/* ============================================================================
+   تمرين نموذجي من نوع البكالوريا — Exercice type BAC
+   ============================================================================ */
+const t23=f('2','3'), t13=f('1','3');
+const same=s=>B(s,s);
+BAC[5]={
+ t:B('تمرين نموذجي من نوع البكالوريا','Exercice type BAC'), pts:6,
+ st:B(`نعتبر المتتالية ${M(S)} المعرّفة بـ ${M(`${u0} = 1`)}، ومن أجل كلّ عدد طبيعي ${M('n')}: ${M(`${un1} = ${t23}${un} + 2`)}.`,
+      `On considère la suite ${M(S)} définie par ${M(`${u0} = 1`)} et, pour tout entier naturel ${M('n')}, ${M(`${un1} = ${t23}${un} + 2`)}.`),
+ parts:[
+  {n:'1) أ', nf:'1) a', p:0.5,
+   q:B(`احسب ${M(U(1))} و ${M(U(2))}.`,`Calcule ${M(U(1))} et ${M(U(2))}.`),
+   hint:B(`عوّض ${M('n')} بـ ${M('0')} ثمّ بـ ${M('1')} في العلاقة التراجعية، واحتفظ بالكسور.`,`Remplace ${M('n')} par ${M('0')} puis par ${M('1')} dans la relation de récurrence, en gardant les fractions.`),
+   sol:[[same(M(`${U(1)} = ${t23} × 1 + 2 = ${f('8','3')}`)),0.25],
+        [same(M(`${U(2)} = ${t23} × ${f('8','3')} + 2 = ${f('16','9')} + ${f('18','9')} = ${f('34','9')}`)),0.25]]},
+  {n:'1) ب', nf:'1) b', p:1,
+   q:B(`برهن بالتراجع أنّه من أجل كلّ عدد طبيعي ${M('n')}: ${M(`${un} < 6`)}.`,`Démontre par récurrence que, pour tout entier naturel ${M('n')}, ${M(`${un} < 6`)}.`),
+   hint:B(`في الوراثة: انطلق من ${M(`${un} < 6`)}، اضرب في ${M(t23)} (عدد موجب، فلا يتغيّر اتجاه المتباينة) ثمّ أضف ${M('2')}.`,`Dans l'hérédité : pars de ${M(`${un} < 6`)}, multiplie par ${M(t23)} (positif, donc le sens de l'inégalité ne change pas), puis ajoute ${M('2')}.`),
+   sol:[[B(`<b>التحقّق:</b> ${M(`${u0} = 1 < 6`)}.`,`<b>Initialisation :</b> ${M(`${u0} = 1 < 6`)}.`),0.25],
+        [B(`<b>الوراثة:</b> نفرض ${M(`${un} < 6`)}. بما أنّ ${M(`${t23} > 0`)}: ${M(`${t23}${un} < 4`)}، ومنه ${M(`${t23}${un} + 2 < 6`)}، أي ${M(`${un1} < 6`)}.`,
+           `<b>Hérédité :</b> supposons ${M(`${un} < 6`)}. Comme ${M(`${t23} > 0`)} : ${M(`${t23}${un} < 4`)}, donc ${M(`${t23}${un} + 2 < 6`)}, c'est-à-dire ${M(`${un1} < 6`)}.`),0.5],
+        [B(`<b>الخلاصة:</b> من أجل كلّ ${M('n ∈ ℕ')}: ${M(`${un} < 6`)}.`,`<b>Conclusion :</b> pour tout ${M('n ∈ ℕ')}, ${M(`${un} < 6`)}.`),0.25]]},
+  {n:'1) ج', nf:'1) c', p:1,
+   q:B(`بيّن أنّ المتتالية ${M(S)} متزايدة تماما.`,`Montre que la suite ${M(S)} est strictement croissante.`),
+   hint:B(`احسب ${M(`${un1} − ${un}`)} وأخرج ${M(t13)} عاملا مشتركا، ثمّ استعمل نتيجة السؤال السابق.`,`Calcule ${M(`${un1} − ${un}`)} et factorise par ${M(t13)}, puis utilise la question précédente.`),
+   sol:[[same(M(`${un1} − ${un} = ${t23}${un} + 2 − ${un} = 2 − ${t13}${un} = ${t13}(6 − ${un})`)),0.5],
+        [B(`بما أنّ ${M(`${un} < 6`)} فإنّ ${M(`6 − ${un} > 0`)}، إذن ${M(`${un1} − ${un} > 0`)}: المتتالية متزايدة تماما.`,`Comme ${M(`${un} < 6`)}, on a ${M(`6 − ${un} > 0`)}, donc ${M(`${un1} − ${un} > 0`)} : la suite est strictement croissante.`),0.5]]},
+  {n:'1) د', nf:'1) d', p:0.5,
+   q:B(`استنتج أنّ ${M(S)} متقاربة.`,`Déduis-en que ${M(S)} est convergente.`),
+   hint:B('متتالية متزايدة و…؟','Une suite croissante et… ?'),
+   sol:[[B(`${M(S)} متزايدة ومحدودة من الأعلى بالعدد ${M('6')}، إذن هي متقاربة (مبرهنة التقارب الرتيب).`,`${M(S)} est croissante et majorée par ${M('6')}, donc elle est convergente (théorème de convergence monotone).`),0.5]]},
+  {n:'2) أ', nf:'2) a', p:1,
+   q:B(`نضع من أجل كلّ ${M('n')}: ${M(`${vn} = ${un} − 6`)}. بيّن أنّ ${M('(v<sub>n</sub>)')} متتالية هندسية أساسها ${M(t23)}، وعيّن حدّها الأوّل.`,
+       `On pose, pour tout ${M('n')}, ${M(`${vn} = ${un} − 6`)}. Montre que ${M('(v<sub>n</sub>)')} est une suite géométrique de raison ${M(t23)} et précise son premier terme.`),
+   hint:B(`اكتب ${M(`${vn1} = ${un1} − 6`)}، عوّض ${M(un1)} بعبارتها، ثمّ أخرج ${M(t23)} عاملا مشتركا.`,`Écris ${M(`${vn1} = ${un1} − 6`)}, remplace ${M(un1)} par son expression, puis factorise par ${M(t23)}.`),
+   sol:[[B(`${M(`${vn1} = ${un1} − 6 = ${t23}${un} + 2 − 6 = ${t23}${un} − 4 = ${t23}(${un} − 6) = ${t23}${vn}`)}، إذن ${M('(v<sub>n</sub>)')} هندسية أساسها ${M(t23)}.`,
+           `${M(`${vn1} = ${un1} − 6 = ${t23}${un} + 2 − 6 = ${t23}${un} − 4 = ${t23}(${un} − 6) = ${t23}${vn}`)}, donc ${M('(v<sub>n</sub>)')} est géométrique de raison ${M(t23)}.`),0.75],
+        [same(M(`${v0} = ${u0} − 6 = −5`)),0.25]]},
+  {n:'2) ب', nf:'2) b', p:0.75,
+   q:B(`اكتب ${M(vn)} ثمّ ${M(un)} بدلالة ${M('n')}.`,`Exprime ${M(vn)} puis ${M(un)} en fonction de ${M('n')}.`),
+   hint:B(`${M(`${vn} = ${v0} × q<sup>n</sup>`)}، ثمّ ${M(`${un} = ${vn} + 6`)}.`,`${M(`${vn} = ${v0} × q<sup>n</sup>`)}, puis ${M(`${un} = ${vn} + 6`)}.`),
+   sol:[[same(M(`${vn} = −5 × (${t23})<sup>n</sup>`)),0.5],[same(M(`${un} = ${vn} + 6 = 6 − 5 × (${t23})<sup>n</sup>`)),0.25]]},
+  {n:'2) ج', nf:'2) c', p:0.5,
+   q:B(`احسب ${M(`${LIM}${un}`)}.`,`Calcule ${M(`${LIM}${un}`)}.`),
+   hint:B(`ما نهاية ${M('q<sup>n</sup>')} إذا كان ${M('0 < q < 1')}؟`,`Quelle est la limite de ${M('q<sup>n</sup>')} si ${M('0 < q < 1')} ?`),
+   sol:[[B(`بما أنّ ${M(`0 < ${t23} < 1`)} فإنّ ${M(`${LIM}(${t23})<sup>n</sup> = 0`)}.`,`Comme ${M(`0 < ${t23} < 1`)}, ${M(`${LIM}(${t23})<sup>n</sup> = 0`)}.`),0.25],
+        [B(`إذن ${M(`${LIM}${un} = 6`)}.`,`Donc ${M(`${LIM}${un} = 6`)}.`),0.25]]},
+  {n:'3)', nf:'3)', p:0.75,
+   q:B(`احسب بدلالة ${M('n')} المجموع ${M(`S<sub>n</sub> = ${v0} + ${V(1)} + … + ${vn}`)}، ثمّ استنتج ${M(`T<sub>n</sub> = ${u0} + ${U(1)} + … + ${un}`)}.`,
+       `Calcule en fonction de ${M('n')} la somme ${M(`S<sub>n</sub> = ${v0} + ${V(1)} + … + ${vn}`)}, puis déduis-en ${M(`T<sub>n</sub> = ${u0} + ${U(1)} + … + ${un}`)}.`),
+   hint:B(`مجموع حدود متتالية هندسية، وانتبه: يوجد ${M('n + 1')} حدّا. ثمّ ${M(`${U('k')} = ${V('k')} + 6`)}.`,`Somme de termes d'une suite géométrique — attention, il y a ${M('n + 1')} termes. Puis ${M(`${U('k')} = ${V('k')} + 6`)}.`),
+   sol:[[same(M(`S<sub>n</sub> = ${v0} × ${f(`1 − (${t23})<sup>n+1</sup>`,`1 − ${t23}`)} = −15(1 − (${t23})<sup>n+1</sup>)`)),0.5],
+        [same(M(`T<sub>n</sub> = S<sub>n</sub> + 6(n + 1) = 6n − 9 + 15(${t23})<sup>n+1</sup>`)),0.25]]}
+ ]};
+
+/* ============================================================================
+   جرّب بنفسك — مختبر المتتاليات u(n+1) = a·u(n) + b
+   Explorer — laboratoire des suites u(n+1) = a·u(n) + b
+   ============================================================================ */
+const LS={a:0.5,b:2,u0:0,mode:'web',k:12,tm:null};
+const KMAX=12, CLV=40;
+const r1=v=>Math.round(v*10)/10;
+const fin=v=>isFinite(v)&&Math.abs(v)<1e9;
+function terms(n){ const T=[LS.u0]; for(let i=0;i<n;i++) T.push(LS.a*T[i]+LS.b); return T; }
+const PRE=[[B('حسابية','Arithmétique'),1,1.5,-3],[B('هندسية','Géométrique'),1.2,0,1],[B('متقاربة','Convergente'),0.5,2,0],[B('حلزون','Spirale'),-0.6,4,0]];
+
+function natureTxt(){
+  const {a,b}=LS;
+  if(a===1) return B(`${M('a = 1')}: ${M(`${un1} = ${un}${addC(b)}`)} — متتالية <b>حسابية</b> أساسها ${M(`r = ${ar(b)}`)}.`,`${M('a = 1')} : ${M(`${un1} = ${un}${addC(b)}`)} — suite <b>arithmétique</b> de raison ${M(`r = ${ar(b)}`)}.`);
+  if(b===0) return B(`${M('b = 0')}: ${M(`${un1} = ${ar(a)}${un}`)} — متتالية <b>هندسية</b> أساسها ${M(`q = ${ar(a)}`)}.`,`${M('b = 0')} : ${M(`${un1} = ${ar(a)}${un}`)} — suite <b>géométrique</b> de raison ${M(`q = ${ar(a)}`)}.`);
+  if(a===0) return B(`${M('a = 0')}: كلّ الحدود ابتداءً من ${M(U(1))} تساوي ${M(ar(b))}.`,`${M('a = 0')} : tous les termes à partir de ${M(U(1))} valent ${M(ar(b))}.`);
+  const al=ar(rnd(LS.b/(1-a),3));
+  return B(`${M(`α = ${f('b','1 − a')} = ${al}`)}، والمتتالية ${M(`${vn} = ${un} − α`)} <b>هندسية</b> أساسها ${M(`a = ${ar(a)}`)}، إذن ${M(`${un} = α + (${u0} − α)a<sup>n</sup>`)}.`,
+           `${M(`α = ${f('b','1 − a')} = ${al}`)} et la suite ${M(`${vn} = ${un} − α`)} est <b>géométrique</b> de raison ${M(`a = ${ar(a)}`)}, donc ${M(`${un} = α + (${u0} − α)a<sup>n</sup>`)}.`);
+}
+function limTxt(){
+  const {a,b,u0:x0}=LS;
+  if(a===1){
+    if(b===0) return B(`المتتالية ثابتة: كلّ حدودها تساوي ${M(ar(x0))}.`,`La suite est constante : tous ses termes valent ${M(ar(x0))}.`);
+    return b>0?B(`${M('r > 0')}: المتتالية متزايدة تماما و ${M(`${LIM}${un} = +∞`)}.`,`${M('r > 0')} : la suite est strictement croissante et ${M(`${LIM}${un} = +∞`)}.`)
+              :B(`${M('r < 0')}: المتتالية متناقصة تماما و ${M(`${LIM}${un} = −∞`)}.`,`${M('r < 0')} : la suite est strictement décroissante et ${M(`${LIM}${un} = −∞`)}.`);
+  }
+  const al=b/(1-a), AL=ar(rnd(al,3));
+  if(Math.abs(x0-al)<1e-9) return B(`${M(`${u0} = α`)}: المتتالية ثابتة، كلّ حدودها تساوي ${M(AL)}.`,`${M(`${u0} = α`)} : la suite est constante, tous ses termes valent ${M(AL)}.`);
+  if(Math.abs(a)<1) return B(`${M('−1 < a < 1')}: ${M('a<sup>n</sup> → 0')}، إذن المتتالية متقاربة و ${M(`${LIM}${un} = α = ${AL}`)}.`,`${M('−1 < a < 1')} : ${M('a<sup>n</sup> → 0')}, donc la suite converge et ${M(`${LIM}${un} = α = ${AL}`)}.`);
+  if(a>1){ const s=x0>al?'+∞':'−∞';
+    return B(`${M('a > 1')} و ${M(`${u0} ${x0>al?'>':'<'} α`)}: ${M(`${LIM}${un} = ${s}`)}.`,`${M('a > 1')} et ${M(`${u0} ${x0>al?'>':'<'} α`)} : ${M(`${LIM}${un} = ${s}`)}.`); }
+  return a===-1?B(`${M('a = −1')}: الحدود تتناوب بين قيمتين حول ${M('α')}: المتتالية ليست لها نهاية.`,`${M('a = −1')} : les termes alternent entre deux valeurs autour de ${M('α')} : la suite n'a pas de limite.`)
+               :B(`${M('a < −1')}: الحدود تتناوب حول ${M('α')} وتبتعد عنه: المتتالية ليست لها نهاية.`,`${M('a < −1')} : les termes alternent autour de ${M('α')} en s'en éloignant : la suite n'a pas de limite.`);
+}
+
+function draw(){
+  const svg=document.getElementById('lsvg'); if(!svg) return;
+  const {a,b,u0:x0,mode}=LS, K=Math.min(LS.k,KMAX), T=terms(KMAX);
+  const alpha=a!==1?b/(1-a):null;
+  const C='#0F5C4E', G='#B8860B', GR='#9AA3AE', TX='#5B6676';
+  let h='';
+  const txt=(x,y,s,anc,sz,col)=>`<text x="${x}" y="${y}" font-size="${sz||11}" text-anchor="${anc||'middle'}" fill="${col||TX}">${s}</text>`;
+  if(mode==='pts'){
+    const vals=T.filter(fin).map(v=>Math.max(-CLV,Math.min(CLV,v))).concat([0]);
+    if(alpha!==null&&Math.abs(a)<1) vals.push(alpha);
+    let lo=Math.min(...vals), hi=Math.max(...vals); if(hi-lo<2){ const m=(hi+lo)/2; lo=m-1; hi=m+1; }
+    const pad=(hi-lo)*0.08, L0=lo, H0=hi; lo-=pad; hi+=pad;
+    const X0=40,X1=348,Y0=12,Y1=268, sx=n=>X0+n*(X1-X0)/KMAX, sy=v=>Y1-(v-lo)*(Y1-Y0)/(hi-lo);
+    h+=`<rect x="${X0}" y="${Y0}" width="${X1-X0}" height="${Y1-Y0}" fill="none" stroke="#E2DDD2"/>`;
+    if(lo<0&&hi>0) h+=`<line x1="${X0}" y1="${sy(0)}" x2="${X1}" y2="${sy(0)}" stroke="${GR}"/>`+txt(X0-5,sy(0)+4,'0','end',10.5);
+    for(let n=0;n<=KMAX;n+=2) h+=txt(sx(n),Y1+16,n);
+    h+=txt(X1,Y1+28,'n','end',11)+txt(X0-5,sy(H0)+4,ar(rnd(H0,1)),'end',10.5)+txt(X0-5,sy(L0)+4,ar(rnd(L0,1)),'end',10.5);
+    if(alpha!==null&&alpha>lo&&alpha<hi) h+=`<line x1="${X0}" y1="${sy(alpha)}" x2="${X1}" y2="${sy(alpha)}" stroke="${G}" stroke-dasharray="5 4"/>`+txt(X1-4,sy(alpha)-5,'α','end',13,G);
+    for(let n=0;n<=K;n++){ const v=T[n]; if(!fin(v)&&!isFinite(v)) continue;
+      const cv=Math.max(lo,Math.min(hi,v)), out=cv!==v;
+      h+=`<circle cx="${sx(n)}" cy="${sy(cv)}" r="${out?3:4.3}" fill="${out?'#A62B39':C}"/>`; }
+  } else {
+    const vals=[x0,0]; for(let i=0;i<=K;i++) if(fin(T[i])) vals.push(Math.max(-CLV,Math.min(CLV,T[i])));
+    if(alpha!==null&&fin(alpha)&&Math.abs(alpha)<=CLV) vals.push(alpha);
+    let lo=Math.min(...vals), hi=Math.max(...vals); if(hi-lo<4){ const m=(hi+lo)/2; lo=m-2; hi=m+2; }
+    const pad=(hi-lo)*0.1; lo-=pad; hi+=pad; const W=hi-lo;
+    const X0=30,X1=350,Y0=10,Y1=270;
+    const cl=v=>Math.max(lo-W,Math.min(hi+W,v));
+    const sx=v=>X0+(cl(v)-lo)*(X1-X0)/W, sy=v=>Y1-(cl(v)-lo)*(Y1-Y0)/W;
+    h+=`<defs><clipPath id="lclip"><rect x="${X0}" y="${Y0}" width="${X1-X0}" height="${Y1-Y0}"/></clipPath></defs>`;
+    h+=`<rect x="${X0}" y="${Y0}" width="${X1-X0}" height="${Y1-Y0}" fill="none" stroke="#E2DDD2"/>`;
+    const base=(lo<0&&hi>0)?0:lo;
+    h+='<g clip-path="url(#lclip)">';
+    if(lo<0&&hi>0) h+=`<line x1="${X0}" y1="${sy(0)}" x2="${X1}" y2="${sy(0)}" stroke="${GR}"/><line x1="${sx(0)}" y1="${Y0}" x2="${sx(0)}" y2="${Y1}" stroke="${GR}"/>`;
+    h+=`<line x1="${sx(lo)}" y1="${sy(lo)}" x2="${sx(hi)}" y2="${sy(hi)}" stroke="${GR}" stroke-dasharray="6 4" stroke-width="1.4"/>`;
+    h+=`<line x1="${sx(lo)}" y1="${sy(a*lo+b)}" x2="${sx(hi)}" y2="${sy(a*hi+b)}" stroke="${C}" stroke-width="2.2"/>`;
+    if(K>0){ let d=`M${sx(x0)} ${sy(base)}`;
+      for(let i=0;i<K;i++){ if(!fin(T[i+1])) break; d+=` L${sx(T[i])} ${sy(T[i+1])} L${sx(T[i+1])} ${sy(T[i+1])}`; }
+      h+=`<path d="${d}" fill="none" stroke="${G}" stroke-width="1.8" stroke-linejoin="round"/>`; }
+    if(alpha!==null&&fin(alpha)) h+=`<circle cx="${sx(alpha)}" cy="${sy(alpha)}" r="4.5" fill="${G}"/>`;
+    const lab=[];
+    for(let i=0;i<=Math.min(K,3);i++){ if(!fin(T[i])||T[i]<lo||T[i]>hi) continue;
+      h+=`<circle cx="${sx(T[i])}" cy="${sy(base)}" r="3" fill="${C}"/>`;
+      let ly=sy(base)+15+(i%2)*11; if(ly>Y1-3) ly=sy(base)-7-(i%2)*11;      /* au-dessus de l'axe s'il est trop bas */
+      lab.push(`<text x="${sx(T[i])}" y="${ly}" font-size="11" text-anchor="middle" fill="${C}">u<tspan font-size="8.5" dy="3">${i}</tspan></text>`); }
+    h+='</g>'+lab.join('');
+    /* légende sous le cadre */
+    h+=`<line x1="${X0}" y1="285" x2="${X0+22}" y2="285" stroke="${GR}" stroke-dasharray="6 4" stroke-width="1.4"/>`+txt(X0+28,289,'y = x','start',11,GR)
+      +`<line x1="${X0+92}" y1="285" x2="${X0+114}" y2="285" stroke="${C}" stroke-width="2.2"/>`+txt(X0+120,289,'y = ax + b','start',11,C);
+    if(alpha!==null&&fin(alpha)&&alpha>lo&&alpha<hi) h+=txt(sx(alpha)+8,sy(alpha)-7,'α','start',13,G);
+  }
+  svg.innerHTML=h;
+  const el=document.getElementById('lread'); if(!el) return;
+  const T6=terms(6), fm=v=>fin(v)&&Math.abs(v)<1e6?ar(rnd(v,3)):'…';
+  el.innerHTML=fix(`<p>${T6.map((v,i)=>M(`${U(i)} = ${fm(v)}`)).join(LANG==='ar'?' ؛ ':' ; ')}</p><p class="obs">${tr(natureTxt())}</p><p class="obs">${tr(limTxt())}</p>`);
+}
+function playLabel(){ const b=document.getElementById('lplay'); if(b) b.textContent=LS.tm?'■ '+tr(B('إيقاف','Arrêter')):'▶ '+tr(B('شغّل الحركة','Animer')); }
+function stopAnim(){ if(LS.tm){ clearInterval(LS.tm); LS.tm=null; } }
+
+LABS[5]=function(p){
+  stopAnim(); LS.k=KMAX;
+  const sl=(id,lab,min,max,step,val)=>`<label class="sl"><span><span class="m">${lab} = <b class="lat" id="v${id}">${ar(val)}</b></span></span><input type="range" id="s${id}" min="${min}" max="${max}" step="${step}" value="${val}"></label>`;
+  const modes=[['web',B('السلّم (التمثيل البياني)','Escalier (représentation graphique)')],['pts',B('سحابة النقط','Nuage de points')]];
+  p.innerHTML=fix(`<div class="lab">
+   <div class="labhead"><b>${tr(B('مختبر المتتاليات','Laboratoire des suites'))} — ${M(`${un1} = a${un} + b`)}</b><span class="labtip">${tr(B('حرّك المؤشّرات وشاهد الحدود تتغيّر','Déplace les curseurs et observe les termes'))}</span></div>
+   <div class="btnrow labmodes">${modes.map(([k,t])=>`<button class="btn small ${LS.mode===k?'':'sec2'}" data-lm="${k}">${tr(t)}</button>`).join('')}</div>
+   <div class="labctl">${sl('a','a',-1.5,1.5,0.1,LS.a)}${sl('b','b',-4,4,0.5,LS.b)}${sl('u','u<sub>0</sub>',-6,6,0.5,LS.u0)}</div>
+   <div class="btnrow" style="margin:2px 0 8px">${PRE.map((x,i)=>`<button class="btn small sec2" data-pre="${i}">${tr(x[0])}</button>`).join('')}</div>
+   <svg class="labsvg" id="lsvg" viewBox="0 0 360 300" style="direction:ltr" role="img" aria-label="${tr(B('تمثيل حدود المتتالية','Représentation des termes de la suite'))}"></svg>
+   <div class="btnrow"><button class="btn small" id="lplay"></button><button class="btn small sec2" id="lstep">+1 ${tr(B('خطوة','étape'))}</button></div>
+   <div class="labread" id="lread"></div>
+   <div class="labnote">${tr(B(
+    `<b>لاحظ:</b> المستقيمان ${M('y = ax + b')} و ${M('y = x')} يتقاطعان في النقطة التي فاصلتها ${M('α')}. إذا كان ${M('−1 < a < 1')} فإنّ «السلّم» ينجذب نحو هذه النقطة (متتالية متقاربة)، وإذا كان ${M('a < 0')} يصبح السلّم حلزونا لأنّ الحدود تتناوب حول ${M('α')}. جرّب ${M('a = 1')} (حسابية: المستقيمان متوازيان)، ثمّ ${M('b = 0')} (هندسية).`,
+    `<b>Observe :</b> les droites ${M('y = ax + b')} et ${M('y = x')} se coupent au point d'abscisse ${M('α')}. Si ${M('−1 < a < 1')}, l'« escalier » est attiré par ce point (suite convergente) ; si ${M('a < 0')}, il devient une spirale car les termes alternent autour de ${M('α')}. Essaie ${M('a = 1')} (arithmétique : les droites sont parallèles), puis ${M('b = 0')} (géométrique).`))}</div></div>`);
+  const sync=()=>{ [['a','a'],['b','b'],['u','u0']].forEach(([id,k])=>{ const s=p.querySelector('#s'+id), v=p.querySelector('#v'+id); if(s) s.value=LS[k]; if(v) v.textContent=ar(LS[k]); }); };
+  [['a','a'],['b','b'],['u','u0']].forEach(([id,k])=>{ const s=p.querySelector('#s'+id);
+    s.oninput=()=>{ LS[k]=r1(+s.value); p.querySelector('#v'+id).textContent=ar(LS[k]); stopAnim(); LS.k=KMAX; playLabel(); draw(); }; });
+  p.querySelectorAll('[data-pre]').forEach(bt=>bt.onclick=()=>{ const x=PRE[+bt.dataset.pre]; LS.a=x[1]; LS.b=x[2]; LS.u0=x[3]; sync(); stopAnim(); LS.k=KMAX; playLabel(); draw(); });
+  p.querySelectorAll('[data-lm]').forEach(bt=>bt.onclick=()=>{ LS.mode=bt.dataset.lm; LABS[5](p); });
+  p.querySelector('#lplay').onclick=()=>{
+    if(LS.tm){ stopAnim(); LS.k=KMAX; playLabel(); draw(); return; }
+    LS.k=0; draw(); LS.tm=setInterval(()=>{ if(!document.getElementById('lsvg')){ stopAnim(); return; }
+      LS.k++; draw(); if(LS.k>=KMAX){ stopAnim(); playLabel(); } },650); playLabel(); };
+  p.querySelector('#lstep').onclick=()=>{ stopAnim(); LS.k=LS.k>=KMAX?1:LS.k+1; playLabel(); draw(); };
+  playLabel(); draw();
+};
+})();
+
+/* ======== app.js ======== */
+/* ============================================================================
+   الحفظ المحلّي: التقدّم، كرّاسة الأخطاء (مراجعة متباعدة)، الأيام، الشارات، الإعدادات
+   Enregistrement local : progression, carnet d'erreurs, jours, badges, réglages.
+   كلّ قراءة أو كتابة محميّة: إن رفض المتصفّح الحفظ يعمل التطبيق عاديا في الذاكرة فقط.
+   ============================================================================ */
+const Store=(function(){
+  const KEY='mathbac.v1', GAPS=[1,3,7];           /* الفواصل: يوم، ثلاثة أيام، أسبوع */
+  const blank=()=>({v:1,les:{},q:[],mast:0,days:[],badges:{},bac:{},set:{theme:'auto',z:1,rate:0.9,lang:'ar'}});
+  let P=blank(), persist=true;
+  try{
+    const t=localStorage.getItem(KEY);
+    if(t){ const o=JSON.parse(t); if(o&&o.v===1) P=merge(blank(),o); }
+  }catch(e){ persist=false; }
+  function merge(b,o){ for(const k in b) if(o[k]!==undefined) b[k]=(b[k]&&typeof b[k]==='object'&&!Array.isArray(b[k]))?Object.assign(b[k],o[k]):o[k]; return b; }
+  function save(){ if(!persist) return false; try{ localStorage.setItem(KEY,JSON.stringify(P)); return true; }catch(e){ persist=false; return false; } }
+  const pad=n=>String(n).padStart(2,'0');
+  const fmt=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  function today(){ return fmt(new Date()); }
+  function addDays(s,n){ const d=new Date(s+'T12:00:00'); d.setDate(d.getDate()+n); return fmt(d); }
+  function les(id){ return P.les[id]||(P.les[id]={ok:0,ko:0,h:[]}); }
+  function markDay(){ const t=today(); if(!P.days.includes(t)){ P.days.push(t); P.days=P.days.slice(-120); } }
+  function streak(){
+    const set=new Set(P.days); let d=today(), n=0;
+    if(!set.has(d)) d=addDays(d,-1);
+    while(set.has(d)){ n++; d=addDays(d,-1); }
+    return n;
+  }
+  function stars(id){
+    const s=P.les[id]; if(!s) return 0;
+    const acc=s.h.length?s.h.reduce((a,b)=>a+b,0)/s.h.length:0;
+    return (s.ok>=30&&acc>=0.8)?3:s.ok>=15?2:s.ok>=5?1:0;
+  }
+  /* تسجيل نتيجة تمرين مولَّد */
+  function record(lid,gi,success,run){
+    const s=les(lid); success?s.ok++:s.ko++; s.h.push(success?1:0); if(s.h.length>10) s.h.shift();
+    markDay();
+    const t=today();
+    if(run&&run.mode==='review'&&run.item){
+      const it=P.q.find(x=>x.lid===run.item.lid&&x.gi===run.item.gi);
+      if(it){
+        if(success){ it.st++; if(it.st>=GAPS.length){ P.q=P.q.filter(x=>x!==it); P.mast++; } else it.due=addDays(t,GAPS[it.st]); }
+        else { it.st=0; it.due=addDays(t,GAPS[0]); }
+      }
+    } else if(!success){
+      const it=P.q.find(x=>x.lid===lid&&x.gi===gi);
+      if(it){ it.st=0; it.due=addDays(t,GAPS[0]); }
+      else { P.q.push({lid,gi,st:0,due:addDays(t,GAPS[0]),a:t}); if(P.q.length>80) P.q.shift(); }
+    }
+    const fresh=checkBadges(); save(); return fresh;
+  }
+  function due(){ const t=today(); return P.q.filter(x=>x.due<=t).sort((a,b)=>a.due<b.due?-1:1); }
+  function upcoming(){ const t=today(); return P.q.filter(x=>x.due>t).sort((a,b)=>a.due<b.due?-1:1); }
+  /* الشارات / badges */
+  const BADGES=[
+    ...L.filter(l=>!l.soon).map(l=>({id:'L'+l.id,ico:'★',t:B('متمكّن: '+l.t.ar,'Maîtrise : '+l.t.fr),d:B('ثلاث نجوم في الباب '+l.id,'Trois étoiles au chapitre '+l.id),test:()=>stars(l.id)>=3})),
+    {id:'F1',ico:'✎',t:B('الانطلاقة','Premier pas'),d:B('أوّل إجابة صحيحة في مولّد التمارين','Première bonne réponse au générateur'),test:()=>Object.values(P.les).some(s=>s.ok>=1)},
+    {id:'S3',ico:'◆',t:B('ثلاثة أيام متتالية','Trois jours d\'affilée'),d:B('تدرّبت ثلاثة أيام دون انقطاع','Tu t\'es entraîné(e) trois jours sans interruption'),test:()=>streak()>=3},
+    {id:'S7',ico:'◆',t:B('أسبوع كامل','Une semaine entière'),d:B('سبعة أيام متتالية','Sept jours d\'affilée'),test:()=>streak()>=7},
+    {id:'S30',ico:'◆',t:B('شهر من المثابرة','Un mois de persévérance'),d:B('ثلاثون يوما متتاليا','Trente jours d\'affilée'),test:()=>streak()>=30},
+    {id:'R5',ico:'↺',t:B('أخطاء تحوّلت إلى مكاسب','Des erreurs devenues des acquis'),d:B('أتقنت 5 أنواع من تمارين كرّاسة الأخطاء','Tu as maîtrisé 5 types d\'exercices du carnet d\'erreurs'),test:()=>P.mast>=5},
+    {id:'B1',ico:'▣',t:B('أوّل تمرين بكالوريا مصحَّح','Premier exercice BAC corrigé'),d:B('فتحت كلّ حلول تمرين بكالوريا وصحّحت نفسك','Tu as ouvert tous les corrigés d\'un exercice BAC'),test:()=>Object.values(P.bac).some(x=>x.done)},
+    {id:'B6',ico:'▣',t:B('العلامة الكاملة','Note maximale'),d:B('العلامة الكاملة في تمرين بكالوريا','La note maximale à un exercice BAC'),test:()=>Object.values(P.bac).some(x=>x.done&&x.full)},
+  ];
+  function checkBadges(){
+    const fresh=[];
+    for(const b of BADGES) if(!P.badges[b.id] && b.test()){ P.badges[b.id]=today(); fresh.push(b); }
+    return fresh;
+  }
+  function exportCode(){ return btoa(unescape(encodeURIComponent(JSON.stringify(P)))); }
+  function importData(txt){
+    let o=null; txt=String(txt||'').trim();
+    try{ o=JSON.parse(txt); }catch(e){ try{ o=JSON.parse(decodeURIComponent(escape(atob(txt.replace(/\s+/g,''))))); }catch(e2){ o=null; } }
+    if(!o||o.v!==1||typeof o.les!=='object'||!Array.isArray(o.q)) return false;
+    P=merge(blank(),o); save(); return true;
+  }
+  return {
+    get P(){ return P; }, persist:()=>persist, save, today, addDays, streak, stars, record, due, upcoming,
+    BADGES, checkBadges, exportCode, importData, les,
+    reset(){ P=blank(); save(); },
+    setSetting(k,v){ P.set[k]=v; save(); },
+    bacState(id){ return P.bac[id]||(P.bac[id]={hint:{},sol:{},tick:{},done:false,full:false}); },
+    saveBac(){ markDay(); const f=checkBadges(); save(); return f; },
+  };
+})();
+LANG=Store.P.set.lang==='fr'?'fr':'ar';
+
+/* إشعار صغير عند الحصول على شارة جديدة / petite notification */
+function toastBadges(list){
+  if(!list||!list.length||typeof document.createElement!=='function') return;
+  let el=document.getElementById('toast');
+  if(!el){ el=document.createElement('div'); el.id='toast'; document.body.appendChild(el); }
+  el.innerHTML=fix(list.map(b=>`<div class="tb"><span class="ti">${b.ico}</span><span><b>${b.h?tr(b.h):t('newBadge')}</b><br>${tr(b.t)}</span></div>`).join(''));
+  el.classList.add('on'); clearTimeout(el._h); el._h=setTimeout(()=>el.classList.remove('on'),4200);
+}
+
+/* ============================================================================
+   الواجهة — Interface
+   ============================================================================ */
+const $=s=>document.querySelector(s);
+const S={view:'home', id:5, tab:'cours', dom:'all'};
+const cur=()=>CH(S.id);
+const ACTIVE=()=>L.filter(l=>!l.soon);
+let streak=0, tries=0, ex=null, sel=null, genOn=(ACTIVE()[0]||L[0]).id;
+const VIEWS={};
+const lname=id=>{ const l=CH(id); return l?tr(l.t):''; };
+const go=(view,extra)=>{ Object.assign(S,{view},extra||{}); render(); window.scrollTo(0,0); };
+
+function setAcc(dom){
+  const v=DOMAINS[dom]?DOMAINS[dom].v:'brand';
+  const r=document.documentElement.style;
+  r.setProperty('--acc','var(--'+v+')');
+  r.setProperty('--acc-l','var(--'+v+'-l)');
+  r.setProperty('--acc-d','var(--'+v+'-d)');
+}
+function paintYears(){
+  const items=[['all',t('allDom')]].concat(Object.keys(DOMAINS).map(k=>[k,tr(DOMAINS[k].name)]));
+  $('#years').innerHTML=items.map(([k,n])=>`<button class="ybtn ${S.dom===k?'on':''}" data-yr="${k}">${n}</button>`).join('');
+  document.querySelectorAll('[data-yr]').forEach(b=>b.onclick=()=>{ S.dom=b.dataset.yr; go('home'); });
+}
+function paintTitle(){
+  const sm=(a,b)=>`${a}<small>${b}</small>`;
+  $('#ttl').innerHTML=fix(S.view==='lesson'?sm(tr(cur().t),`${t('chap')} <span class="lat">${cur().id}</span> · ${t('appSub')}`)
+    : S.view==='quick'?sm(t('quickTitle'),t('quickSub'))
+    : S.view==='progress'?sm(t('progTitle'),t('progSub'))
+    : S.view==='practice'?sm(t('revH'),t('progTitle'))
+    : sm(t('appName'),t('appSub')));
+}
+
+/* ---------------------------- الفهرس / Sommaire ---------------------------- */
+function renderHome(){
+  setAcc('alg');
+  let h=`<div class="hero"><h2>${t('heroH')}</h2><p>${t('heroP')}</p><div class="hnote">${t('heroNote')}</div></div>`;
+  h+=todayCard();
+  for(const k of Object.keys(DOMAINS)){
+    if(S.dom!=='all' && S.dom!==k) continue;
+    const grp=L.filter(l=>l.dom===k); if(!grp.length) continue;
+    h+=`<div class="domain" style="--acc:var(--${DOMAINS[k].v})"><span>${tr(DOMAINS[k].name)}</span><hr></div>`;
+    grp.forEach(l=>{
+      h+=`<button class="lcard ${l.soon?'soon':''}" ${l.soon?'disabled':''} data-go="${l.id}" style="--acc-l:var(--${DOMAINS[k].v}-l);--acc-d:var(--${DOMAINS[k].v})">
+        <span class="lnum">${l.id}</span>
+        <span><b>${tr(l.t)}</b><em>${t('chap')} <span class="lat">${l.id}</span> · ${l.soon?`<span class="tsoon">${t('soon')}</span>`:t('tabsN')}</em>
+        ${l.soon?'':`<em class="prog">${starTxt(Store.stars(l.id))}</em>`}</span></button>`;
+    });
+  }
+  h+=`<div class="note">${t('progNote')}</div>`;
+  $('#app').innerHTML=fix(h);
+  wireToday();
+  document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{ if(b.disabled) return; ex=null; go('lesson',{id:+b.dataset.go,tab:'cours'}); });
+}
+function todayCard(){
+  const d=Store.due().length, st=Store.streak();
+  return `<div class="card today">
+    <div class="tgrid">
+      <div class="tile"><b class="lat">${st}</b><span>${st===1?t('dayOne'):t('daysRow')}</span></div>
+      <div class="tile"><b class="lat">${d}</b><span>${t('toReview')}</span></div>
+      <div class="tile"><b class="lat">${Object.keys(Store.P.badges).length}</b><span>${t('badgesW')}</span></div>
+    </div>
+    <div class="btnrow">
+      ${d?`<button class="btn" id="hRev">${t('revH')} (<span class="lat">${d}</span>)</button>`:''}
+      <button class="btn ${d?'sec2':''}" id="hEx">${t('nav_quick')}</button>
+      <button class="btn sec2" id="hProg">${t('progTitle')}</button>
+    </div></div>`;
+}
+function wireToday(){
+  const b=(id,fn)=>{ const e=$('#'+id); if(e) e.onclick=fn; };
+  b('hRev',startReview); b('hEx',()=>go('quick')); b('hProg',()=>go('progress'));
+}
+
+/* ---------------------------- الدرس / Leçon ---------------------------- */
+const TABS=['cours','analogie','vie','noyau','methode','lab','bac','gen'];
+function tabsFor(l){ return TABS.filter(k=>k==='lab'?!!LABS[l.id]:k==='bac'?!!BAC[l.id]:k==='gen'?!!GEN[l.id]:!!l[k]); }
+function renderLesson(){
+  const l=cur(); if(!l||l.soon){ S.view='home'; return renderHome(); }
+  setAcc(l.dom);
+  const act=ACTIVE(), i=act.indexOf(l), prev=act[i-1], next=act[i+1];
+  let h=`<div class="crumb"><b>${tr(DOMAINS[l.dom].name)}</b> · ${t('chap')} <span class="lat">${l.id}</span></div>
+   <h2 class="ltitle"><span class="lat">${l.id}</span>. ${tr(l.t)}</h2>
+   <div class="hook">${tr(l.hook)}</div>
+   <div class="tabs">${tabsFor(l).map(k=>`<button class="tab ${S.tab===k?'on':''} ${k==='lab'?'labtab':''} ${k==='bac'?'mix':''}" data-tab="${k}">${t('tab_'+k)}</button>`).join('')}</div>
+   ${['gen','lab','bac'].includes(S.tab)?'':`<div class="speak noprint"><button class="btn sec2 small" id="spk">${t('listen')}</button><span id="spkmsg"></span></div>`}
+   <div id="pane" class="pane-${S.tab}"></div>
+   <div class="btnrow" style="margin:16px 0 4px">
+   ${prev?`<button class="btn sec2" data-nav="${prev.id}">${t('prevChap')} <span class="lat">${prev.id}</span></button>`:''}
+   ${next?`<button class="btn" data-nav="${next.id}">${t('nextChap')} <span class="lat">${next.id}</span>${t('nextArrow')}</button>`:''}
+   </div>`;
+  $('#app').innerHTML=fix(h);
+  document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{
+    stopSpeech(); S.tab=b.dataset.tab; if(S.tab==='gen'&&RUN.mode!=='free') RUN={mode:'free'}; renderLesson(); window.scrollTo(0,0); });
+  const sp=$('#spk'); if(sp) sp.onclick=()=>toggleSpeech($('#pane'));
+  document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>{ ex=null; go('lesson',{id:+b.dataset.nav,tab:'cours'}); });
+  paint();
+}
+function paint(){
+  const p=$('#pane'), l=cur();
+  if(!tabsFor(l).includes(S.tab)) S.tab='cours';
+  if(S.tab==='gen'){ if(RUN.mode!=='free') RUN={mode:'free'}; p.innerHTML=fix(genShell(l)); wireGen(); if(!ex||ex.lid!==l.id) newEx(l.id); else paintEx(); return; }
+  if(S.tab==='lab') return LABS[l.id](p);
+  if(S.tab==='bac') return paintBac(l,p);
+  p.innerHTML=fix(tr(l[S.tab])+(S.tab==='noyau'?glossCard(l):''));
+}
+function glossCard(l){
+  if(!l.gloss) return '';
+  return `<div class="card"><h3>${tr(B('المصطلحات بالعربية والفرنسية','Vocabulaire arabe — français'))}</h3>
+   <table class="dt gl"><tr><th>العربية</th><th>Français</th></tr>${l.gloss.map(g=>`<tr><td dir="rtl">${g[0]}</td><td dir="ltr">${g[1]}</td></tr>`).join('')}</table>
+   <p class="note">${tr(B('في الجامعة تُدرَّس الرياضيات والعلوم بالفرنسية غالبا: حفظ هذه المصطلحات الآن يسهّل عليك الانتقال.','À l\'université, les mathématiques et les sciences sont souvent enseignées en français : retenir ce vocabulaire dès maintenant facilite la transition.'))}</p></div>`;
+}
+
+/* ---------------------- تمرين البكالوريا / Exercice type BAC ---------------------- */
+const ptsTxt=p=>`<span class="lat">${String(p).replace('.',',')}</span> ${t('pts')}`;
+function bacGot(X,s,i){ return X.parts[i].sol.reduce((a,x,j)=>a+(s.tick[i+'-'+j]?x[1]:0),0); }
+function bacScore(X,s){ return X.parts.reduce((a,_,i)=>a+bacGot(X,s,i),0); }
+function bacMsg(X,s){
+  const done=X.parts.every((_,i)=>s.sol[i]), sc=bacScore(X,s), r=sc/X.pts;
+  return !done?t('bacMsgNone'):r>=0.8?t('bacMsgTop'):r>=0.5?t('bacMsgMid'):t('bacMsgLow');
+}
+function paintBac(l,p){
+  const X=BAC[l.id], s=Store.bacState(l.id);
+  const sc=()=>`<span class="lat">${String(Math.round(bacScore(X,s)*100)/100).replace('.',',')} / ${X.pts}</span>`;
+  let h=`<div class="card scorecard"><div class="exhead"><h3>${tr(X.t)}</h3><span class="ptsb big" id="bacScore">${sc()}</span></div>
+    <p class="qtext">${tr(X.st)}</p><p class="note">${t('bacHow')}</p><p class="exsum" id="bacMsg">${bacMsg(X,s)}</p></div>`;
+  X.parts.forEach((P,i)=>{
+    h+=`<div class="card"><div class="exhead"><h3>${LANG==='ar'?P.n:P.nf}</h3><span class="ptsb">${ptsTxt(P.p)}</span></div>
+      <div class="qtext">${tr(P.q)}</div>
+      <div class="btnrow noprint"><button class="btn sec2 small" data-bh="${i}">${s.hint[i]?t('hideHint'):t('hint')}</button>
+        <button class="btn small" data-bs="${i}">${s.sol[i]?t('hideCorr'):t('corr')}</button></div>
+      <div class="hintbox ${s.hint[i]?'on':''}"><b>${t('hint')} :</b> ${tr(P.hint)}</div>
+      <div class="solbox ${s.sol[i]?'on':''}"><div class="soltip">${t('tickTip')}</div>
+       ${P.sol.map((x,j)=>`<label class="solrow"><input type="checkbox" data-bt="${i}-${j}" ${s.tick[i+'-'+j]?'checked':''}><span class="st2">${tr(x[0])}</span><span class="sp">${ptsTxt(x[1])}</span></label>`).join('')}
+       <div class="exsum" id="bsum${i}">${t('qMark')}<b>${ptsTxt(bacGot(X,s,i))}</b> / ${ptsTxt(P.p)}</div></div></div>`;
+  });
+  h+=`<div class="btnrow noprint"><button class="btn warnb small" id="bacReset">${t('bacReset')}</button></div>`;
+  p.innerHTML=fix(h);
+  const upd=()=>{ s.done=X.parts.every((_,i)=>s.sol[i]); s.full=s.done&&Math.abs(bacScore(X,s)-X.pts)<1e-9;
+    const fr=Store.saveBac(); $('#bacScore').innerHTML=sc(); $('#bacMsg').innerHTML=fix(bacMsg(X,s)); if(fr.length) toastBadges(fr); };
+  p.querySelectorAll('[data-bh]').forEach(b=>b.onclick=()=>{ const i=b.dataset.bh; s.hint[i]=!s.hint[i]; Store.save(); paintBac(l,p); });
+  p.querySelectorAll('[data-bs]').forEach(b=>b.onclick=()=>{ const i=b.dataset.bs; s.sol[i]=!s.sol[i]; upd(); paintBac(l,p); });
+  p.querySelectorAll('[data-bt]').forEach(c=>c.onchange=()=>{ const k=c.dataset.bt, i=+k.split('-')[0]; s.tick[k]=c.checked; upd();
+    $('#bsum'+i).innerHTML=fix(`${t('qMark')}<b>${ptsTxt(bacGot(X,s,i))}</b> / ${ptsTxt(X.parts[i].p)}`); });
+  $('#bacReset').onclick=()=>{ Object.assign(s,{hint:{},sol:{},tick:{}}); Store.save(); paintBac(l,p); };
+}
+
+/* -------------------- تمارين من كلّ الأبواب / Exercices -------------------- */
+let RUN={mode:'free'};          /* free | review — يحدّد مصير النتيجة والتمرين الموالي */
+function renderQuick(){
+  if(RUN.mode!=='free') RUN={mode:'free'};
+  const act=ACTIVE(); if(!act.find(x=>x.id===genOn)) genOn=act[0].id;
+  const l=CH(genOn); setAcc(l.dom);
+  let h=`<div class="crumb"><b>${t('quickTitle')}</b> · ${t('quickSub')}</div>
+   <h2 class="ltitle">${t('quickH')}</h2>
+   <div class="pageref">${t('quickRef')}</div>
+   <div class="tabs">${act.map(x=>`<button class="tab ${x.id===genOn?'on':''}" data-gl="${x.id}"><span class="lat">${x.id}</span>. ${tr(x.t)}</button>`).join('')}</div>
+   <div id="pane" class="pane-gen"></div>`;
+  $('#app').innerHTML=fix(h);
+  $('#pane').innerHTML=fix(genShell(l)); wireGen();
+  if(!ex||ex.lid!==genOn) newEx(genOn); else paintEx();
+  document.querySelectorAll('[data-gl]').forEach(b=>b.onclick=()=>{ genOn=+b.dataset.gl; ex=null; renderQuick(); window.scrollTo(0,0); });
+}
+
+/* ---------------------- مولّد التمارين / Générateur ---------------------- */
+function genShell(l){
+  return `<div class="gen">
+    <div class="top2"><h3 id="gtitle">${t('genTitle')}${tr(l.t)}</h3><span class="score" id="score"></span></div>
+    <div class="body">
+      <div id="runbar"></div>
+      <div class="qbox" id="q"><span class="tag" id="qtag">${t('genTag')}</span><div id="qt"></div></div>
+      <div id="ansArea"></div>
+      <div class="btnrow">
+        <button class="btn" id="check">${t('check')}</button>
+        <button class="btn sec2" id="next">${t('newEx')}</button>
+        <button class="btn warnb" id="show">${t('showSol')}</button>
+      </div>
+      <div class="fb" id="fb"></div>
+      <div id="scrg">${scratchHTML()}</div>
+      <p class="help">${t('genHelp')}</p>
+    </div></div>`;
+}
+function wireGen(){
+  $('#next').onclick=()=>{ if(RUN.next) RUN.next(); else newEx(ex?ex.lid:cur().id); };
+  $('#check').onclick=judge;
+  $('#show').onclick=reveal;
+}
+function makeEx(lid,gi){
+  const g=GEN[lid], k=(gi==null||gi>=g.length)?Math.floor(Math.random()*g.length):gi;
+  const e=g[k](); e.lid=lid; e.gi=k; e.done=false; return e;
+}
+let EXUID=0;
+function newEx(lid,gi){ sel=null; tries=0; ex=makeEx(lid,gi); ex.uid=++EXUID; paintEx(); }
+function paintEx(){
+  $('#qt').innerHTML=fix(tr(ex.q));
+  const tag=$('#qtag'); if(tag) tag.innerHTML=fix(`${t('genTag')} · ${t('chap')} <span class="lat">${ex.lid}</span> · ${lname(ex.lid)}`);
+  $('#score').textContent=t('streak')+streak;
+  const rb=$('#runbar'); if(rb) rb.innerHTML=fix(RUN.bar?RUN.bar():'');
+  const a=$('#ansArea');
+  if(ex.type==='choice'){
+    a.innerHTML=fix(`<div class="choices">${ex.opts.map(o=>`<button class="choice ${sel===o.k?'sel':''}" data-k="${o.k}">${tr(o)}</button>`).join('')}</div>`);
+    a.querySelectorAll('.choice').forEach(b=>b.onclick=()=>{
+      sel=b.dataset.k;
+      a.querySelectorAll('.choice').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel');});
+  }else{
+    a.innerHTML=`<div class="answer"><input type="text" id="inp" placeholder="${ex.type==='exprn'?t('phN'):t('ph')}" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="text"></div>`;
+    $('#inp').addEventListener('keydown',e=>{if(e.key==='Enter')judge();});
+    attachPad($('#inp'),ex.type,a);
+  }
+  const fb=$('#fb'); fb.className='fb'; fb.innerHTML='';
+  const sg=$('#scrg'); if(sg){ sg.innerHTML=scratchHTML(); wireScratch(sg,'gen:'+ex.uid); }
+}
+/* نهاية التمرين: تُسجَّل النتيجة مرّة واحدة فقط (نجاح = جواب صحيح قبل ظهور الحلّ) */
+function finishEx(success){
+  if(!ex||ex.done) return; ex.done=true;
+  const fresh=Store.record(ex.lid,ex.gi,success,RUN);
+  if(RUN.onDone) RUN.onDone(success);
+  if(fresh&&fresh.length) toastBadges(fresh);
+}
+function ok(){
+  streak++;
+  const fb=$('#fb'); fb.className='fb good show';
+  fb.innerHTML=fix(`<h4>${pick(t('okMsgs'))}</h4><div class="sol"><b>${t('fullSteps')}</b>${tr(ex.sol)}</div>${RUN.after?RUN.after(true):''}`);
+  $('#score').textContent=t('streak')+streak;
+  finishEx(true);
+}
+function bad(msg){
+  const fb=$('#fb'); fb.className='fb bad show';
+  if(tries<2){
+    fb.innerHTML=fix(`<h4>${t('notYet')}</h4><p>${msg||t('retry')} ${t('oneMore')}</p>`);
+  }else{
+    streak=0;
+    fb.innerHTML=fix(`<h4>${t('okFail')}</h4><p>${msg||''} ${t('hereSol')}</p>
+     <div class="sol">${tr(ex.sol)}</div><p class="carnet">${t('carnet')}</p>${RUN.after?RUN.after(false):''}`);
+    $('#score').textContent=t('streak')+'0';
+    finishEx(false);
+  }
+}
+function reveal(){
+  const fb=$('#fb'); fb.className='fb bad show';
+  fb.innerHTML=fix(`<h4>${t('solTitle')}</h4><div class="sol">${tr(ex.sol)}</div>
+   <p style="margin-top:8px">${t('solThen')}</p>${ex.done?'':`<p class="carnet">${t('carnetShort')}</p>`}${RUN.after&&!ex.done?RUN.after(false):''}`);
+  streak=0; $('#score').textContent=t('streak')+'0';
+  finishEx(false);
+}
+
+/* ---------------------- التصحيح: دالة صافية / correction : fonction pure ----------------------
+   ترجع {s:'ok'|'bad'|'empty', m:رسالة}. «empty» لا يُحتسب محاولة. */
+const DX=m=>`<b>${t('dx')}</b> ${tr(m)}`;
+function near(a,b,tol){ return Math.abs(a-b)<=tol; }
+function checkAnswer(e,raw,choice){
+  if(e.type==='choice'){
+    if(!choice) return {s:'empty',m:t('chooseFirst')};
+    if(choice===e.ans) return {s:'ok'};
+    return {s:'bad',m:(e.why&&e.why[choice])?DX(e.why[choice]):t('wrongChoice')};
+  }
+  raw=raw==null?'':String(raw);
+  if(!raw.trim()) return {s:'empty',m:t('empty')};
+  if(e.type==='exprn'){
+    if(isNaN(pexprN(raw,1))) return {s:'bad',m:t('exprParse')};
+    if(sameSeq(raw,e.fn)) return {s:'ok'};
+    for(const [fm,m] of (e.missF||[])) if(!sameFnN(fm,e.fn) && sameSeq(raw,fm)) return {s:'bad',m:DX(m)};
+    return {s:'bad',m:t('exprBad')};
+  }
+  const v=pnum(raw);
+  if(isNaN(v)) return {s:'bad',m:t('numParse')};
+  const tol=e.tol!=null?e.tol:Math.max(1e-6,Math.abs(e.ans)*1e-9);
+  if(near(v,e.ans,tol)) return {s:'ok'};
+  for(const [w,m] of (e.miss||[])) if(isFinite(w) && near(v,w,tol) && !near(w,e.ans,tol)) return {s:'bad',m:DX(m)};
+  if(near(v,-e.ans,tol)) return {s:'bad',m:DX(t('signWrong'))};
+  return {s:'bad',m:t('wrong')};
+}
+function judge(){
+  if(!ex) return;
+  const fb=$('#fb');
+  if(ex.done){ fb.className='fb good show';
+    if(!fb.innerHTML.includes('class="nextnote"')) fb.innerHTML+=fix(`<p class="nextnote">${t('exDone')}</p>`); return; }
+  const r=checkAnswer(ex, $('#inp')?$('#inp').value:'', sel);
+  if(r.s==='empty'){ fb.className='fb bad show'; fb.innerHTML=fix(`<p>${r.m}</p>`); return; }
+  tries++;
+  return r.s==='ok'?ok():bad(r.m);
+}
+
+/* ---------- جلسة مراجعة كرّاسة الأخطاء / séance de révision ---------- */
+function startRun(kind,list){
+  if(!list.length) return;
+  RUN={mode:kind,items:list.slice(),i:0,ok:0,
+    get item(){ return this.items[this.i]; },
+    next(){ if(this.i<this.items.length-1){ this.i++; newEx(this.item.lid,this.item.gi); nextLabel(); } else endRun(); },
+    bar(){ const n=this.items.length, k=this.i+1;
+      return `<div class="runbar"><b>${t('revH')}</b> — ${t('exOf')}<span class="lat">${k}</span>${t('of')}<span class="lat">${n}</span>
+        <span class="rbar"><i style="width:${Math.round(100*(this.i)/n)}%"></i></span></div>`; },
+    onDone(s){ if(s) this.ok++; },
+    after(){ return `<p class="nextnote">${this.i<this.items.length-1?t('pressNext'):t('pressEnd')}</p>`; },
+  };
+  ex=null; go('practice');
+}
+function nextLabel(){ const nb=$('#next'); if(nb&&RUN.items) nb.textContent=RUN.i<RUN.items.length-1?t('nextOne'):t('endRun'); }
+function endRun(){ const r=RUN; RUN={mode:'done',ok:r.ok,n:r.items.length}; render(); }
+function startReview(){ startRun('review',Store.due().map(x=>({lid:x.lid,gi:x.gi}))); }
+VIEWS.practice=function(){
+  setAcc('alg');
+  if(RUN.mode==='done'){
+    const d=RUN, msg=d.ok===d.n?t('resAll'):d.ok>=d.n/2?t('resHalf'):t('resLow');
+    $('#app').innerHTML=fix(`<div class="crumb"><b>${t('revH')}</b></div>
+      <h2 class="ltitle">${t('runEnd')}</h2>
+      <div class="card scorecard"><div class="exhead"><h3>${t('yourRes')}</h3><span class="ptsb big"><span class="lat">${d.ok} / ${d.n}</span></span></div><p>${msg}</p>
+      <div class="btnrow"><button class="btn" id="goProg">${t('backProg')}</button></div></div>`);
+    $('#goProg').onclick=()=>{ RUN={mode:'free'}; go('progress'); };
+    return;
+  }
+  if(!RUN.items){ S.view='progress'; return VIEWS.progress(); }
+  const it=RUN.item, l=CH(it.lid); setAcc(l.dom);
+  $('#app').innerHTML=fix(`<div class="crumb"><b>${t('revH')}</b></div>
+    <h2 class="ltitle">${t('revTitle')}</h2><div class="pageref">${t('revRef')}</div><div id="pane" class="pane-gen"></div>`);
+  $('#pane').innerHTML=fix(genShell(l)); wireGen(); nextLabel();
+  if(!ex||ex.lid!==it.lid||(it.gi!=null&&ex.gi!==it.gi)) newEx(it.lid,it.gi); else paintEx();
+};
+
+/* ---------------------------- تقدّمي / Mes progrès ---------------------------- */
+function whenTxt(d){
+  const n=Math.round((new Date(d+'T12:00:00')-new Date(Store.today()+'T12:00:00'))/864e5);
+  if(n<=0) return t('today'); if(n===1) return t('tomorrow'); if(n===2) return t('in2');
+  if(n<=10) return t('inN')+'<span class="lat">'+n+'</span>'+t('daysW');
+  const p=d.split('-'); return '<span class="lat">'+p[2]+'/'+p[1]+'</span>';
+}
+function starTxt(n){ return '<span class="stars">'+'★'.repeat(n)+'<i>'+'★'.repeat(3-n)+'</i></span>'; }
+VIEWS.progress=function(){
+  setAcc('alg');
+  const P=Store.P, due=Store.due(), up=Store.upcoming(), st=Store.streak();
+  const okTot=Object.values(P.les).reduce((a,s)=>a+s.ok,0);
+  const earned=Store.BADGES.filter(b=>P.badges[b.id]);
+  let h=`<div class="crumb"><b>${t('progTitle')}</b></div><h2 class="ltitle">${t('progH')}</h2>
+   <div class="tgrid big">
+    <div class="tile"><b class="lat">${st}</b><span>${st===1?t('dayOne'):t('daysRow')}</span></div>
+    <div class="tile"><b class="lat">${okTot}</b><span>${t('okAnswers')}</span></div>
+    <div class="tile"><b class="lat">${earned.length}</b><span>${t('badgesOf')}<span class="lat">${Store.BADGES.length}</span></span></div>
+   </div>
+   ${Store.persist()?'':`<div class="warn">${t('noSave')}</div>`}
+   <div class="card"><h3>${t('carnetH')}</h3>
+    ${due.length?`<p>${t('dueN')}<b><span class="lat">${due.length}</span></b>${t('dueTail')}</p>
+      <div class="btnrow"><button class="btn" id="pRev">${t('startRev')}</button></div>`
+     :`<p>${t('nothingDue')}${up.length?`${t('nextRev')}<b>${whenTxt(up[0].due)}</b>${t('waiting')}<span class="lat">${up.length}</span>.`:t('autoNote')}</p>`}
+    <p class="note">${t('carnetHow')}</p>
+    ${P.q.length?`<details><summary>${t('carnetIn')} (<span class="lat">${P.q.length}</span>)</summary><ul class="qlist">${P.q.map(x=>`<li>${t('chap')} <span class="lat">${x.lid}</span> — ${lname(x.lid)} · ${t('stage')} <span class="lat">${x.st+1}/3</span> · ${t('when')}${whenTxt(x.due)}</li>`).join('')}</ul></details>`:''}
+   </div>
+   <div class="card"><h3>${t('mapH')}</h3><p class="note">${t('mapNote')}</p>
+    <div class="map">${Object.keys(DOMAINS).map(k=>`<div class="mrowd"><div class="mdom" style="--acc:var(--${DOMAINS[k].v})">${tr(DOMAINS[k].name)}</div><div class="stations">${
+      L.filter(l=>l.dom===k).map(l=>{ const s=Store.stars(l.id), on=P.les[l.id];
+        return `<button class="station s${s} ${on?'seen':''}" ${l.soon?'disabled':''} data-go4="${l.id}" style="--acc:var(--${DOMAINS[k].v})"><span class="snum lat">${l.id}</span><span class="sname">${tr(l.t)}</span>${l.soon?`<span class="tsoon">${t('soon')}</span>`:starTxt(s)}</button>`;}).join('')}</div></div>`).join('')}</div>
+   </div>
+   <div class="card"><h3>${t('myBadges')}</h3><div class="badges">${Store.BADGES.map(b=>`<div class="badge ${P.badges[b.id]?'on':''}"><span class="bi">${b.ico}</span><b>${tr(b.t)}</b><small>${tr(b.d)}</small></div>`).join('')}</div></div>
+   <div class="card" id="backup"><h3>${t('backupH')}</h3><p>${t('backupP')}</p>
+    <div class="btnrow"><button class="btn sec2" id="bCopy">${t('showCode')}</button><button class="btn sec2" id="bFile">${t('dlFile')}</button></div>
+    <textarea id="bCode" class="code" rows="3" placeholder="${t('pasteCode')}"></textarea>
+    <div class="btnrow"><button class="btn" id="bImp">${t('impCode')}</button><label class="btn sec2 filebtn">${t('impFile')}<input type="file" id="bIn" accept=".json,.txt,application/json,text/plain"></label></div>
+    <p id="bMsg" class="note"></p>
+   </div>`;
+  $('#app').innerHTML=fix(h);
+  const on=(id,fn)=>{ const e=$('#'+id); if(e) e.onclick=fn; };
+  on('pRev',startReview);
+  document.querySelectorAll('[data-go4]').forEach(b=>b.onclick=()=>{ if(b.disabled) return; ex=null; go('lesson',{id:+b.dataset.go4,tab:'cours'}); });
+  on('bCopy',()=>{ const x=$('#bCode'); x.value=Store.exportCode(); if(x.select) x.select(); $('#bMsg').textContent=t('codeShown'); });
+  on('bFile',()=>downloadText('mathbac-progress-'+Store.today()+'.json',JSON.stringify(Store.P)));
+  const imp=okk=>{ $('#bMsg').textContent=okk?t('impOk'):t('impBad'); if(okk){ LANG=Store.P.set.lang==='fr'?'fr':'ar'; setTimeout(()=>{ applySettings(); applyLang(); render(); },600); } };
+  on('bImp',()=>imp(Store.importData($('#bCode').value)));
+  const fi=$('#bIn'); if(fi) fi.onchange=()=>{ const fl=fi.files&&fi.files[0]; if(!fl) return; const r=new FileReader();
+    r.onload=()=>imp(Store.importData(r.result)); r.readAsText(fl); };
+};
+function downloadText(name,text){
+  try{ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type:'application/json'})); a.download=name;
+    document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },500); }catch(e){}
+}
+
+/* ---------------------------- الإعدادات / Réglages ---------------------------- */
+let mqDark=null;
+function applySettings(){
+  const s=Store.P.set, root=document.documentElement;
+  if(!mqDark&&window.matchMedia){ mqDark=window.matchMedia('(prefers-color-scheme: dark)'); try{ mqDark.addEventListener('change',applySettings); }catch(e){ try{ mqDark.addListener(applySettings); }catch(_){} } }
+  const dark=s.theme==='dark'||(s.theme==='auto'&&mqDark&&mqDark.matches);
+  root.classList.toggle('dk',!!dark); root.dataset.theme=s.theme;
+  const z=[0.9,1,1.1,1.2,1.35].includes(+s.z)?+s.z:1;
+  root.style.setProperty('--z',z);
+  const m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content',dark?'#123E35':'#0F5C4E');
+}
+function applyLang(){
+  const root=document.documentElement;
+  root.lang=LANG; root.dir=LANG==='ar'?'rtl':'ltr';
+  const lb=$('#lng'); lb.textContent=t('langBtn'); lb.setAttribute('aria-label',t('langAria'));
+  $('#home').setAttribute('aria-label',t('menuAria'));
+  document.title=t('appName')+' — '+t('appSub');
+  const cn=t('creditName');
+  $('#cred').innerHTML=fix(`${cn&&cn!=='creditName'?`<div>${t('credit')}<b>${cn}</b></div>`:''}
+    <div class="cpy"><div class="cpt">${t('cpt')} — <span class="lat">2026</span></div>${t('cpy')}</div>`);
+  renderNav();
+}
+function setLang(l){ if(l===LANG) return; stopSpeech(); LANG=l; Store.setSetting('lang',l); applyLang(); render(); }
+function openSettings(){
+  const s=Store.P.set, sp=speechInfo();
+  const seg=(k,items,cv)=>`<div class="seg">${items.map(([v,x])=>`<button class="${String(cv)===String(v)?'on':''}" data-set="${k}" data-v="${v}">${x}</button>`).join('')}</div>`;
+  openSheet(`<h3 style="font-size:17px;margin-bottom:10px">${t('setTitle')}</h3>
+   <div class="card"><h3>${t('setLang')}</h3>${seg('lang',[['ar','العربية'],['fr','Français']],LANG)}</div>
+   ${instCardHTML()}
+   <div class="card"><h3>${t('setTheme')}</h3>${seg('theme',[['auto',t('thAuto')],['light',t('thLight')],['dark',t('thDark')]],s.theme)}</div>
+   <div class="card"><h3>${t('setPad')}</h3>${seg('pad',[['auto',t('padAuto')],['on',t('padOn')],['off',t('padOff')]],s.pad||'auto')}
+     <p class="note">${t('padNote')}</p></div>
+   <div class="card"><h3>${t('setZ')}</h3>${seg('z',[[0.9,t('z09')],[1,t('z1')],[1.1,t('z11')],[1.2,t('z12')],[1.35,t('z135')]],s.z)}
+     <p class="note">${t('zNote')}</p></div>
+   <div class="card"><h3>${t('setSpeech')}</h3>
+     <label class="sl"><span>${t('speed')}<b class="lat" id="rtv">${ar(s.rate)}</b></span><input type="range" id="rt" min="0.6" max="1.3" step="0.1" value="${s.rate}"></label>
+     <p class="note">${sp.msg}</p>
+     <div class="btnrow"><button class="btn sec2 small" id="rtTry" ${sp.ok?'':'disabled'}>${t('tryVoice')}</button></div></div>
+   <div class="card"><h3>${t('setSaved')}</h3><p class="note">${Store.persist()?t('savedOk'):t('savedNo')}</p>
+     <div class="btnrow"><button class="btn warnb small" id="rst">${t('resetAll')}</button></div><p class="note" id="rstm"></p></div>
+   <div class="btnrow"><button class="btn sec2" id="stx">${t('close')}</button></div>`);
+  document.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>{ const k=b.dataset.set, v=k==='z'?+b.dataset.v:b.dataset.v;
+    if(k==='lang'){ setLang(v); return openSettings(); }
+    Store.setSetting(k,v); if(k==='pad') PADON=null; applySettings(); openSettings(); });
+  const rt=$('#rt'); rt.oninput=()=>{ $('#rtv').textContent=ar(+rt.value); Store.setSetting('rate',+rt.value); };
+  $('#rtTry').onclick=()=>speakText(t('voiceTest'));
+  let armed=false;
+  $('#rst').onclick=()=>{ if(!armed){ armed=true; $('#rstm').textContent=t('resetSure'); $('#rst').textContent=t('resetYes'); return; }
+    const keep=Object.assign({},Store.P.set); Store.reset(); Object.assign(Store.P.set,keep); Store.save(); closeSheet(); render(); };
+  $('#stx').onclick=closeSheet; instWire();
+}
+
+/* ---------------------------- القراءة الصوتية / lecture à voix haute ----------------------------
+   تعتمد على أصوات الجهاز (Web Speech API): صوت عربي أو فرنسي حسب لغة التطبيق. */
+const SP={on:false};
+function pickVoice(){
+  const ss=window.speechSynthesis; if(!ss||!ss.getVoices) return null;
+  const re=LANG==='ar'?/^ar(\b|[-_])/i:/^fr(\b|[-_])/i;
+  const v=ss.getVoices().filter(x=>re.test(x.lang||''));
+  return LANG==='ar'?(v.find(x=>/DZ|MA|TN/i.test(x.lang))||v.find(x=>/SA/i.test(x.lang))||v[0]||null):(v.find(x=>/FR/i.test(x.lang))||v[0]||null);
+}
+function speechInfo(){
+  if(!('speechSynthesis' in window)||typeof SpeechSynthesisUtterance==='undefined') return {ok:false,msg:t('noSpeech')};
+  const v=pickVoice();
+  return v?{ok:true,msg:`${t('voiceUsed')}<span class="lat">${v.name} (${v.lang})</span>${t('voiceApprox')}`}:{ok:false,msg:t('noVoice')};
+}
+function chunks(x){
+  const out=[]; for(const part of x.replace(/([.!؟?:؛;\n])\s+/g,'$1\u0001').split('\u0001')){ let p=part.trim(); while(p.length>220){ const c=Math.max(p.lastIndexOf('،',220),p.lastIndexOf(',',220)); const k=c>60?c+1:220; out.push(p.slice(0,k)); p=p.slice(k).trim(); } if(p) out.push(p); }
+  return out;
+}
+function speakText(x,onEnd){
+  const ss=window.speechSynthesis, v=pickVoice(); if(!ss||!v) return false;
+  ss.cancel(); const parts=chunks(x); let i=0;
+  const next=()=>{ if(!SP.on) return; if(i>=parts.length){ SP.on=false; if(onEnd) onEnd(); return; }
+    const u=new SpeechSynthesisUtterance(parts[i++]); u.voice=v; u.lang=v.lang; u.rate=+Store.P.set.rate||0.9;
+    u.onend=next; u.onerror=()=>{ SP.on=false; if(onEnd) onEnd(); }; ss.speak(u); };
+  SP.on=true; next(); return true;
+}
+function paneText(el){
+  const fr=LANG==='fr', c=el.cloneNode(true);
+  c.querySelectorAll('svg,.ref,button,input,.noread').forEach(x=>x.remove());
+  c.querySelectorAll('.fr').forEach(x=>{ const s=x.children; if(s.length===2) x.textContent=' '+s[0].textContent+(fr?' sur ':' على ')+s[1].textContent+' '; });
+  c.querySelectorAll('sub').forEach(x=>{ x.textContent=' '+x.textContent+' '; });
+  c.querySelectorAll('sup').forEach(x=>{ x.textContent=(fr?' puissance ':' أس ')+x.textContent+' '; });
+  c.querySelectorAll('li,p,div,h3,h4,tr').forEach(x=>x.appendChild(document.createTextNode('. ')));
+  const R=fr?{'²':' au carré ','×':' fois ','−':' moins ','≤':' inférieur ou égal à ','≥':' supérieur ou égal à ','→':' tend vers ','∞':' l\'infini ','≠':' différent de '}
+            :{'²':' مربّع ','×':' ضرب ','−':' ناقص ','≤':' أصغر من أو يساوي ','≥':' أكبر من أو يساوي ','→':' يؤول إلى ','∞':' ما لا نهاية ','≠':' يختلف عن '};
+  let s=c.textContent||''; for(const k in R) s=s.split(k).join(R[k]);
+  return s.replace(/\s*\.\s*(\.\s*)+/g,'. ').replace(/\s+/g,' ').trim();
+}
+function stopSpeech(){
+  SP.on=false; try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){}
+  const b=document.getElementById('spk'); if(b) b.textContent=t('listen');
+}
+function toggleSpeech(el){
+  const b=$('#spk'), m=$('#spkmsg');
+  if(SP.on){ stopSpeech(); return; }
+  const info=speechInfo(); if(!info.ok){ if(m) m.innerHTML=fix(`<span class="note">${info.msg}</span>`); return; }
+  if(m) m.innerHTML='';
+  if(speakText(paneText(el),()=>{ if(b) b.textContent=t('listen'); })&&b) b.textContent=t('stopListen');
+}
+
+/* ---------------------------- لوحة المفاتيح الرياضية + المسودّة / clavier + brouillon ----------------------------
+   على الهاتف (مؤشّر لمسي) تظهر اللوحة مكان لوحة الجهاز، مع زرّ للرجوع إليها. */
+const COARSE=(function(){ try{ return !!(window.matchMedia&&window.matchMedia('(pointer: coarse)').matches); }catch(e){ return false; } })();
+const PAD_EX={num:['/','(',')','^'],exprn:['n','^','×','(',')','/','+']};
+let PADON=null;                                   /* null = حسب الجهاز */
+function padOn(){ const s=Store.P.set.pad||'auto'; return PADON!==null?PADON:(s==='on'||(s==='auto'&&COARSE)); }
+function padKeys(type){
+  const x=(PAD_EX[type]||PAD_EX.num).slice(); while(x.length<9) x.push('');
+  return [['7','8','9',x[0],x[1],x[2]],['4','5','6',x[3],x[4],x[5]],['1','2','3',x[6],x[7],x[8]],[',','0','−','◀','▶','⌫']];
+}
+function padInsert(inp,k){
+  const v=inp.value; let a=inp.selectionStart, b=inp.selectionEnd;
+  if(a==null||b==null||(document.activeElement!==inp&&!COARSE)){ a=b=v.length; }
+  if(k==='⌫'){ if(a===b&&a>0) a--; inp.value=v.slice(0,a)+v.slice(b); setCaret(inp,a); }
+  else if(k==='◀'){ setCaret(inp,Math.max(0,a-1)); }
+  else if(k==='▶'){ setCaret(inp,Math.min(v.length,b+1)); }
+  else { const ins=k==='−'?'-':k; inp.value=v.slice(0,a)+ins+v.slice(b); setCaret(inp,a+ins.length); }
+  try{ inp.dispatchEvent(new Event('input',{bubbles:true})); }catch(e){}
+}
+function setCaret(inp,k){ try{ inp.focus({preventScroll:true}); inp.setSelectionRange(k,k); }catch(e){ try{ inp.setSelectionRange(k,k); }catch(_){} } }
+function attachPad(inp,type,box){
+  if(!inp||!box) return;
+  const on=padOn();
+  inp.setAttribute('inputmode',on&&COARSE?'none':'text');
+  const wrap=document.createElement('div'); wrap.className='padwrap noprint';
+  const keys=padKeys(type).map(r=>r.map(k=>k?`<button type="button" class="pk ${/^[0-9,]$/.test(k)?'d':/[◀▶⌫]/.test(k)?'f':'o'}" data-pk="${k}">${k}</button>`:'<span class="pk e"></span>').join('')).join('');
+  wrap.innerHTML=`<div class="padbar"><button type="button" class="btn sec2 small" data-padt="1">${on?(COARSE?t('padDevice'):t('padHide')):t('padShow')}</button></div>
+    <div class="pad ${on?'':'off'}" dir="ltr">${keys}</div>`;
+  box.appendChild(wrap);
+  if(type==='exprn'){                              /* معاينة: كيف سيُقرأ الجواب */
+    const pv=document.createElement('div'); pv.className='padpv'; wrap.insertBefore(pv,wrap.firstChild);
+    const upd=()=>{ const v=inp.value.trim(); pv.innerHTML=v?t('willRead')+'<span class="m">'+padPreview(v)+'</span>':''; };
+    inp.addEventListener('input',upd); upd();
+  }
+  wrap.querySelectorAll('[data-pk]').forEach(b=>{
+    b.addEventListener('pointerdown',e=>e.preventDefault());
+    b.addEventListener('mousedown',e=>e.preventDefault());
+    b.onclick=()=>padInsert(inp,b.dataset.pk);
+  });
+  wrap.querySelector('[data-padt]').onclick=()=>{
+    PADON=!padOn(); wrap.remove(); attachPad(inp,type,box);
+    if(!PADON&&COARSE){ inp.setAttribute('inputmode','text'); try{ inp.blur(); inp.focus(); }catch(e){} }
+  };
+}
+function padPreview(v){
+  const esc=x=>x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return esc(v).replace(/\*/g,'×').replace(/-/g,'−')
+    .replace(/\^\(([^)]*)\)/g,'<sup>$1</sup>').replace(/\^(−?[0-9n]+)/g,'<sup>$1</sup>').replace(/\^/g,'<sup>□</sup>');
+}
+const SCR={};                                     /* رسومات المسودّة في الذاكرة فقط، حسب التمرين */
+function scratchHTML(){ return `<div class="scrbar noprint"><button type="button" class="btn sec2 small" data-scr="1">${t('scr')}</button></div><div class="scrbox noprint"></div>`; }
+function wireScratch(root,key){
+  const bar=root.querySelector('[data-scr]'), box=root.querySelector('.scrbox'); if(!bar||!box) return;
+  const show=()=>{ box.innerHTML=`<div class="scrtools"><button type="button" class="btn small" data-st="pen">${t('pen')}</button><button type="button" class="btn small sec2" data-st="er">${t('eraser')}</button>
+      <button type="button" class="btn small sec2" data-st="clr">${t('clearAll')}</button><span class="note">${t('scrNote')}</span></div><canvas class="scr"></canvas>`;
+    mountCanvas(box.querySelector('canvas'),key,box); bar.textContent=t('scrHide'); SCR[key+':open']=true; };
+  const hide=()=>{ box.innerHTML=''; bar.textContent=t('scr'); SCR[key+':open']=false; };
+  bar.onclick=()=>box.firstChild?hide():show();
+  if(SCR[key+':open']) show();
+}
+function mountCanvas(cv,key,box){
+  if(!cv.getContext) return;
+  const dpr=Math.min(window.devicePixelRatio||1,2), W=cv.clientWidth||320, H=Math.round(Math.min(320,Math.max(200,W*0.55)));
+  cv.width=W*dpr; cv.height=H*dpr; cv.style.height=H+'px';
+  const g=cv.getContext('2d'); g.scale(dpr,dpr); g.lineCap='round'; g.lineJoin='round';
+  if(SCR[key]){ const im=new Image(); im.onload=()=>g.drawImage(im,0,0,W,H); im.src=SCR[key]; }
+  let mode='pen', last=null;
+  const pos=e=>{ const r=cv.getBoundingClientRect(); return [(e.clientX-r.left)*W/r.width,(e.clientY-r.top)*H/r.height]; };
+  cv.addEventListener('pointerdown',e=>{ last=pos(e); try{ cv.setPointerCapture(e.pointerId); }catch(_){} e.preventDefault(); });
+  cv.addEventListener('pointermove',e=>{ if(!last) return; const p=pos(e);
+    g.globalCompositeOperation=mode==='er'?'destination-out':'source-over'; g.strokeStyle='#1A2230'; g.lineWidth=mode==='er'?18:2.4;
+    g.beginPath(); g.moveTo(last[0],last[1]); g.lineTo(p[0],p[1]); g.stroke(); last=p; e.preventDefault(); });
+  const end=()=>{ if(last){ last=null; try{ SCR[key]=cv.toDataURL(); }catch(_){} } };
+  cv.addEventListener('pointerup',end); cv.addEventListener('pointercancel',end); cv.addEventListener('pointerleave',end);
+  box.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.st;
+    if(k==='clr'){ g.clearRect(0,0,W,H); delete SCR[key]; return; }
+    mode=k; box.querySelectorAll('[data-st=pen],[data-st=er]').forEach(x=>x.classList.toggle('sec2',x!==b));
+  });
+}
+
+/* ---------------------------- تثبيت التطبيق / installation ----------------------------
+   Chrome و Edge يطلقان beforeinstallprompt؛ Safari على iPhone لا يدعمه: نعرض الطريقة يدويا. */
+const INST={ev:null, done:false};
+function instStandalone(){ try{ return !!((window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true); }catch(e){ return false; } }
+function instIOS(){ const u=navigator.userAgent||''; return /iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&(navigator.maxTouchPoints||0)>1); }
+function instWeb(){ try{ return location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1'; }catch(e){ return false; } }
+function instState(){
+  if(INST.done||instStandalone()) return 'installed';
+  if(INST.ev) return 'ready';
+  if(!instWeb()) return 'file';
+  return instIOS()?'ios':'menu';
+}
+function instHidden(){ const x=+(Store.P.set.instX||0); return x&&Date.now()-x<7*864e5; }   /* «لاحقا» تُخفي الشريط أسبوعا */
+function instPaint(){
+  let b=document.getElementById('instb');
+  const st=instState(), show=S.view==='home'&&!instHidden()&&(st==='ready'||st==='ios');
+  if(!show){ if(b) b.classList.remove('on'); return; }
+  if(!b){ b=document.createElement('div'); b.id='instb'; b.setAttribute('role','region'); document.body.appendChild(b); }
+  b.setAttribute('aria-label',t('instH'));
+  b.innerHTML=fix(`<span class="ii">📲</span><span class="it"><b>${t('instBarH')}</b><br>${st==='ready'?t('instBarP'):t('instIOS')}</span>
+    ${st==='ready'?`<button class="btn small" id="instGo">${t('instBtn')}</button>`:''}<button class="ix" id="instX" aria-label="${t('later')}">×</button>`);
+  b.classList.add('on');
+  const g=document.getElementById('instGo'); if(g) g.onclick=instAsk;
+  document.getElementById('instX').onclick=()=>{ Store.setSetting('instX',Date.now()); instPaint(); };
+}
+async function instAsk(){
+  const ev=INST.ev; if(!ev) return;
+  INST.ev=null;                                   /* prompt() مرّة واحدة فقط للحدث نفسه */
+  try{ const r=await ev.prompt(); const c=(r&&r.outcome)?r:(ev.userChoice?await ev.userChoice:null);
+    if(c&&c.outcome==='dismissed') Store.setSetting('instX',Date.now());
+  }catch(e){}
+  instPaint(); if(instCardOpen()) openSettings();
+}
+function instCardHTML(){
+  const st=instState();
+  const body={installed:`<p class="note">${t('instDone')}</p>`,
+    ready:`<p class="note">${t('instReady')}</p><div class="btnrow"><button class="btn small" id="instGo2">${t('instNow')}</button></div>`,
+    ios:`<p class="note">${t('instIOS')}</p>`, menu:`<p class="note">${t('instMenu')}</p>`, file:`<p class="note">${t('instFile')}</p>`}[st];
+  return `<div class="card" id="instCard"><h3>${t('instH')}</h3>${body}</div>`;
+}
+function instCardOpen(){ const sh=document.getElementById('sheet'); return !!(sh&&sh.classList.contains('on')&&document.getElementById('instCard')); }
+function instWire(){ const b=document.getElementById('instGo2'); if(b) b.onclick=instAsk; }
+window.addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); INST.ev=e; instPaint(); if(instCardOpen()) openSettings(); });
+window.addEventListener('appinstalled',()=>{ INST.ev=null; INST.done=true; instPaint(); if(instCardOpen()) openSettings();
+  toastBadges([{ico:'📲',h:t('instToastH'),t:t('instToast')}]); });
+
+/* ---------------------------- التصيير والتنقّل / rendu et navigation ---------------------------- */
+function render(){
+  stopSpeech();
+  if(S.view==='home') renderHome();
+  else if(S.view==='lesson') renderLesson();
+  else if(S.view==='quick') renderQuick();
+  else if(VIEWS[S.view]) VIEWS[S.view]();
+  else { S.view='home'; renderHome(); }
+  paintYears(); paintTitle(); instPaint();
+  const act={lesson:'home',practice:'progress'}[S.view]||S.view;
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on', b.dataset.v===act));
+}
+function openSheet(html){ $('#sheetin').innerHTML=fix(html); $('#sheet').classList.add('on'); }
+function closeSheet(){ $('#sheet').classList.remove('on'); }
+function renderNav(){
+  $('#nav').innerHTML=[['home','▤'],['quick','✎'],['progress','★'],['settings','⚙']].map(([v,i])=>
+    `<button data-v="${v}"><i>${i}</i>${t('nav_'+v)}</button>`).join('');
+  document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
+    if(b.dataset.v==='settings') return openSettings();
+    if(b.dataset.v==='quick' && RUN.mode!=='free') RUN={mode:'free'};
+    go(b.dataset.v); });
+  const act={lesson:'home',practice:'progress'}[S.view]||S.view;
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on', b.dataset.v===act));
+}
+$('#home').onclick=()=>go('home');
+$('#lng').onclick=()=>setLang(LANG==='ar'?'fr':'ar');
+$('#sheet').onclick=e=>{ if(e.target===$('#sheet')) closeSheet(); };
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeSheet(); });
+
+applySettings(); applyLang(); render();
+
+</script>
+<script>
+/* تسجيل عامل الخدمة (يتطلّب https أو localhost) — service worker (https ou localhost) */
+(function(){
+  if(!('serviceWorker' in navigator)) return;
+  var okHost=location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1';
+  if(!okHost) return;
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('sw.js').then(function(r){
+      r.addEventListener('updatefound',function(){ var w=r.installing; if(!w) return;
+        w.addEventListener('statechange',function(){ if(w.state==='installed'&&navigator.serviceWorker.controller&&typeof toastBadges==='function')
+          toastBadges([{ico:'↻',h:t('updH'),t:t('upd')}]); }); });
+    }).catch(function(){});
+  });
+})();
+</script>
+</body>
+</html>
