@@ -426,3 +426,4 @@ input[type=text]::placeholder{font-family:var(--ar);letter-spacing:0}
 html[lang=fr] input[type=text]::placeholder{font-family:var(--fr)}
 .top h1{min-width:0}
 .top h1,.top h1 small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nw{white-space:nowrap}

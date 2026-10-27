@@ -28,7 +28,7 @@ const cx=a=>a===1?'':a===-1?'−':ar(a);          /* معامل: 1n ← n */
 const sgn=n=>n<0?'−':'+';
 const lcm=(a,b)=>Math.abs(a*b)/gcd(a,b);
 /* صيغة رياضية؛ الصيغ القصيرة لا تنقسم على سطرين / formule ; les formules courtes ne sont pas coupées en fin de ligne */
-const M=s=>{ s=String(s); if(s.replace(/<[^>]*>/g,'').length<=22) s=s.replace(/(<[^>]*>)| /g,(m,tag)=>tag||'\u00a0'); return `<span class="m">${s}</span>`; };
+const M=s=>{ s=String(s); return s.replace(/<[^>]*>/g,'').replace(/&[a-z]+;/g,'x').length<=28?`<span class="m"><span class="nw">${s}</span></span>`:`<span class="m">${s}</span>`; };
 /* عدد عشري مقرّب للعرض / nombre arrondi pour l'affichage */
 const rnd=(v,d)=>{ const k=Math.pow(10,d==null?2:d); const r=Math.round(v*k)/k; return Object.is(r,-0)?0:r; };
 /* عدد ناطق قريب من v (للعرض بكسر) / fraction proche de v */

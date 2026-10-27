@@ -15,6 +15,8 @@ JS = [
     "core.js",
     "i18n.js",
     "program.js",
+    "ch-limites.js",
+    "ch-limites-ex.js",
     "ch-suites.js",
     "ch-suites-ex.js",
     "app.js",

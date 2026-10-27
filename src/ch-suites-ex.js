@@ -108,11 +108,11 @@ GEN[5]=[
          N:B(`احسب ${M(f(un1,un))}: ستجده ثابتا يساوي ${N_(q)}.`,`Calcule ${M(f(un1,un))} : il est constant, égal à ${N_(q)}.`)};
   } else { const sq=Math.random()<0.5, d=ri(1,sq?5:4); expr=sq?`n² + ${d}`:`2<sup>n</sup> + ${d}`;
     const g=n=>sq?n*n+d:Math.pow(2,n)+d, a0=g(0), a1=g(1), a2=g(2);
-    const s1=st(1,`${M(`${u0} = ${a0}`)} ، ${M(`${U(1)} = ${a1}`)} ، ${M(`${U(2)} = ${a2}`)}`);
+    const t3=j=>`${M(`${u0} = ${a0}`)}${j}${M(`${U(1)} = ${a1}`)}${j}${M(`${U(2)} = ${a2}`)}`, s1=st(1,t3(' ، ')), s1f=st(1,t3(', '));
     const dA=`${M(`${U(1)} − ${u0} = ${a1-a0}`)}`, dB=`${M(`${U(2)} − ${U(1)} = ${a2-a1}`)}`;
     const rA=`${M(`${f(U(1),u0)} = ${frs(a1,a0)}`)}`, rB=`${M(`${f(U(2),U(1))} = ${frs(a2,a1)}`)}`;
     sol=B(s1+st(2,`${dA} و ${dB}: الفرق ليس ثابتا، إذن ليست حسابية.`)+st(3,`${rA} و ${rB}: حاصل القسمة ليس ثابتا، إذن ليست هندسية.`),
-          s1+st(2,`${dA} et ${dB} : la différence n'est pas constante, donc elle n'est pas arithmétique.`)+st(3,`${rA} et ${rB} : le quotient n'est pas constant, donc elle n'est pas géométrique.`));
+          s1f+st(2,`${dA} et ${dB} : la différence n'est pas constante, donc elle n'est pas arithmétique.`)+st(3,`${rA} et ${rB} : le quotient n'est pas constant, donc elle n'est pas géométrique.`));
     why={A:B(`${dA} بينما ${dB}: الفرق ليس ثابتا.`,`${dA} alors que ${dB} : la différence n'est pas constante.`),
          G:B(`${rA} بينما ${rB}: حاصل القسمة ليس ثابتا.`,`${rA} alors que ${rB} : le quotient n'est pas constant.`)};
   }
@@ -130,10 +130,10 @@ GEN[5]=[
   } else if(v==='geo'){ const k=pick([1,2,3,4,-1,-2,-3]), [qp,qd]=pick([[2,1],[3,1],[1,2],[1,3],[2,3],[-2,1],[-1,2]]), q=qp/qd;
     expr=kx(k)+qP(qp,qd,'n');
     if(q<0){ ans='X'; const t0=k, t1=k*q, t2=k*q*q;
-      const tt=`${M(`${u0} = ${nice(t0)}`)} ، ${M(`${U(1)} = ${nice(t1)}`)} ، ${M(`${U(2)} = ${nice(t2)}`)}`;
+      const t3=j=>`${M(`${u0} = ${nice(t0)}`)}${j}${M(`${U(1)} = ${nice(t1)}`)}${j}${M(`${U(2)} = ${nice(t2)}`)}`, tt=t3(' ، '), ttf=t3(', ');
       const cmp=`${M(`${U(1)} ${t1<t0?'<':'>'} ${u0}`)}`, cmp2=`${M(`${U(2)} ${t2<t1?'<':'>'} ${U(1)}`)}`;
       sol=B(st(1,`الأساس ${M(`q = ${qS(qp,qd)}`)} سالب، فإشارات الحدود تتناوب: ${tt}.`)+st(2,`${cmp} لكنّ ${cmp2}: المتتالية ليست رتيبة.`),
-            st(1,`La raison ${M(`q = ${qS(qp,qd)}`)} est négative, donc les signes des termes alternent : ${tt}.`)+st(2,`${cmp} mais ${cmp2} : la suite n'est pas monotone.`));
+            st(1,`La raison ${M(`q = ${qS(qp,qd)}`)} est négative, donc les signes des termes alternent : ${ttf}.`)+st(2,`${cmp} mais ${cmp2} : la suite n'est pas monotone.`));
     } else { const s=Math.sign(k)*Math.sign(q-1); ans=s>0?'C':'D';
       const s1=st(1,M(`${un1} − ${un} = ${kx(k)}${qP(qp,qd,'n')} × (${qS(qp,qd)} − 1) = ${kx(k)}${qP(qp,qd,'n')} × ${pn(q-1)}`));
       sol=B(s1+st(2,`${M(qP(qp,qd,'n')+' > 0')}، و ${M(ar(k))} ${k>0?'موجب':'سالب'}، و ${M(`${qS(qp,qd)} − 1`)} ${q>1?'موجب':'سالب'}: الفرق ${s>0?'موجب':'سالب'} تماما، إذن المتتالية ${s>0?'متزايدة':'متناقصة'} تماما.`),

@@ -9,10 +9,15 @@ Basée sur l'application [Math3AM](https://ferhat06gc-commits.github.io/Math3AM/
 
 | Chapitre | État |
 |---|---|
+| 1. Limites et continuité | **Complet** : 8 onglets |
 | 5. Suites numériques | **Complet** : 8 onglets |
-| 1–4, 6–9 | Listés dans le sommaire, marqués « Bientôt » |
+| 2–4, 6–9 | Listés dans le sommaire, marqués « Bientôt » |
 
-Onglets du chapitre « Suites numériques » :
+Chaque chapitre complet a les mêmes 8 onglets : cours, analogies, dans la vie, l'essentiel (avec lexique arabe ↔ français), bien raisonner, explorer (laboratoire interactif), exercice type BAC sur 6 points, et exercices générés à l'infini (11 types par chapitre).
+
+Le laboratoire de « Limites et continuité » a deux modes : les asymptotes de f(x) = ax + b + c/(x − d), et la dichotomie pour encadrer la solution de x³ + x − k = 0.
+
+Détail des onglets du chapitre « Suites numériques » :
 
 1. **Cours** (7 parties) :
    - généralités ;
@@ -42,6 +47,8 @@ math-bac/
 │   ├── core.js           outils : calcul, lecture des réponses, mise en page arabe, langue
 │   ├── i18n.js           tous les textes de l'interface, en arabe et en français
 │   ├── program.js        domaines et liste des chapitres
+│   ├── ch-limites.js     chapitre 1 : cours, analogies, vie, essentiel, méthode
+│   ├── ch-limites-ex.js  chapitre 1 : générateurs, exercice BAC, laboratoire
 │   ├── ch-suites.js      chapitre 5 : cours, analogies, vie, essentiel, méthode
 │   ├── ch-suites-ex.js   chapitre 5 : générateurs, exercice BAC, laboratoire
 │   └── app.js            progression, écrans, réglages, clavier, installation
