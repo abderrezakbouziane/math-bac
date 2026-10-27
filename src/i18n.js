@@ -83,7 +83,7 @@ ar:{
   bacMsgLow:'لا بأس: راجع «النواة الصلبة» و«التفكير الصحيح» ثمّ أعد التمرين.', bacMsgNone:'افتح الحلول وصحّح خطواتك لتظهر علامتك.',
   labObs:'لاحظ', credit:'تصميم التطبيق وتطويره: ',
   cpt:'تطبيق تعليمي مجاني لمساعدة تلاميذ السنة الثالثة ثانوي على التحضير لامتحان البكالوريا في الرياضيات',
-  cpy:'مبادرة مستقلّة، غير تابعة لوزارة التربية الوطنية. الاستعمال مجّاني لغرض التعلّم والتدريس، دون أيّ استعمال تجاري. مبنيّ على تطبيق <span class="lat">Math3AM</span> بإذن من مؤلّفه.',
+  cpy:'مبادرة مستقلّة، غير تابعة لوزارة التربية الوطنية. الاستعمال مجّاني لغرض التعلّم والتدريس، دون أيّ استعمال تجاري.',
 },
 fr:{
   appName:'Mathématiques — BAC', appSub:'3e AS · Sciences expérimentales',
@@ -166,6 +166,6 @@ fr:{
   bacMsgLow:'Pas grave : relis « L\'essentiel » et « Bien raisonner », puis refais l\'exercice.', bacMsgNone:'Ouvre les corrigés et coche tes étapes réussies pour voir ta note.',
   labObs:'Observe', credit:'Conception et développement : ',
   cpt:'Application éducative gratuite pour aider les élèves de 3e année secondaire à préparer le BAC de mathématiques',
-  cpy:'Initiative indépendante, non affiliée au ministère de l\'Éducation nationale. Utilisation gratuite pour apprendre et enseigner, sans usage commercial. Basée sur l\'application <span class="lat">Math3AM</span>, avec l\'accord de son auteur.',
+  cpy:'Initiative indépendante, non affiliée au ministère de l\'Éducation nationale. Utilisation gratuite pour apprendre et enseigner, sans usage commercial.',
 }
 };
